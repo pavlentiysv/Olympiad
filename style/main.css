@@ -1,8 +1,17 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700");
 
+body {
+  overflow-x: hidden;
+  font-family: "Lato", sans-serif;
+  color: #004377;
+}
 
+/*--- Navigation ---*/
 
-
-
+.navbar {
+  text-transform: uppercase;
+  font-size: 16px;
+}
 
 /*============ BOOTSTRAP BREAK POINTS:
 
