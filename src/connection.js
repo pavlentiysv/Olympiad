@@ -14,7 +14,7 @@ conn.connect(function(err) {
   console.log("Connected!");
 });
 
-var sql1 = "INSERT INTO accounts (email, password, userType) values ('greerz1212@gmail.com', '1212', 'admin')";
+var sql1 = "INSERT INTO accounts (email, password, userType) values ('pavlentiysv@gmail.com', '1212', 'admin')";
  
 conn.query(sql1, function(err, results) {
     if (err) throw err;
