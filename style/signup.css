@@ -3,7 +3,8 @@
   padding: 0;
 }
 body {
-  background-image: url(../img/signup_bg.jpg);
+  /* background-image: url(../img/signup_bg.jpg); */
+  background-color: #cee4eb;
   background-attachment: fixed;
   background-size: cover;
 }
@@ -13,55 +14,39 @@ body {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+.sign-up .label {
+  color: white;
+  font-size: 16px;
+  padding-left: 5px;
+}
+.no-account {
+  font-size: 16px;
+  color: white;
+}
+.sign-up a {
+  font-size: 16px;
+  color: #5997d1;
+}
+.forgot {
+  color: #5997d1;
+  font-size: 16px;
+}
 .form-area {
   background: #1e3357a8;
   margin-top: 90px;
 }
-
-
-/* .col-md-5 {
-  background: #1e3357a8;
-  margin-top: 100px;
-}
-.label {
-  font-size: 16px;
-  font-weight: normal;
+.btn-default {
+  background-color: #5997d1;
   color: white;
-  padding-left: 6px;
+  border-radius: 0px;
+  width: 100%;
+  font-size: 18px;
+  margin-top: 5px;
 }
-.pic {
-  color: #5997d1;
+.form-control{
+  background: white;
+  border-radius: 0;   
+  border: 1px solid #5997d1;
+  padding: 15px;  
 }
-.input-group {
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-.form-control {
-  background: transparent;
-  border-radius: 0;
-  border: 0;
-  border-bottom: 1px solid #5997d1;
-  font-size: 14px;
-  color: #5997d1;
-  padding: 5px;
-}
-input[type="checkbox"]{
-  height: 12px;
-  width: 12px;
-}
-.remember{
-  padding-left: 3px;
-  font-size: 15px;
-  color:white;
-}
-.forgot{
-  font-size: 15px;
-  color:white;
-}
-.btn-default{
-  border-radius: 0;
-  color: white;
-  margin-top: 15px;
-  margin-bottom: 20px;
-  background-color: #5997d1;  
-} */
+
