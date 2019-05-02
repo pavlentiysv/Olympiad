@@ -71,18 +71,43 @@ CREATE TABLE `bsuir_olympiad`.`user` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
     
-CREATE TABLE `bsuir_olympiad`.`event_user` (
+CREATE TABLE `bsuir_olympiad`.`events_users` (
   `eventID` INT NOT NULL,
   `userID` INT NOT NULL,
   PRIMARY KEY (`eventID`, `userID`),
-  INDEX `event_user_user_idx` (`userID` ASC) VISIBLE,
-  CONSTRAINT `event_user_event_FK`
+  INDEX `events_users_users_FK_idx` (`userID` ASC) VISIBLE,
+  CONSTRAINT `events_users_events_FK`
     FOREIGN KEY (`eventID`)
-    REFERENCES `bsuir_olympiad`.`event` (`eventID`)
+    REFERENCES `bsuir_olympiad`.`events` (`eventID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `event_user_user`
+  CONSTRAINT `events_users_users_FK`
     FOREIGN KEY (`userID`)
-    REFERENCES `bsuir_olympiad`.`user` (`userID`)
+    REFERENCES `bsuir_olympiad`.`users` (`userID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+    
+CREATE TABLE `bsuir_olympiad`.`questions` (
+  `questionID` INT NOT NULL AUTO_INCREMENT,
+  `testID` INT NULL,
+  `number` VARCHAR(8) NOT NULL,
+  `text` VARCHAR(64) NOT NULL,
+  PRIMARY KEY (`questionID`),
+  INDEX `question_test_FK_idx` (`testID` ASC) VISIBLE,
+  CONSTRAINT `question_test_FK`
+    FOREIGN KEY (`testID`)
+    REFERENCES `bsuir_olympiad`.`tests` (`testID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+    
+CREATE TABLE `bsuir_olympiad`.`answers` (
+  `answerID` INT NOT NULL AUTO_INCREMENT,
+  `questionID` INT NOT NULL,
+  `text` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`answerID`),
+  INDEX `answers_questions_FK_idx` (`questionID` ASC) VISIBLE,
+  CONSTRAINT `answers_questions_FK`
+    FOREIGN KEY (`questionID`)
+    REFERENCES `bsuir_olympiad`.`questions` (`questionID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
