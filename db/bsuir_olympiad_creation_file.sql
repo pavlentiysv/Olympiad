@@ -111,3 +111,17 @@ CREATE TABLE `bsuir_olympiad`.`answers` (
     REFERENCES `bsuir_olympiad`.`questions` (`questionID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+
+#How tests will work
+SELECT * FROM questions;
+SELECT * FROM bsuir_olympiad.answers;
+
+SELECT questions.text, questions.correctAnswerTitle,answers.title, answers.answer
+FROM bsuir_olympiad.questions
+INNER JOIN answers ON answers.questionID = questions.questionID;
+
+SELECT questions.text, answers.answer
+FROM bsuir_olympiad.questions
+INNER JOIN answers ON answers.questionID = questions.questionID
+WHERE questions.correctAnswerTitle = answers.title;
+#End of How test will work
