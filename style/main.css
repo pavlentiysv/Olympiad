@@ -57,3 +57,6 @@ body {
   padding: 0.6rem 1.3rem;
   font-size: 1.1rem;
 }
+.btn-lg:hover {
+  color: #1e3357;
+}
