@@ -165,9 +165,14 @@ hr {
   .narrow h1 {
     font-size: 1.5rem;
   }
-  .jumbotron {
+  /* .jumbotron {
     margin-bottom: 0;
-    padding: 2rem 0;
     border-radius: 0;
+  } */
+  .heading-underline {
+    width: 15rem;
+    height: 0.2rem;
+    background-color: #5997d1;
+    margin: 0 auto;
   }
 }
