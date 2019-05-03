@@ -43,10 +43,22 @@ body {
   font-size: 18px;
   margin-top: 5px;
 }
-.form-control{
+.form-control {
   background: white;
-  border-radius: 0;   
+  border-radius: 0;
   border: 1px solid #5997d1;
-  padding: 15px;  
+  padding: 15px;
 }
-
+.sign-up .btn-lg {
+  border-width: medium;
+  border-radius: 0;
+  width: 100%;
+  text-shadow: 0.1rem 0.1rem 0.2rem #1e335794;
+  font-weight: 700;
+  padding: 0.6rem 1.3rem;
+  font-size: 1.1rem;
+  color: white;
+}
+.sign-up .btn-lg:hover {
+  color: #1e3357;
+}
