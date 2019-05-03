@@ -165,4 +165,9 @@ hr {
   .narrow h1 {
     font-size: 1.5rem;
   }
+  .jumbotron {
+    margin-bottom: 0;
+    padding: 2rem 0;
+    border-radius: 0;
+  }
 }
