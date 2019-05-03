@@ -5,6 +5,12 @@ body {
   font-family: "Lato", sans-serif;
   color: #004377;
 }
+.offset:before {
+  display: block;
+  content: "";
+  height: 4rem;
+  margin-top: -4.5rem;
+}
 
 /*--- Navigation ---*/
 .navbar {
@@ -74,9 +80,66 @@ body {
   border-width: medium;
   border-radius: 0;
   text-transform: uppercase;
+  padding: 0.6rem 1.2rem;
+  margin: 1rem;
+  color: white;
+  background-color: #5997d1;
+  border-color: #5997d1;
+}
+.btn-secondary:hover {
+  background-color: #306291;
+  border-color: #306291;
+}
+
+/*-- News Section --*/
+.jumbotron {
+  margin-bottom: 0;
+  padding: 2rem 0 3.5rem;
+  border-radius: 0;
+}
+h3.heading {
+  font-size: 1.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 1.9rem;
+}
+.heading-underline {
+  width: 15rem;
+  height: 0.2rem;
+  background-color: #5997d1;
+  margin: 0 auto 2rem;
+}
+.news-item svg.svg-inline--fa {
+  color: #5997d1;
+}
+.news-item h3 {
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  padding-bottom: 0.4rem;
+}
+.new-item p {
+  font-size: 1.1rem;
 }
 
 /*--- Contact Section ---*/
+footer {
+  background-color: #1e3357;
+  color: white;
+  padding: 2rem 0 2rem;
+
+}
+footer img {
+  margin: 1rem 0;
+  height: 4rem;
+}
+footer a {
+  color: white;
+}
+footer svg.svg-inline--fa {
+  font-size: 1.6rem;
+  margin: 1.2rem .5rem 0 0;
+}
 .location {
   padding-right: 5px;
+
 }
