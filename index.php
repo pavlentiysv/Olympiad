@@ -41,7 +41,7 @@
               <a href="#contact" class="nav-link">Контакты</a>
             </li>
             <li class="nav-item">
-              <a href="signin.html" class="nav-link">Личный кабинет</a>
+              <a href="signin.php" class="nav-link">Личный кабинет</a>
             </li>
           </ul>
         </div>

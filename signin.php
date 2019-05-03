@@ -54,7 +54,7 @@
                 <a href="#"><p class="forgot text-center">Забыли пароль?</p></a>
               </div>
               <p class="no-account text-center">
-                У вас нет аккаунта? <a href="signup.html"> Регистрация</a>
+                У вас нет аккаунта? <a href="signup.php"> Регистрация</a>
               </p>
             </form>
           </div>

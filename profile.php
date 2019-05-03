@@ -2,6 +2,13 @@
 require('db/dbManager.class.php');
 $mysql = new dbManager();
 $conn = $mysql->getConnection();
+
+$vbsScriptLocation = 'E:/wamp/wamp64/www/Olympiad/VBS/wordHandler.vbs';
+$vbsParameters = 'E:/wamp/wamp64/www/Olympiad/db/Tasks/olimp_mat2009.docx'; //if more then 1 word in ""
+$WshShell = new COM("WScript.Shell"); 
+$oExec = $WshShell->Run($vbsScriptLocation.' "'.$vbsParameters.'"', 3, true); 
+// E:/wamp/wamp64/www/Olympiad/VBS/wordHandler.vbs E:/wamp/wamp64/www/Olympiad/db/Tasks/olimp_mat2009.docx
+echo "А теперь все огонь";
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +21,7 @@ $conn = $mysql->getConnection();
     <link rel="stylesheet" href="bootstrap-4.1.3-dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="style/main.css" />
     <link rel="stylesheet" href="style/fixed.css" />
-    <title>Олимпиада БГУИР</title>
+    <title>Личный кабинет</title>
 </head>
 
 <body>
