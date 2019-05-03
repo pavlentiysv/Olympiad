@@ -62,3 +62,10 @@ body {
 .sign-up .btn-lg:hover {
   color: #1e3357;
 }
+
+
+@media (max-width: 767px) {
+  .form-area {
+    margin-top: 0px;
+  }
+}
