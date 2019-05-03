@@ -165,4 +165,15 @@ hr {
   .narrow h1 {
     font-size: 1.5rem;
   }
+  h3.heading {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .heading-underline {
+    width: 7.5rem;
+    height: 0.2rem;
+    background-color: #5997d1;
+    margin: 0 auto 2rem;
+  }
 }
