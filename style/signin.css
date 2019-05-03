@@ -68,4 +68,7 @@ body {
   .form-area {
     margin-top: 0px;
   }
+  .empty-space {
+    padding: 8px;
+  }
 }
