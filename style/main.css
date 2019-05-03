@@ -126,7 +126,6 @@ footer {
   background-color: #1e3357;
   color: white;
   padding: 2rem 0 2rem;
-
 }
 footer img {
   margin: 1rem 0;
@@ -137,9 +136,16 @@ footer a {
 }
 footer svg.svg-inline--fa {
   font-size: 1.6rem;
-  margin: 1.2rem .5rem 0 0;
+  margin: 1.2rem 0.5rem 0 0;
+}
+footer svg.svg-inline--fa:hover {
+  color: #5997d1;
 }
 .location {
   padding-right: 5px;
-
+}
+hr {
+  width: 100%;
+  border-top: 2px solid #5997d1;
+  margin-bottom: 20px;
 }
