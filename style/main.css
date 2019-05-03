@@ -149,3 +149,20 @@ hr {
   border-top: 2px solid #5997d1;
   margin-bottom: 20px;
 }
+
+@media (max-width: 767px) {
+  .caption h1 {
+    font-size: 38px;
+  }
+  .caption h3 {
+    font-size: 1.2rem;
+    padding-bottom: 20px;
+  }
+  .btn-lg {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+  .narrow h1 {
+    font-size: 1.5rem;
+  }
+}
