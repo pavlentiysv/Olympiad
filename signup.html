@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -9,69 +9,69 @@
     <link rel="stylesheet" href="style/main.css" />
     <link rel="stylesheet" href="style/example.css" />
     <title>Регистрация</title>
-  </head>
-  <body>
+</head>
+<body>
     <div id="home">
-      <!-- Start Navigation -->
-      <nav class="navbar navbar-expand-md navbar-dark bg-dark ">
+    <!-- Start Navigation -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark ">
         <a href="index.html" class="navbar-brand">
-          <img src="img/bsuirlogo.png" alt="logo" />
+    <img src="img/bsuirlogo.png" alt="logo" />
         </a>
-      </nav>
-      <!-- End Navigation -->
+    </nav>
+    <!-- End Navigation -->
 
-      <div class="container">
+    <div class="container">
         <div class="text-center">
             <h1 class="nice">Регистрация</h1>
         </div>
         <form class="form-horizontal" method="post"
-              action="#">
+            action="#">
             <!-- Text input-->
             <div class="row">
         
                 <div class="col-md-4 control-label">
-                  <label for="firstName">Имя</label>
-                  <input type="text" class="form-control" id="firstName" placeholder="Иван" value="" required="">
-                  <div class="invalid-feedback">
+                <label for="firstName">Имя</label>
+                <input type="text" class="form-control" id="firstName" placeholder="Иван" value="" required="">
+                <div class="invalid-feedback">
                     Valid first name is required.
-                  </div>
+                </div>
                 </div>
                 <div class="col-md-4 control-label">
                     <label for="lastName">Фамилия</label>
                     <input type="text" class="form-control" id="lastName" placeholder="Иванов" value="" required="">
                     <div class="invalid-feedback">
-                      Valid last name is required.
+                    Valid last name is required.
                 </div>
-                  </div>
-                  <div class="col-md-4 mb-3 control-label">
+                </div>
+                <div class="col-md-4 mb-4 control-label">
                     <label for="MiddleName">Отчество</label>
                     <input type="text" class="form-control" id="MiddleName" placeholder="Иванович" value="" required="">
                     <div class="invalid-feedback">
-                      Valid MiddleName is required.
+                    Valid MiddleName is required.
                     </div>
                 </div>
-             </div>
+            </div>
             <!-- Select Date Of Birth-->
             <div class="row">
-              <div class="col-md-7">
+            <div class="col-md-7">
                 <div class="row form-group">
                     <label class="col-md-1 control-label" for="selectbasic">Месяц</label>
 
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <select id="selectbasic" name="selectbasic" class="form-control">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                        </select>
+                            <option value="1">Январь</option>
+                            <option value="2">Февраль</option>
+                            <option value="3">Март</option>
+                            <option value="4">Апрель</option>
+                            <option value="5">Май</option>
+                            <option value="6">Июнь</option>
+                            <option value="7">Июль</option>
+                            <option value="8">Август</option>
+                            <option value="9">Сентябрь</option>
+                            <option value="10">Октябрь</option>
+                            <option value="11">Ноябрь</option>
+                            <option value="12">Декабрь</option>
+                        </select>   
                     </div>
     
     
@@ -147,11 +147,11 @@
                         </select>
                     </div>
                 </div>
-              </div>
+            </div>
             </div>
             <!-- Gender Input -->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="checkboxes">Пол</label>
+            <div class="row form-group">
+                <label class="col-md-1" for="checkboxes">Пол</label>
     
                 <div class="col-md-4">
                     <div class="checkbox">
@@ -171,55 +171,71 @@
                 </div>
             </div>
             <!-- Email input-->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="password">Email</label>
+            <div class="row form-group">
+                <label class="col-md-1 " for="password">Email</label>
     
                 <div class="col-md-4">
                     <input id="email" name="email" type="email" placeholder="Email"
-                           class="form-control input-md" required="">
+                        class="form-control input-md" required="">
                     <span class="help-block">Укажите email</span>
                 </div>
             </div>
             <!-- Address input-->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="name">Адрес</label>
+            <div class="row form-group">
+                <label class="col-md-1 control-label" for="name">Адрес</label>
     
                 <div class="col-md-4">
-                    <input id="address" name="address" type="text" placeholder="Адрес" class="form-control input-md"
-                           required="">
+                    <input id="address" name="address" type="text" placeholder="Адрес" class="form-control input-md" required="">
                     <span class="help-block">Укажите адрес проживания</span>
                 </div>
             </div>
             <!-- Phone input-->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="phone">Телефон</label>
+            <div class="row form-group">
+                <label class="col-md-1 control-label" for="phone">Телефон</label>
     
                 <div class="col-md-4">
-                    <input id="phone" name="phone" type="number" placeholder="Номер телефона"
-                           class="form-control input-md" required="">
+                    <input id="phone" name="phone" type="number" placeholder="Номер телефона"class="form-control input-md" required="">
                     <span class="help-block">Укажите ваш номер мобильного</span>
                 </div>
             </div>
             <!-- School input-->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="name">Школа</label>
+            <div class="row form-group">
+                <label class="col-md-1 control-label" for="name">Школа</label>
     
                 <div class="col-md-4">
-                    <input id="school" name="school" type="text" placeholder="Школа" class="form-control input-md"
-                           required="">
+                    <input id="school" name="school" type="text" placeholder="Школа" class="form-control input-md" required="">
                     <span class="help-block">Укажите название вашей школы</span>
                 </div>
             </div>
             <!-- School Address input-->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="name">Школьный адрес</label>
+            <div class="row form-group">
+                <label class="col-md-1 control-label" for="name">Школьный адрес</label>
     
                 <div class="col-md-4">
-                    <input id="aschool" name="aschool" type="text" placeholder="Школьный адрес" class="form-control input-md"
-                           required="">
+                    <input id="aschool" name="aschool" type="text" placeholder="Школьный адрес" class="form-control input-md" required="">
                     <span class="help-block">Укажите адрес вашей школы</span>
                 </div>
             </div>
+                <!--Password input-->       
+                <div class="row form-group">
+                    <label class="col-md-1 " for="password">Пароль</label>
+        
+                    <div class="col-md-4">
+                        <input id="pass" name="pass" type="pass" placeholder="Пароль"
+                            class="form-control input-md" required="">
+                        <span class="help-block">Укажите пароль</span>
+                    </div>
+            </div> 
+                <!--Password confirm-->       
+                <div class="row form-group">
+                        <label class="col-md-1 " for="password">Подтвердите пароль</label>
+            
+                        <div class="col-md-4">
+                            <input id="pass" name="pass" type="pass" placeholder="Подтвердите пароль"
+                                class="form-control input-md" required="">
+                            <span class="help-block">Подтвердите пароль</span>
+                        </div>
+                </div>                         
             <!-- Button (Double) -->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="button1id"></label>
@@ -230,6 +246,7 @@
                         Отмена</a>
                 </div>
             </div>
+
         </form>
     </div>
     <!--- Script Source Files -->
@@ -237,5 +254,5 @@
     <script src="bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
     <!--- End of Script Source Files -->
-  </body>
+</body>
 </html>
