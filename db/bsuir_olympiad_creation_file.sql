@@ -125,3 +125,15 @@ FROM bsuir_olympiad.questions
 INNER JOIN answers ON answers.questionID = questions.questionID
 WHERE questions.correctAnswerTitle = answers.title;
 #End of How test will work
+
+delimiter //
+DROP trigger IF EXISTS archive_user;
+CREATE TRIGGER archive_user
+BEFORE INSERT 
+ON accounts
+for each row
+begin
+	SET NEW.password = md5(NEW.password);
+end//
+delimiter ;
+

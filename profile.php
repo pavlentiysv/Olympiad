@@ -1,16 +1,3 @@
-<?php
-require('db/dbManager.class.php');
-$mysql = new dbManager();
-$conn = $mysql->getConnection();
-
-$vbsScriptLocation = 'E:/wamp/wamp64/www/Olympiad/VBS/wordHandler.vbs';
-$vbsParameters = 'E:/wamp/wamp64/www/Olympiad/db/Tasks/olimp_mat2009.docx'; //if more then 1 word in ""
-$WshShell = new COM("WScript.Shell"); 
-$oExec = $WshShell->Run($vbsScriptLocation.' "'.$vbsParameters.'"', 3, true); 
-// E:/wamp/wamp64/www/Olympiad/VBS/wordHandler.vbs E:/wamp/wamp64/www/Olympiad/db/Tasks/olimp_mat2009.docx
-echo "А теперь все огонь";
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,20 +12,30 @@ echo "А теперь все огонь";
 </head>
 
 <body>
-    <?php
-    $query = "SELECT * FROM accounts";
-    $result = $conn->query($query);
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) : ?>
-            <?php echo $row["accountID"] ?>
-            <?php echo $row["email"] ?>
-            <?php echo $row["password"] ?>
-            <?php echo $row["userType"] ?>
-        <?php endwhile;
-} else {
-    echo "Ошибка при запросе к БД.";
-}
-?>
+    <div id="home">
+        <!-- Start Navigation -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <a href="index.html" class="navbar-brand">
+                <img src="img/bsuirlogo.png" alt="logo" />
+            </a>
+        </nav>
+        <!-- End Navigation -->
+        <div class="container sign-up">
+            <div class="row">
+                <div class="empty-space col-md-4"></div>
+                <div class="form-area col-md-5">
+                    <h1 class="text-center">Выход</h1>
+                    <form action="php/signout.inc.php" method="post">
+                        <div class="form-group text-center">
+                            <!-- <a href="#info" class="btn btn-outline-light btn-lg">Войти</a> -->
+                            <input type="submit" name="signout-submit" class="btn btn-outline-light btn-lg" id="submit" value="Выйти" />
+                        </div>
+                    </form>
+                </div>
+                <div class="empty-space col-md-4"></div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
