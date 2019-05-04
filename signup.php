@@ -25,7 +25,7 @@ if (isset($_GET['signup'])) {
     <div id="home">
     <!-- Start Navigation -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark ">
-        <a href="index.html" class="navbar-brand">
+        <a href="index.php" class="navbar-brand">
     <img src="img/bsuirlogo.png" alt="logo" />
         </a>
     </nav>
