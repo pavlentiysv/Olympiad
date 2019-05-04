@@ -38,14 +38,6 @@ if (isset($_GET['signup'])) {
         <form action="php/signin.inc.php" method="post">
             <!-- Text input-->
             <div class="row">
-        
-                <div class="col-md-4 control-label">
-                <label for="firstName">Имя</label>
-                <input type="text" class="form-control" id="firstName" placeholder="Иван" value="" required="">
-                <div class="invalid-feedback">
-                    Valid first name is required.
-                </div>
-                </div>
                 <div class="col-md-4 control-label">
                     <label for="lastName">Фамилия</label>
                     <input type="text" class="form-control" id="lastName" placeholder="Иванов" value="" required="">
@@ -53,6 +45,14 @@ if (isset($_GET['signup'])) {
                     Valid last name is required.
                 </div>
                 </div>
+                <div class="col-md-4 control-label">
+                <label for="firstName">Имя</label>
+                <input type="text" class="form-control" id="firstName" placeholder="Иван" value="" required="">
+                <div class="invalid-feedback">
+                    Valid first name is required.
+                </div>
+                </div>
+
                 <div class="col-md-4 mb-4 control-label">
                     <label for="MiddleName">Отчество</label>
                     <input type="text" class="form-control" id="MiddleName" placeholder="Иванович" value="" required="">
@@ -64,7 +64,13 @@ if (isset($_GET['signup'])) {
             <!-- Select Date Of Birth-->
             <div class="row">
             <div class="col-md-7">
-                <div class="row form-group">
+                <div class="row form-group">  
+                    <label class="col-md-1 control-label" for="selectbasic">Месяц</label>
+                    <div class="col-md-3">
+                        <select id="selectbasic" name="inputMonth" class="form-control">
+                            <?php printMonthsList(); ?>
+                        </select>   
+                    </div>
                     <label class="col-md-1 control-label" for="selectbasic">День</label>
                     <div class="col-md-2">
                         <select id="selectbasic" name="inputDay" class="form-control">
@@ -72,12 +78,7 @@ if (isset($_GET['signup'])) {
                         </select>
                         </div>
 
-                    <label class="col-md-1 control-label" for="selectbasic">Месяц</label>
-                    <div class="col-md-3">
-                        <select id="selectbasic" name="inputMonth" class="form-control">
-                            <?php printMonthsList(); ?>
-                        </select>   
-                    </div>
+
     
                     <label class="col-md-1 control-label" for="selectbasic">Год</label>
                     <div class="col-md-3">
@@ -109,16 +110,7 @@ if (isset($_GET['signup'])) {
     
                 </div>
             </div>
-            <!-- Email input-->
-            <div class="row form-group">
-                <label class="col-md-1 " for="password">Email</label>
-    
-                <div class="col-md-4">
-                    <input id="email" name="email" type="email" placeholder="Email"
-                        class="form-control input-md" required="">
-                    <span class="help-block">Укажите email</span>
-                </div>
-            </div>
+
             <!-- Address input-->
             <div class="row form-group">
                 <label class="col-md-1 control-label" for="name">Адрес</label>
@@ -137,22 +129,51 @@ if (isset($_GET['signup'])) {
                     <span class="help-block">Укажите ваш номер мобильного</span>
                 </div>
             </div>
-            <!-- School input-->
+            <!-- School type input-->
             <div class="row form-group">
-                <label class="col-md-1 control-label" for="name">Школа</label>
+                <label class="col-md-1 control-label" for="name">Тип учебного заведения</label>
     
                 <div class="col-md-4">
-                    <input id="school" name="school" type="text" placeholder="Школа" class="form-control input-md" required="">
-                    <span class="help-block">Укажите название вашей школы</span>
+                    <input id="school" name="school" type="text" placeholder="Гимназия/Средняя школа/Лицей/Колледж" class="form-control input-md" required="">
+                    <span class="help-block">Укажите тип вашего учебного заведения</span>
                 </div>
             </div>
-            <!-- School Address input-->
+            <!-- School name input-->
             <div class="row form-group">
-                <label class="col-md-1 control-label" for="name">Школьный адрес</label>
+                <label class="col-md-1 control-label" for="name">Название учебного заведения</label>
     
                 <div class="col-md-4">
-                    <input id="aschool" name="aschool" type="text" placeholder="Школьный адрес" class="form-control input-md" required="">
-                    <span class="help-block">Укажите адрес вашей школы</span>
+                    <input id="aschool" name="aschool" type="text" placeholder="Название учебного заведения" class="form-control input-md" required="">
+                    <span class="help-block">Укажите название вашего учебного заведения</span>
+                </div>
+            </div>
+            <div class="row">
+            <div class="col-md-12 mb-2">
+                <div class="row form-group">
+                    <label class="col-md-1 control-label" for="selectbasic">Класс</label>
+
+                    <div class="col-md-3">
+                        <select id="selectbasic" name="selectbasic" class="form-control">
+                            <option selected>Выберите класс</option>
+                            <option value="1">7</option>
+                            <option value="2">8</option>
+                            <option value="3">9</option>
+                            <option value="4">10</option>
+                            <option value="4">11</option>
+                        </select>   
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- Email input-->
+            <div class="row form-group">
+                <label class="col-md-1 " for="password">Email</label>
+    
+                <div class="col-md-4">
+                    <input id="email" name="email" type="email" placeholder="Email"
+                        class="form-control input-md" required="">
+                    <span class="help-block">Укажите email</span>
                 </div>
             </div>
                 <!--Password input-->       
