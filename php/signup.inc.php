@@ -21,10 +21,20 @@ if (isset($_POST['signup-submit'])) {
     $telephone = $_POST['telephone'];
     $photo = $_POST['photo'];
 
+    $birthdate = $year."-".$month."-".$day;
+
+    if (empty($middlename)) {
+        $middlename=null;
+    }
+
+    if (empty($photo)) {
+        $photo=null;
+    }
+
     if (
         empty($email) || empty($password) || empty($surname) || empty($name) ||
         empty($city) || empty($institution_type) || empty($institution_number) ||
-        empty($gender) || empty($day) || empty($month) || empty($year) ||
+        empty($grade) || empty($gender) || empty($day) || empty($month) || empty($year) ||
         empty($telephone)
     ) {
         header("Location: ../signup.php?error=emptyFields&email=" . $email . "");
@@ -32,7 +42,7 @@ if (isset($_POST['signup-submit'])) {
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         header("Location: ../signup.php?error=invalidEmail=" . $email . "");
         exit();
-    } else if ($password !== $passwordRepeat) {
+    } else if ($password != $passwordRepeat) {
         header("Location: ../signup.php?error=passwordNotMatching=" . $email . "");
         exit();
     } else {
@@ -50,15 +60,16 @@ if (isset($_POST['signup-submit'])) {
                 header("Location: ../signup.php?error=emailTaken");
                 exit();
             } else {
-                // call addUser('greerz1212@gmail.com','1212', 'Шестаков', 'Валерий', 'Валерьевич', 'Семково',
-                // 'Гимназия', 'Гимназия №50 г.Минска', 14, 'М', '1998-11-12', 291302524, null);
+                // $sql= "call addUser('{$email}','{$password}', '{$surname}', '{$name}', '{$middlename}', '{$city}',
+                // '{$in}', '{$institution_number}', 14, 'М', '1998-11-12', 291302524, null)";
                 $sql = "call addUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 $stmt = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($stmt, $sql)) {
-                    header("Location: ../signin.php?error=sqlError");
+                    header("Location: ../signup.php?error=sqlError");
                     exit();
                 } else {
-                    mysqli_stmt_bind_param($stmt, "ssssssssissss", $email, $password, $surname, $name, $middlename, $city, $type, $number, $grade, $gender, $birthdate, $telephone, $photo);
+                    mysqli_stmt_bind_param($stmt, "ssssssssissis", $email, $password, $surname, $name, 
+                    $middlename, $city, $institution_type, $institution_number, $grade, $gender, $birthdate, $telephone, $photo);
                     mysqli_stmt_execute($stmt);
                     header("Location: ../signup.php?signup=success");
                     exit();
@@ -67,6 +78,6 @@ if (isset($_POST['signup-submit'])) {
         }
     }
 } else {
-    header("Location: ../signin.php");
+    header("Location: ../signup.php");
     exit();
 }

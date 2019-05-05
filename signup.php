@@ -35,19 +35,20 @@ if (isset($_GET['signup'])) {
         <div class="text-center">
             <h1 class="nice">Регистрация</h1>
         </div>
-        <form action="php/signin.inc.php" method="post">
+
+        <form action="php/signup.inc.php" method="post">
             <!-- Text input-->
             <div class="row">
                 <div class="col-md-4 control-label">
                     <label for="lastName">Фамилия</label>
-                    <input type="text" class="form-control" id="lastName" placeholder="Иванов" value="" required="">
+                    <input type="text" class="form-control" name="surname" placeholder="Иванов" value="" required="">
                     <div class="invalid-feedback">
                     Valid last name is required.
                 </div>
                 </div>
                 <div class="col-md-4 control-label">
                 <label for="firstName">Имя</label>
-                <input type="text" class="form-control" id="firstName" placeholder="Иван" value="" required="">
+                <input type="text" class="form-control" name="name" placeholder="Иван" value="" required="">
                 <div class="invalid-feedback">
                     Valid first name is required.
                 </div>
@@ -55,7 +56,7 @@ if (isset($_GET['signup'])) {
 
                 <div class="col-md-4 mb-4 control-label">
                     <label for="MiddleName">Отчество</label>
-                    <input type="text" class="form-control" id="MiddleName" placeholder="Иванович" value="" required="">
+                    <input type="text" class="form-control" name="middlename" placeholder="Иванович" value="" required="">
                     <div class="invalid-feedback">
                     Valid MiddleName is required.
                     </div>
@@ -65,24 +66,21 @@ if (isset($_GET['signup'])) {
             <div class="row">
             <div class="col-md-7">
                 <div class="row form-group">  
-                    <label class="col-md-1 control-label" for="selectbasic">Месяц</label>
-                    <div class="col-md-3">
-                        <select id="selectbasic" name="inputMonth" class="form-control">
-                            <?php printMonthsList(); ?>
-                        </select>   
-                    </div>
                     <label class="col-md-1 control-label" for="selectbasic">День</label>
                     <div class="col-md-2">
-                        <select id="selectbasic" name="inputDay" class="form-control">
+                        <select id="selectbasic" name="day" class="form-control">
                             <?php printDaysList(); ?>
                         </select>
                         </div>
-
-
-    
+                    <label class="col-md-1 control-label" for="selectbasic">Месяц</label>
+                    <div class="col-md-3">
+                        <select id="selectbasic" name="month" class="form-control">
+                            <?php printMonthsList(); ?>
+                        </select>   
+                    </div>
                     <label class="col-md-1 control-label" for="selectbasic">Год</label>
                     <div class="col-md-3">
-                        <select id="selectbasic" name="inputYear" class="form-control">
+                        <select id="selectbasic" name="year" class="form-control">
                             <?php printYearList(); ?>
                         </select>
                     </div>
@@ -96,13 +94,13 @@ if (isset($_GET['signup'])) {
                 <div class="col-md-4">
                     <div class="checkbox">
                         <label>
-                            <input name="genderboxes" id="genderboxes-0" value="1" type="radio">
+                            <input name="gender" id="genderboxes-0" value="М" type="radio">
                             Мужской
                         </label>
                     </div>
                     <div class="checkbox">
                         <label>
-                            <input name="genderboxes" id="genderboxes-1" value="2" type="radio">
+                            <input name="gender" id="genderboxes-1" value="Ж" type="radio">
                             Женский
                         </label>
                     </div>
@@ -116,7 +114,7 @@ if (isset($_GET['signup'])) {
                 <label class="col-md-1 control-label" for="name">Адрес</label>
     
                 <div class="col-md-4">
-                    <input id="address" name="address" type="text" placeholder="Адрес" class="form-control input-md" required="">
+                    <input id="address" name="city" type="text" placeholder="Адрес" class="form-control input-md" required="">
                     <span class="help-block">Укажите адрес проживания</span>
                 </div>
             </div>
@@ -125,7 +123,7 @@ if (isset($_GET['signup'])) {
                 <label class="col-md-1 control-label" for="phone">Телефон</label>
     
                 <div class="col-md-4">
-                    <input id="phone" name="phone" type="number" placeholder="Номер телефона"class="form-control input-md" required="">
+                    <input id="phone" name="telephone" type="number" placeholder="Номер телефона"class="form-control input-md" required="">
                     <span class="help-block">Укажите ваш номер мобильного</span>
                 </div>
             </div>
@@ -134,7 +132,7 @@ if (isset($_GET['signup'])) {
                 <label class="col-md-1 control-label" for="name">Тип учебного заведения</label>
     
                 <div class="col-md-4">
-                    <input id="school" name="school" type="text" placeholder="Гимназия/Средняя школа/Лицей/Колледж" class="form-control input-md" required="">
+                    <input id="school" name="institution_type" type="text" placeholder="Гимназия/Средняя школа/Лицей/Колледж" class="form-control input-md" required="">
                     <span class="help-block">Укажите тип вашего учебного заведения</span>
                 </div>
             </div>
@@ -143,7 +141,7 @@ if (isset($_GET['signup'])) {
                 <label class="col-md-1 control-label" for="name">Название учебного заведения</label>
     
                 <div class="col-md-4">
-                    <input id="aschool" name="aschool" type="text" placeholder="Название учебного заведения" class="form-control input-md" required="">
+                    <input id="aschool" name="institution_number" type="text" placeholder="Название учебного заведения" class="form-control input-md" required="">
                     <span class="help-block">Укажите название вашего учебного заведения</span>
                 </div>
             </div>
@@ -153,13 +151,13 @@ if (isset($_GET['signup'])) {
                     <label class="col-md-1 control-label" for="selectbasic">Класс</label>
 
                     <div class="col-md-3">
-                        <select id="selectbasic" name="selectbasic" class="form-control">
+                        <select id="selectbasic" name="grade" class="form-control">
                             <option selected>Выберите класс</option>
-                            <option value="1">7</option>
-                            <option value="2">8</option>
-                            <option value="3">9</option>
-                            <option value="4">10</option>
-                            <option value="4">11</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
                         </select>   
                     </div>
                 </div>
@@ -181,7 +179,7 @@ if (isset($_GET['signup'])) {
                     <label class="col-md-1 " for="password">Пароль</label>
         
                     <div class="col-md-4">
-                        <input id="pass" name="pass" type="pass" placeholder="Пароль"
+                        <input id="pass" name="password" type="password" placeholder="Укажите пароль"
                             class="form-control input-md" required="">
                         <span class="help-block">Укажите пароль</span>
                     </div>
@@ -191,7 +189,7 @@ if (isset($_GET['signup'])) {
                         <label class="col-md-1 " for="password">Подтвердите пароль</label>
             
                         <div class="col-md-4">
-                            <input id="pass" name="pass" type="pass" placeholder="Подтвердите пароль"
+                            <input id="pass" name="passwordRepeat" type="password" placeholder="Подтвердите пароль"
                                 class="form-control input-md" required="">
                             <span class="help-block">Подтвердите пароль</span>
                         </div>
@@ -201,8 +199,8 @@ if (isset($_GET['signup'])) {
                 <label class="col-md-4 control-label" for="button1id"></label>
     
                 <div class="col-md-8">
-                    <button type="submit" name="signin-submit" class="btn btn-success">Сохранить</button>
-                    <a id="cancel" name="cancel" class="btn btn-danger" href="#">
+                    <button type="submit" name="signup-submit" class="btn btn-success">Сохранить</button>
+                    <a id="cancel" name="cancel" class="btn btn-danger" href="signin.php">
                         Отмена</a>
                 </div>
             </div>
