@@ -15,9 +15,14 @@
     <div id="home">
         <!-- Start Navigation -->
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <a href="index.html" class="navbar-brand">
+            <a href="index.php" class="navbar-brand">
                 <img src="img/bsuirlogo.png" alt="logo" />
             </a>
+            <form action="php/signout.inc.php" method="post">
+                <div class="form-group text-center">
+                    <input type="submit" name="signout-submit" class="btn btn-outline-light btn-lg" id="submit" value="Выйти" />
+                </div>
+            </form>
         </nav>
         <!-- End Navigation -->
         <div class="container sign-up">
@@ -27,7 +32,6 @@
                     <h1 class="text-center">Выход</h1>
                     <form action="php/signout.inc.php" method="post">
                         <div class="form-group text-center">
-                            <!-- <a href="#info" class="btn btn-outline-light btn-lg">Войти</a> -->
                             <input type="submit" name="signout-submit" class="btn btn-outline-light btn-lg" id="submit" value="Выйти" />
                         </div>
                     </form>
