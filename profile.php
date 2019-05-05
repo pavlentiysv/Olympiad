@@ -26,9 +26,53 @@
         </nav>
     </header>
 
-    <!-- Footer -->
+    <!-- Personal Page Section -->
+    <div class="profile-caption">
+        <div class="col-md-12 text-center">
+            <h3 class="heading">Личный кабинет</h3>
+            <div class="heading-underline"></div>
+        </div>
+    </div>
 
-    <div id="contact" class="offset">
+    <div class="personal-page">
+        <div class="row">
+            <!-- Left Block -->
+            <div class="col-md-3 text-center left-block">
+                <img class="avatar" src="img/default_avatar.jpg" alt="avatar">
+                <p class="fullname">Фамилия<br>Имя<br>Отчество</p>
+            </div>
+            <!-- Right Block -->
+            <div class="right-block col-md-9">
+                <!-- Tabs -->
+                <!-- Tab Toggler -->
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">Профиль</a>
+                        <a class="nav-item nav-link" id="nav-tests-tab" data-toggle="tab" href="#nav-tests" role="tab" aria-controls="nav-tests" aria-selected="false">Тесты</a>
+                        <a class="nav-item nav-link" id="nav-settings-tab" data-toggle="tab" href="#nav-settings" role="tab" aria-controls="nav-settings" aria-selected="false">Настройки</a>
+                    </div>
+                </nav>
+
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+                    </div>
+                    <div class="tab-pane fade" id="nav-tests" role="tabpanel" aria-labelledby="nav-tests-tab">...</div>
+                    <div class="tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Personal Page Section End -->
+
+
+
+
+
+
+    <!-- Footer -->
+    <div class="contact">
         <footer>
             <div class="row justify-content-center">
                 <div class="col-md-12 text-center">
@@ -57,11 +101,7 @@
             </div>
         </footer>
     </div>
-    <!--- End Contact Section -->
-
-
-
-
+    <!--- End Footer -->
 
     <!--- Script Source Files -->
     <script src="src/jquery-3.3.1.min.js"></script>
