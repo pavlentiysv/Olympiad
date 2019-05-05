@@ -105,7 +105,7 @@ require 'php/session.inc.php';
     <!-- Start Jumbotron -->
     <div class="jumbotron">
       <div class="narrow text-center">
-        <div class="col-12">
+        <div class="col-md-12">
           <h3 class="heading">Ближайшие мероприятия</h3>
           <div class="heading-underline"></div>
         </div>

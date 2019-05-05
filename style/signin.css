@@ -4,7 +4,7 @@
 }
 body {
   /* background-image: url(../img/signup_bg.jpg); */
-  background-color: #cee4eb;
+  background-color: white;
   background-attachment: fixed;
   background-size: cover;
 }
@@ -32,7 +32,7 @@ body {
   font-size: 16px;
 }
 .form-area {
-  background: #1e3357a8;
+  background-color: #1e3357;
   margin-top: 90px;
 }
 .btn-default {
