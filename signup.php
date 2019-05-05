@@ -123,7 +123,7 @@ if (isset($_GET['signup'])) {
                 <label class="col-md-1 control-label" for="phone">Телефон</label>
     
                 <div class="col-md-4">
-                    <input id="phone" name="telephone" type="number" placeholder="Номер телефона"class="form-control input-md" required="">
+                    <input id="phone" name="telephone" type="tel" placeholder="Номер телефона"class="form-control input-md" required="">
                     <span class="help-block">Укажите ваш номер мобильного</span>
                 </div>
             </div>
