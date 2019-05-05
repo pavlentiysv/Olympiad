@@ -60,8 +60,6 @@ if (isset($_POST['signup-submit'])) {
                 header("Location: ../signup.php?error=emailTaken");
                 exit();
             } else {
-                // $sql= "call addUser('{$email}','{$password}', '{$surname}', '{$name}', '{$middlename}', '{$city}',
-                // '{$in}', '{$institution_number}', 14, 'М', '1998-11-12', 291302524, null)";
                 $sql = "call addUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 $stmt = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($stmt, $sql)) {
