@@ -1,10 +1,27 @@
 <?php
 require 'php/session.inc.php';
 
+$errorMsg = null;
+$email = null;
+
 if (isset($_GET['signin'])) {
   if ($_GET['signin'] == 'success') {
     header("Location: index.php");
   }
+}
+
+if (isset($_GET['error'])) {
+  if ($_GET['error'] == 'sqlError') {
+    $errorMsg = 'Ошибка при обращении к базе данных';
+  } else if ($_GET['error'] == 'noGmail') {
+    $errorMsg = 'Неправильно введен e-mail или пароль';
+  } else {
+    $errorMsg = 'Возникла непредвиденная ошибка';
+  }
+}
+
+if (isset($_GET['email'])) {
+  $email = $_GET['email'];
 }
 ?>
 <!DOCTYPE html>
@@ -41,15 +58,28 @@ if (isset($_GET['signin'])) {
           <form action="php/signin.inc.php" method="post">
             <div class="form-group">
               <label for="email" class="label">E-mail</label>
-              <input type="email" name="email" class="form-control" id="email" />
+              <?php if ($errorMsg!=null) : ?>
+                <input type="email" name="email" class="form-error form-control" id="email" value="<?php echo $email;?>" required=""/>
+              <?php else: ?>
+                <input type="email" name="email" class="form-control" id="email" value="<?php echo $email;?>" required=""/>
+              <?php endif; ?>
             </div>
             <div class="form-group">
               <label for="password" class="label">Пароль</label>
-              <input type="password" name="password" class="form-control" id="password" />
+              <?php if ($errorMsg!=null) : ?>
+                <input type="password" name="password" class="form-error form-control" id="password" required=""/>
+              <?php else: ?>
+                <input type="password" name="password" class="form-control" id="password" required=""/>
+              <?php endif; ?>
             </div>
             <div class="form-group">
               <input type="checkbox" id="remember" />
               <label for="remember" class="label remember">Запомнить меня</label>
+            </div>
+            <div class="form-group text-center">
+            <?php if ($errorMsg!=null) : ?>
+                <span class="error-text"><?php echo $errorMsg;?></span>
+            <?php endif; ?>
             </div>
             <div class="form-group text-center">
               <!-- <a href="#info" class="btn btn-outline-light btn-lg">Войти</a> -->
