@@ -2,7 +2,7 @@
 require 'php/session.inc.php';
 
 if (isset($_GET['signin'])) {
-  if ($_GET['signin']=='success') {
+  if ($_GET['signin'] == 'success') {
     header("Location: index.php");
   }
 }
@@ -26,7 +26,7 @@ if (isset($_GET['signin'])) {
   <div id="home">
     <!-- Start Navigation -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <a href="index.html" class="navbar-brand">
+      <a href="index.php" class="navbar-brand">
         <img src="img/bsuirlogo.png" alt="logo" />
       </a>
     </nav>
@@ -37,7 +37,7 @@ if (isset($_GET['signin'])) {
         <div class="empty-space col-md-4"></div>
         <div class="form-area col-md-5">
           <h1 class="text-center">Вход</h1>
-          
+
           <form action="php/signin.inc.php" method="post">
             <div class="form-group">
               <label for="email" class="label">E-mail</label>

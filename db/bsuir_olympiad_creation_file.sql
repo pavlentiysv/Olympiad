@@ -126,6 +126,8 @@ INNER JOIN answers ON answers.questionID = questions.questionID
 WHERE questions.correctAnswerTitle = answers.title;
 #End of How test will work
 
+use bsuir_olympiad;
+
 delimiter //
 DROP trigger IF EXISTS archive_user;
 CREATE TRIGGER archive_user
@@ -136,4 +138,56 @@ begin
 	SET NEW.password = md5(NEW.password);
 end//
 delimiter ;
+
+SELECT email FROM accounts WHERE email='whereisinput@gmail.com' and password=md5('whereisinput228');
+
+use bsuir_olympiad;
+SELECT institutionID FROM institutions WHERE type = '' AND number = '';
+
+USE `bsuir_olympiad`;
+DROP procedure IF EXISTS `addUser`;
+
+DELIMITER $$
+USE `bsuir_olympiad`$$
+CREATE PROCEDURE `addUser` (
+	IN iemail VARCHAR(254), 
+    ipassword VARCHAR(254), 
+    isurname VARCHAR(64),
+	iname VARCHAR(64), 
+    imiddlename VARCHAR(64), 
+    icity VARCHAR(64), 
+    itype VARCHAR(45), 
+    inumber VARCHAR(254),
+	igrade int, 
+    igender CHAR(1), 
+    ibirthdate DATE, 
+    itelephoneNumber int, 
+    iphoto VARCHAR(254)
+)
+BEGIN
+	DECLARE _accountID VARCHAR(254);
+    DECLARE _institutionID INT;
+    
+	INSERT INTO accounts (email, password) values (iemail, ipassword);
+	SELECT accountID INTO _accountID FROM accounts WHERE email = iemail;
+    
+    SELECT institutionID INTO _institutionID FROM institutions WHERE type = itype AND number = inumber;
+    
+    IF _institutionID IS NULL THEN
+		INSERT INTO institutions (number, type) values (inumber, itype);
+        SELECT institutionID INTO _institutionID FROM institutions WHERE type = itype AND number = inumber; 
+	END IF;
+    
+    INSERT INTO users (accountID, surname, name, middlename, 
+		city, institutionID, grade, gender, 
+		birthDate, telephoneNumber, photo) 
+	VALUES (_accountID, isurname, iname, imiddlename, 
+		icity, _institutionID, igrade, igender, 
+		ibirthDate, itelephoneNumber, iphoto);
+END$$
+
+DELIMITER ;
+
+call addUser('greerz1212@gmail.com','1212', 'Шестаков', 'Валерий', 'Валерьевич', 'Семково', 'Гимназия', 'Гимназия №50 г.Минска', 14, 'М', '1998-11-12', 291302524, null);
+
 
