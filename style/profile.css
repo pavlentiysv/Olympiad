@@ -1,10 +1,7 @@
-.col-md-3 {
-  border-right: 0.2rem solid #5997d1;
-  margin: 10px;
-}
 .left-block {
   margin: 0 0 32px;
   padding: 0 16px;
+  border-right: 0.2rem solid #5997d1;
 }
 .right-block {
   padding: 0 16px;
@@ -15,17 +12,17 @@
   margin: 1rem auto 1rem;
 }
 .avatar {
-  width:100%;
+  width: 100%;
   border-radius: 50%;
   padding: 15px;
 }
-.fullname{
+.fullname {
   font-weight: 700;
   font-size: 18px;
 }
-.profile-panel{
+.profile-panel {
   width: 100%;
 }
-.nav-tabs a{
+.nav-tabs a {
   color: #1e3357;
 }
