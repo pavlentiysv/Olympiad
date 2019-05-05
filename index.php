@@ -10,7 +10,7 @@ require 'php/session.inc.php';
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="stylesheet" href="bootstrap-4.1.3-dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="style/main.css" />
-  <link rel="stylesheet" href="style/fixed.css" />
+  <link rel="stylesheet" href="style/fixed.css" />  
   <link rel="icon" href="img/bsuirlogo_mini.png" />
   <title>Олимпиада БГУИР</title>
 </head>
@@ -69,7 +69,7 @@ require 'php/session.inc.php';
 
   <!--- Start Info Section -->
   <div id="info" class="offset">
-    <div class="col-12 narrow text-center">
+    <div class="info col-12 narrow text-center">
       <h1>Об олимпиаде</h1>
       <p class="lead">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut
