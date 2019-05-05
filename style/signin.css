@@ -49,6 +49,12 @@ body {
   border: 1px solid #5997d1;
   padding: 15px;
 }
+.form-error {
+  background: white;
+  border-radius: 0;
+  border: 1px solid #ff0000;
+  padding: 15px;
+}
 .sign-up .btn-lg {
   border-width: medium;
   border-radius: 0;
@@ -61,6 +67,10 @@ body {
 }
 .sign-up .btn-lg:hover {
   color: #1e3357;
+}
+
+.error-text {
+  color: #e61414;
 }
 
 

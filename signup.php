@@ -118,6 +118,14 @@ if (isset($_GET['signup'])) {
                         <input id="address" name="city" type="text" placeholder="Адрес" class="form-control input-md" required="">
                         <span class="help-block">Укажите адрес проживания</span>
                     </div>
+            </div>
+            <!-- Phone input-->
+            <div class="row form-group">
+                <label class="col-md-1 control-label" for="phone">Телефон</label>
+    
+                <div class="col-md-4">
+                    <input id="phone" name="telephone" type="tel" placeholder="Номер телефона"class="form-control input-md" required="">
+                    <span class="help-block">Укажите ваш номер мобильного</span>
                 </div>
                 <!-- Phone input-->
                 <div class="row form-group">
