@@ -34,8 +34,8 @@ if (isset($_GET['error'])) {
     } else if ($_GET['error'] == 'passwordNotMatching') {
         $errorMsg = 'Пароли не совпадают';
     } else if ($_GET['error'] == 'emailTaken') {
-        $errorMsg = 'Е-mail уже занят другим пользователем ('.$_GET['telephone'].')';
-    }else if ($_GET['error'] == 'noGmail') {
+        $errorMsg = 'Е-mail уже занят другим пользователем (' . $_GET['telephone'] . ')';
+    } else if ($_GET['error'] == 'noGmail') {
         $errorMsg = 'Неправильно введен e-mail или пароль';
     } else {
         $errorMsg = 'Возникла непредвиденная ошибка';
@@ -79,7 +79,7 @@ if (isset($_GET['year'])) {
     $year = $_GET['year'];
 }
 if (isset($_GET['telephone'])) {
-    $telephone = '+'.trim($_GET['telephone']);
+    $telephone = '+' . trim($_GET['telephone']);
 }
 ?>
 
@@ -185,7 +185,7 @@ if (isset($_GET['telephone'])) {
                 <div class="row form-group">
                     <label class="col-md-1 control-label" for="telephone">Телефон</label>
                     <div class="col-md-4">
-                        <input id="telephone" name="telephone" type="tel" pattern="\+[0-9]{3}\([0-9]{2}\)[0-9]{3}-[0-9]{2}-[0-9]{2}" placeholder="+375(29)123-45-67" class="form-control input-md" value='<?php echo $telephone;?>' required="">
+                        <input id="telephone" name="telephone" type="tel" pattern="\+[0-9]{3}\([0-9]{2}\)[0-9]{3}-[0-9]{2}-[0-9]{2}" placeholder="+375(29)123-45-67" class="form-control input-md" value='<?php echo $telephone; ?>' required="">
                         <span class="help-block">Ваш номер телефона</span>
                     </div>
                 </div>
