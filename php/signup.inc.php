@@ -23,6 +23,8 @@ if (isset($_POST['signup-submit'])) {
 
     $birthdate = $year."-".$month."-".$day;
 
+    $autoFill = "&email=${email}&surname=${surname}&name=${name}&middlename=${middlename}&city=${city}&institution_type=${institution_type}&institution_number=${institution_number}&grade=${grade}&gender=${gender}&day=${day}&month=${month}&year=${year}&telephone=${telephone}&photo=${photo}";
+    
     if (empty($middlename)) {
         $middlename=null;
     }
@@ -37,19 +39,19 @@ if (isset($_POST['signup-submit'])) {
         empty($grade) || empty($gender) || empty($day) || empty($month) || empty($year) ||
         empty($telephone)
     ) {
-        header("Location: ../signup.php?error=emptyFields&email=" . $email . "");
+        header("Location: ../signup.php?error=emptyFields${autoFill}");
         exit();
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header("Location: ../signup.php?error=invalidEmail=" . $email . "");
+        header("Location: ../signup.php?error=invalidEmail${autoFill}");
         exit();
     } else if ($password != $passwordRepeat) {
-        header("Location: ../signup.php?error=passwordNotMatching=" . $email . "");
+        header("Location: ../signup.php?error=passwordNotMatching${autoFill}");
         exit();
     } else {
         $sql = "SELECT email FROM accounts WHERE email = ?";
         $stmt = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt, $sql)) {
-            header("Location: ../signup.php?error=sqlError");
+            header("Location: ../signup.php?error=sqlError${autoFill}");
             exit();
         } else {
             mysqli_stmt_bind_param($stmt, "s", $email);
@@ -57,16 +59,16 @@ if (isset($_POST['signup-submit'])) {
             mysqli_stmt_store_result($stmt);
             $resultCheck = mysqli_stmt_num_rows($stmt);
             if ($resultCheck > 0) {
-                header("Location: ../signup.php?error=emailTaken");
+                header("Location: ../signup.php?error=emailTaken${autoFill}");
                 exit();
             } else {
                 $sql = "call addUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 $stmt = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($stmt, $sql)) {
-                    header("Location: ../signup.php?error=sqlError");
+                    header("Location: ../signup.php?error=sqlError${autoFill}");
                     exit();
                 } else {
-                    mysqli_stmt_bind_param($stmt, "ssssssssissis", $email, $password, $surname, $name, 
+                    mysqli_stmt_bind_param($stmt, "ssssssssissss", $email, $password, $surname, $name, 
                     $middlename, $city, $institution_type, $institution_number, $grade, $gender, $birthdate, $telephone, $photo);
                     mysqli_stmt_execute($stmt);
                     header("Location: ../signup.php?signup=success");
