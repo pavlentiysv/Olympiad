@@ -18,11 +18,27 @@
 }
 .fullname {
   font-weight: 700;
-  font-size: 18px;
+  font-size: 20px;
 }
 .profile-panel {
   width: 100%;
 }
 .nav-tabs a {
   color: #1e3357;
+}
+.tab-content p {
+  margin: 0;
+}
+div.tab-content {
+  margin: 10px;
+}
+div.info-row {
+  border-bottom: 1px solid gray;
+}
+div.info-title,
+div.info-value {
+  padding: 5px 8px 5px;
+}
+.info-title p {
+  font-weight: 700;
 }

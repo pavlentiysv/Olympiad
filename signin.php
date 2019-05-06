@@ -24,6 +24,7 @@ if (isset($_GET['email'])) {
   $email = $_GET['email'];
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

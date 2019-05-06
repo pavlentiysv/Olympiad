@@ -54,18 +54,80 @@
                 </nav>
 
                 <div class="tab-content" id="nav-tabContent">
+                    <!-- Profile Tab Content -->
                     <div class="nav-profile tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <p>Фамилия:</p>
+                        <div class="info-row row">
+                            <div class="info-title col-md-3">
+                                <p>Фамилия</p>
                             </div>
-                            <div class="col-md-9">
+                            <div class="info-value col-md-9">
                                 <p>Иванов</p>
                             </div>
                         </div>
+                        <div class="info-row row">
+                            <div class="info-title col-md-3">
+                                <p>Имя</p>
+                            </div>
+                            <div class="info-value col-md-9">
+                                <p>Иван</p>
+                            </div>
+                        </div>
+                        <div class="info-row row">
+                            <div class="info-title col-md-3">
+                                <p>Отчество</p>
+                            </div>
+                            <div class="info-value col-md-9">
+                                <p>Иванович</p>
+                            </div>
+                        </div>
+                        <div class="info-row row">
+                            <div class="info-title col-md-3">
+                                <p>Пол</p>
+                            </div>
+                            <div class="info-value col-md-9">
+                                <p>Не опознан</p>
+                            </div>
+                        </div>
+                        <div class="info-row row">
+                            <div class="info-title col-md-3">
+                                <p>Дата рождения</p>
+                            </div>
+                            <div class="info-value col-md-9">
+                                <p>22.22.2049</p>
+                            </div>
+                        </div>
+                        <div class="info-row row">
+                            <div class="info-title col-md-3">
+                                <p>Адрес</p>
+                            </div>
+                            <div class="info-value col-md-9">щзшкуаров</p>
+                            </div>
+                        </div>
+                        <div class="info-row row">
+                            <div class="info-title col-md-3">
+                                <p>Телефон</p>
+                            </div>
+                            <div class="info-value col-md-9">
+                                <p>8800-555-35-35</p>
+                            </div>
+                        </div>
+                        <div class="info-row row">
+                            <div class="info-title col-md-3">
+                                <p>Учебное заведение</p>
+                            </div>
+                            <div class="info-value col-md-9">
+                                <p>Гимназия 50<br>11 класс</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="nav-tests tab-pane fade" id="nav-tests" role="tabpanel" aria-labelledby="nav-tests-tab">...</div>
-                    <div class="nav-settings tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">...</div>
+                    <!-- Test Tab Content -->
+                    <div class="nav-tests tab-pane fade" id="nav-tests" role="tabpanel" aria-labelledby="nav-tests-tab">
+                        <p>Результаты</p>
+                    </div>
+                    <!-- Settings Tab Content -->
+                    <div class="nav-settings tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
+                        ...
+                    </div>
                 </div>
             </div>
         </div>
