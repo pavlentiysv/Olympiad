@@ -139,6 +139,17 @@ begin
 end//
 delimiter ;
 
+delimiter //
+DROP trigger IF EXISTS archive_user_update;
+CREATE TRIGGER archive_user_update
+BEFORE UPDATE 
+ON accounts
+for each row
+begin
+	SET NEW.password = md5(NEW.password);
+end//
+delimiter ;
+
 SELECT email FROM accounts WHERE email='whereisinput@gmail.com' and password=md5('whereisinput228');
 
 use bsuir_olympiad;
@@ -190,4 +201,17 @@ DELIMITER ;
 
 call addUser('greerz1212@gmail.com','1212', 'Шестаков', 'Валерий', 'Валерьевич', 'Семково', 'Гимназия', 'Гимназия №50 г.Минска', 14, 'М', '1998-11-12', 291302524, null);
 
+# For select all users with full info
+SELECT accounts.email,accounts.usertype,accounts.password, surname, name, middlename, city, institutions.type, institutions.number grade, gender, birthdate, telephoneNumber, photo
+FROM users
+RIGHT JOIN accounts ON accounts.accountID = users.accountID
+LEFT JOIN institutions ON institutions.institutionID=users.institutionID;
 
+#For reseting password
+CREATE TABLE `bsuir_olympiad`.`password_reset` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(254) NOT NULL,
+  `selector` TEXT NOT NULL,
+  `token` LONGTEXT NOT NULL,
+  `expires` TEXT NOT NULL,
+  PRIMARY KEY (`ID`));

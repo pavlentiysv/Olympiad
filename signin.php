@@ -3,6 +3,7 @@ require 'php/session.inc.php';
 
 $errorMsg = null;
 $email = null;
+$resetPasswordMsg = null;
 
 if (isset($_GET['signin'])) {
   if ($_GET['signin'] == 'success') {
@@ -22,6 +23,12 @@ if (isset($_GET['error'])) {
 
 if (isset($_GET['email'])) {
   $email = $_GET['email'];
+}
+
+if (isset($_GET["newpwd"])) {
+  if ($_GET["newpwd"] == "success") {
+    $resetPasswordMsg = 'Ваш пароль был успешно обновлен!';
+  }
 }
 ?>
 
@@ -87,7 +94,10 @@ if (isset($_GET['email'])) {
               <input type="submit" name="signin-submit" class="btn btn-outline-light btn-lg" id="submit" value="Войти" />
             </div>
             <div class="form-group">
-              <a href="#">
+              <?php if ($resetPasswordMsg!=null) : ?>
+                <p class="label text-center"><?php echo $resetPasswordMsg;?></p>
+              <?php endif; ?>
+              <a href="reset-password.php">
                 <p class="forgot text-center">Забыли пароль?</p>
               </a>
             </div>
