@@ -170,7 +170,26 @@
                                     <p>Дата рождения</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input type="text" class="form-control" name="bday" value="22.22.2049" />
+                                    <div class="row form-group">
+                                        <label class="col-md-1 control-label" for="day">День</label>
+                                        <div class="col-md-2">
+                                            <select id="day" name="day" class="form-control">
+                                                
+                                            </select>
+                                        </div>
+                                        <label class="col-md-1 control-label" for="month">Месяц</label>
+                                        <div class="col-md-3">
+                                            <select id="month" name="month" class="form-control">
+                                                
+                                            </select>
+                                        </div>
+                                        <label class="col-md-1 control-label" for="year">Год</label>
+                                        <div class="col-md-3">
+                                            <select id="year" name="year" class="form-control">
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="info-row row">
@@ -227,7 +246,7 @@
                                 <div class="info-value col-md-9">
                                     <input type="password" class="form-control" name="password" />
                                 </div>
-                            </div>                            
+                            </div>
                             <input type="submit" class="btn btn-success" value="Сохранить">
                             <a id="cancel" name="cancel" class="btn btn-danger" href="signin.php">Отмена</a>
                         </form>
