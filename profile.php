@@ -54,21 +54,207 @@
                 </nav>
 
                 <div class="tab-content" id="nav-tabContent">
+                    <!-- Profile Tab Content -->
                     <div class="nav-profile tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <p>Фамилия:</p>
+                        <div class="info-row row">
+                            <div class="info-title col-md-3">
+                                <p>Фамилия</p>
                             </div>
-                            <div class="col-md-9">
+                            <div class="info-value col-md-9">
                                 <p>Иванов</p>
                             </div>
                         </div>
+                        <div class="info-row row">
+                            <div class="info-title col-md-3">
+                                <p>Имя</p>
+                            </div>
+                            <div class="info-value col-md-9">
+                                <p>Иван</p>
+                            </div>
+                        </div>
+                        <div class="info-row row">
+                            <div class="info-title col-md-3">
+                                <p>Отчество</p>
+                            </div>
+                            <div class="info-value col-md-9">
+                                <p>Иванович</p>
+                            </div>
+                        </div>
+                        <div class="info-row row">
+                            <div class="info-title col-md-3">
+                                <p>Пол</p>
+                            </div>
+                            <div class="info-value col-md-9">
+                                <p>Не опознан</p>
+                            </div>
+                        </div>
+                        <div class="info-row row">
+                            <div class="info-title col-md-3">
+                                <p>Дата рождения</p>
+                            </div>
+                            <div class="info-value col-md-9">
+                                <p>22.22.2049</p>
+                            </div>
+                        </div>
+                        <div class="info-row row">
+                            <div class="info-title col-md-3">
+                                <p>Адрес</p>
+                            </div>
+                            <div class="info-value col-md-9">
+                                <p>ул. Некрасова, 2-3</p>
+                            </div>
+                        </div>
+                        <div class="info-row row">
+                            <div class="info-title col-md-3">
+                                <p>Телефон</p>
+                            </div>
+                            <div class="info-value col-md-9">
+                                <p>8800-555-35-35</p>
+                            </div>
+                        </div>
+                        <div class="info-row row">
+                            <div class="info-title col-md-3">
+                                <p>Учебное заведение</p>
+                            </div>
+                            <div class="info-value col-md-9">
+                                <p>Гимназия 50<br>11 класс</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="nav-tests tab-pane fade" id="nav-tests" role="tabpanel" aria-labelledby="nav-tests-tab">...</div>
-                    <div class="nav-settings tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">...</div>
+                    <!-- Test Tab Content -->
+                    <div class="nav-tests tab-pane fade" id="nav-tests" role="tabpanel" aria-labelledby="nav-tests-tab">
+                        <p>Результаты</p>
+                    </div>
+                    <!-- Settings Tab Content -->
+                    <div class="nav-settings tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
+                        <h3>Редактирование профиля</h3>
+                        <form action="" method="">
+                            <div class="info-row row">
+                                <div class="info-title col-md-3">
+                                    <p>Фамилия</p>
+                                </div>
+                                <div class="info-value col-md-9">
+                                    <input type="text" class="form-control" name="surname" value="Иванов" />
+                                </div>
+                            </div>
+                            <div class="info-row row">
+                                <div class="info-title col-md-3">
+                                    <p>Имя</p>
+                                </div>
+                                <div class="info-value col-md-9">
+                                    <input type="text" class="form-control" name="name" value="Иван" />
+                                </div>
+                            </div>
+                            <div class="info-row row">
+                                <div class="info-title col-md-3">
+                                    <p>Отчество</p>
+                                </div>
+                                <div class="info-value col-md-9">
+                                    <input type="text" class="form-control" name="middlename" value="Иванович" />
+                                </div>
+                            </div>
+                            <div class="info-row row">
+                                <div class="info-title col-md-3">
+                                    <p>Пол</p>
+                                </div>
+                                <div class="info-value col-md-9">
+                                    <select id="gender" name="gender" class="form-control">
+                                        <option value="">- Не выбран -</option>
+                                        <option value="М">Мужской</option>
+                                        <option value="Ж">Женский</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="info-row row">
+                                <div class="info-title col-md-3">
+                                    <p>Дата рождения</p>
+                                </div>
+                                <div class="info-value col-md-9">
+                                    <div class="row form-group">
+                                        <label class="col-md-1 control-label" for="day">День</label>
+                                        <div class="col-md-2">
+                                            <select id="day" name="day" class="form-control">
+                                                
+                                            </select>
+                                        </div>
+                                        <label class="col-md-1 control-label" for="month">Месяц</label>
+                                        <div class="col-md-3">
+                                            <select id="month" name="month" class="form-control">
+                                                
+                                            </select>
+                                        </div>
+                                        <label class="col-md-1 control-label" for="year">Год</label>
+                                        <div class="col-md-3">
+                                            <select id="year" name="year" class="form-control">
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-row row">
+                                <div class="info-title col-md-3">
+                                    <p>Город проживания</p>
+                                </div>
+                                <div class="info-value col-md-9">
+                                    <input type="text" class="form-control" name="city" value="Нурсултан" />
+                                </div>
+                            </div>
+                            <div class="info-row row">
+                                <div class="info-title col-md-3">
+                                    <p>Телефон</p>
+                                </div>
+                                <div class="info-value col-md-9">
+                                    <input id="telephone" name="telephone" type="tel" pattern="\+[0-9]{3}\([0-9]{2}\)[0-9]{3}-[0-9]{2}-[0-9]{2}" placeholder="+375(29)123-45-67" class="form-control" value="+375(33)383-50-09">
+                                </div>
+                            </div>
+                            <div class="info-row row">
+                                <div class="info-title col-md-3">
+                                    <p>Тип учебного заведения</p>
+                                </div>
+                                <div class="info-value col-md-9">
+                                    <select id="institution_type" name="institution_type" class="form-control">
+                                        <option value="">- Не выбран -</option>
+                                        <option value="Средняя Школа">Средняя Школа</option>
+                                        <option value="Гимназия">Гимназия</option>
+                                        <option value="Лицей">Лицей</option>
+                                        <option value="Колледж">Колледж</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="info-row row">
+                                <div class="info-title col-md-3">
+                                    <p>Название/номер учебного заведения</p>
+                                </div>
+                                <div class="info-value col-md-9">
+                                    <input type="text" class="form-control" name="institution_number" value="50" />
+                                </div>
+                            </div>
+                            <div class="info-row row">
+                                <div class="info-title col-md-3">
+                                    <p>Класс/Курс</p>
+                                </div>
+                                <div class="info-value col-md-9">
+                                    <input type="text" class="form-control" name="grade" value="3" />
+                                </div>
+                            </div>
+                            <h3>Подтверждение изменений</h3>
+                            <div class="info-row row">
+                                <div class="info-title col-md-3">
+                                    <p>Пароль</p>
+                                </div>
+                                <div class="info-value col-md-9">
+                                    <input type="password" class="form-control" name="password" />
+                                </div>
+                            </div>
+                            <input type="submit" class="btn btn-success" value="Сохранить">
+                            <a id="cancel" name="cancel" class="btn btn-danger" href="signin.php">Отмена</a>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <!-- Personal Page Section End -->
