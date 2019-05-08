@@ -4,7 +4,7 @@ $errorMsg = null;
 
 if (isset($_GET['reset'])) {
   if ($_GET['reset'] == "success") {
-    $successMsg = 'Проверьте ваш e-mail! (Эта страница вам больше не нужна).';
+    $successMsg = 'Проверьте ваш e-mail!';
   }
 } else if (isset($_GET['error'])) {
   if ($_GET['error'] == "emailSendError") {
