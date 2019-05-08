@@ -46,16 +46,20 @@ if (isset($_GET['reset'])) {
     <div class="col-md-12 control-label text-center">
       <h1>Восстановление пароля</h1>
       <p>Вам на электронную почту будет отправлено сообщение с инструкциями для восстановления Вашего пароля.</p>
-      <div class="col-md-12">
-        <form class="inline-block" action="php/reset-request.inc.php" method="post">
-          <input class="form-control mb-4" type="email" name="email" placeholder="Введите ваш e-mail" value="">
-          <button class="btn btn-success" type="submit" name="reset-request-submit">Послать запрос на восстановление</button>
-        </form>
-        <?php if ($errorMsg != null) : ?>
-          <p><?php echo $errorMsg; ?></p>
-        <?php elseif ($successMsg != null) : ?>
-          <p><?php echo $successMsg; ?></p>
-        <?php endif; ?>
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <form class="inline-block" action="php/reset-request.inc.php" method="post">
+            <input class="form-control mb-4" type="email" name="email" placeholder="Введите ваш e-mail" value="">
+            <button class="btn btn-success" type="submit" name="reset-request-submit">Отправить запрос</button>
+          </form>
+          <?php if ($errorMsg != null) : ?>
+            <p><?php echo $errorMsg; ?></p>
+          <?php elseif ($successMsg != null) : ?>
+            <p><?php echo $successMsg; ?></p>
+          <?php endif; ?>
+        </div>
+        <div class="col-md-4"></div>
       </div>
     </div>
   </div>
