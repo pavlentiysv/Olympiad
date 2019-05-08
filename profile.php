@@ -189,7 +189,7 @@ require 'php/printSelect.inc.php';
                                         <div class="col-md-1">
                                             <label class="control-label" for="day">День</label></div>
                                         <div class="col-md-2">
-                                            <select id="day" name="day" class="form-control">
+                                            <select id="day" name="day" class="form-control" size="5">
                                                 <?php printDaysList($day); ?>
                                             </select>
                                         </div>
