@@ -45,8 +45,8 @@ if (isset($_GET['reset'])) {
     <!-- End Navigation -->
     <div class="col-md-12 control-label text-center">
       <h1>Восстановление пароля</h1>
-      <p>Вам на электронную почту будет послано сообщение с инструкциями для восстановления вашего пароля.</p>
-      <div class="col-md-5">
+      <p>Вам на электронную почту будет отправлено сообщение с инструкциями для восстановления Вашего пароля.</p>
+      <div class="col-md-12">
         <form class="inline-block" action="php/reset-request.inc.php" method="post">
           <input class="form-control mb-4" type="email" name="email" placeholder="Введите ваш e-mail" value="">
           <button class="btn btn-success" type="submit" name="reset-request-submit">Послать запрос на восстановление</button>
