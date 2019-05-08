@@ -1,3 +1,7 @@
+<?php
+require 'php/session.inc.php';
+require 'php/profile.inc.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,8 +42,12 @@
         <div class="row">
             <!-- Left Block -->
             <div class="col-md-3 text-center left-block">
-                <img class="avatar" src="img/default_avatar.jpg" alt="avatar">
-                <p class="fullname">Фамилия<br>Имя<br>Отчество</p>
+                <?php if ($photo != null && file_exists("uploads/users/avatars/$photo")) :?>
+                    <img class="avatar" src="uploads/users/avatars/<?php echo $photo;?>" alt="avatar">
+                <?php else :?>
+                    <img class="avatar" src="img/default_avatar.jpg" alt="avatar">
+                <?php endif;?>
+                <p class="fullname"><?php echo $surname;?><br><?php echo $name;?><br><?php echo $middlename;?></p>
             </div>
             <!-- Right Block -->
             <div class="right-block col-md-9">
@@ -61,7 +69,7 @@
                                 <p>Фамилия</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p>Иванов</p>
+                                <p><?php echo $surname;?></p>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -69,7 +77,7 @@
                                 <p>Имя</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p>Иван</p>
+                                <p><?php echo $name;?></p>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -77,7 +85,7 @@
                                 <p>Отчество</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p>Иванович</p>
+                                <p><?php echo $middlename;?></p>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -85,7 +93,7 @@
                                 <p>Пол</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p>Не опознан</p>
+                                <p><?php echo $gender;?></p>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -93,7 +101,7 @@
                                 <p>Дата рождения</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p>22.22.2049</p>
+                                <p><?php echo $birthDate;?></p>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -101,7 +109,7 @@
                                 <p>Адрес</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p>ул. Некрасова, 2-3</p>
+                                <p><?php echo $city;?></p>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -109,7 +117,7 @@
                                 <p>Телефон</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p>8800-555-35-35</p>
+                                <p><?php echo $telephone;?></p>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -117,7 +125,7 @@
                                 <p>Учебное заведение</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p>Гимназия 50<br>11 класс</p>
+                                <p><?php echo $institution_number;?><br><?php echo $grade;?> класс</p>
                             </div>
                         </div>
                     </div>
