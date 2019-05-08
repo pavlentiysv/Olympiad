@@ -1,9 +1,9 @@
 <?php
-$email = '@';
+$email = null;
 $userType = null;
-$surname = 'Иванов';
-$name = 'Иван';
-$middlename = 'Иванович';
+$surname = null;
+$name = null;
+$middlename = null;
 $city = null;
 $institution_type = null;
 $institution_number = null;
