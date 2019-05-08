@@ -19,11 +19,12 @@ if (isset($_POST['signup-submit'])) {
     $month = $_POST['month'];
     $year = $_POST['year'];
     $telephone = $_POST['telephone'];
-    $photo = $_POST['photo'];
+    $photo = $_FILES['photo'];
 
     $birthdate = $year."-".$month."-".$day;
+    $photoNameNew=null; //global for inserting to db
 
-    $autoFill = "&email=${email}&surname=${surname}&name=${name}&middlename=${middlename}&city=${city}&institution_type=${institution_type}&institution_number=${institution_number}&grade=${grade}&gender=${gender}&day=${day}&month=${month}&year=${year}&telephone=${telephone}&photo=${photo}";
+    $autoFill = "&email=${email}&surname=${surname}&name=${name}&middlename=${middlename}&city=${city}&institution_type=${institution_type}&institution_number=${institution_number}&grade=${grade}&gender=${gender}&day=${day}&month=${month}&year=${year}&telephone=${telephone}";
     
     if (empty($middlename)) {
         $middlename=null;
@@ -62,6 +63,37 @@ if (isset($_POST['signup-submit'])) {
                 header("Location: ../signup.php?error=emailTaken${autoFill}");
                 exit();
             } else {
+                //<!-- Checking photo input --!>
+                if ($photo != null) {
+                    $photoName = $photo['name'];
+                    $photoTmpName = $photo['tmp_name'];
+                    $photoSize = $photo['size'];
+                    $photoError = $photo['error'];
+                    $photoExt = explode('.', $photoName);
+                    $photoActualExt = strtolower(end($photoExt));
+
+                    $allowed = array('jpg', 'jpeg', 'png');
+                    if (in_array($photoActualExt, $allowed)) {
+                        if ($photoError === 0) {
+                            if ($photoSize <= 5242880) {
+                                //5242880 Kb = 5 Mb
+                                $photoNameNew = $email.".".$photoActualExt;
+                                $photoDestination = '../uploads/users/avatars/'.$photoNameNew;
+                                move_uploaded_file($photoTmpName, $photoDestination);
+                            } else {
+                                header("Location: ../signup.php?error=photoSize${autoFill}");
+                                exit();  
+                            }
+                        } else {
+                            header("Location: ../signup.php?error=photoUpload${autoFill}");
+                            exit(); 
+                        }
+                    } else {
+                        header("Location: ../signup.php?error=photoExt${autoFill}");
+                        exit(); 
+                    }
+                }
+
                 $sql = "call addUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 $stmt = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -69,7 +101,7 @@ if (isset($_POST['signup-submit'])) {
                     exit();
                 } else {
                     mysqli_stmt_bind_param($stmt, "ssssssssissss", $email, $password, $surname, $name, 
-                    $middlename, $city, $institution_type, $institution_number, $grade, $gender, $birthdate, $telephone, $photo);
+                    $middlename, $city, $institution_type, $institution_number, $grade, $gender, $birthdate, $telephone, $photoNameNew);
                     mysqli_stmt_execute($stmt);
                     header("Location: ../signup.php?signup=success");
                     exit();

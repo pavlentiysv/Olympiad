@@ -26,19 +26,25 @@ if (isset($_GET['signup'])) {
 
 if (isset($_GET['error'])) {
     if ($_GET['error'] == 'emptyFields') {
-        $errorMsg = 'Заполните все обязательные поля';
+        $errorMsg = 'Заполните все обязательные поля.';
     } else if ($_GET['error'] == 'sqlError') {
-        $errorMsg = 'Ошибка при обращении к базе данных';
+        $errorMsg = 'Ошибка при обращении к базе данных.';
     } else if ($_GET['error'] == 'invalidEmail') {
         $errorMsg = 'Правильно введите e-mail';
     } else if ($_GET['error'] == 'passwordNotMatching') {
-        $errorMsg = 'Пароли не совпадают';
+        $errorMsg = 'Пароли не совпадают.';
     } else if ($_GET['error'] == 'emailTaken') {
-        $errorMsg = 'Е-mail уже занят другим пользователем (' . $_GET['telephone'] . ')';
+        $errorMsg = 'Е-mail уже занят другим пользователем';
     } else if ($_GET['error'] == 'noGmail') {
-        $errorMsg = 'Неправильно введен e-mail или пароль';
+        $errorMsg = 'Неправильно введен e-mail или пароль.';
+    } else if ($_GET['error'] == 'photoExt') {
+        $errorMsg = 'Вы можете загружать файлы только с типами jpg, jpeg, png.';
+    } else if ($_GET['error'] == 'photoUpload') {
+        $errorMsg = 'Возникла ошибка при загрузке фото.';
+    } else if ($_GET['error'] == 'photoSize') {
+        $errorMsg = 'Размер фото не может превышать 5 Мб.';
     } else {
-        $errorMsg = 'Возникла непредвиденная ошибка';
+        $errorMsg = 'Возникла непредвиденная ошибка.';
     }
 }
 
@@ -112,7 +118,7 @@ if (isset($_GET['telephone'])) {
                 <h1 class="nice">Регистрация</h1>
             </div>
 
-            <form action="php/signup.inc.php" method="post">
+            <form action="php/signup.inc.php" method="post" enctype="multipart/form-data">
                 <!-- Text input-->
                 <div class="form-group text-center">
                     <?php if ($errorMsg != null) : ?>
@@ -225,11 +231,19 @@ if (isset($_GET['telephone'])) {
                     </div>
                 </div>
 
+                <!--Profile photo-->
+                <div class="row form-group">
+                    <label class="col-md-1 " for="photo">Фото профиля</label>
+                    <div class="col-md-4">
+                        <input id="photo" name="photo" type="file" class="input-md">
+                    </div>
+                </div>
+
                 <!-- Email input-->
                 <div class="row form-group">
                     <label class="col-md-1 " for="email">Email</label>
                     <div class="col-md-4">
-                        <input id="email" name="email" type="email" placeholder="Email" class="form-control input-md" required="" value=<?php echo $email; ?>>
+                        <input id="email" name="email" type="email" placeholder="Email" class="form-control input-md" required="" value="<?php echo $email; ?>">
                     </div>
                 </div>
 

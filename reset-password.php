@@ -4,11 +4,15 @@ $errorMsg = null;
 
 if (isset($_GET['reset'])) {
   if ($_GET['reset'] == "success") {
-    $successMsg = 'Проверьте ваш e-mail!';
+    $successMsg = 'Проверьте ваш e-mail! (Эта страница вам больше не нужна).';
   }
 } else if (isset($_GET['error'])) {
   if ($_GET['error'] == "emailSendError") {
     $errorMsg = 'Ошибка при отправке сообщения.';
+  } else if ($_GET['error'] == "sqlError") {
+    $errorMsg = 'Ошибка при обращении к базе данных.';
+  } else if ($_GET['error'] == "UserNotFound") {
+    $errorMsg = 'Такого пользователя не существует.';
   } else {
     $errorMsg = 'Возникла непредвиденная ошибка.';
   }
@@ -44,7 +48,7 @@ if (isset($_GET['reset'])) {
       <p>Вам на электронную почту будет послано сообщение с инструкциями для восстановления вашего пароля.</p>
       <div class="col-md-5">
         <form class="inline-block" action="php/reset-request.inc.php" method="post">
-          <input class="form-control mb-4" type="text" name="email" placeholder="Введите ваш e-mail" value="">
+          <input class="form-control mb-4" type="email" name="email" placeholder="Введите ваш e-mail" value="">
           <button class="btn btn-success" type="submit" name="reset-request-submit">Послать запрос на восстановление</button>
         </form>
         <?php if ($errorMsg != null) : ?>

@@ -1,13 +1,31 @@
 <?php
+require 'config.inc.php';
 
 if (isset($_POST['reset-request-submit'])) {
   $selector = bin2hex(random_bytes(8));
   $token = random_bytes(32);
-  $url = "192.168.1.99/olympiad/create-new-password.php?selector=$selector&validator=".bin2hex($token);
+  $url = "${serverHostIP}/olympiad/create-new-password.php?selector=$selector&validator=" . bin2hex($token);
   $expires = date("U") + 1800;
 
   require '../db/dbHandler.inc.php';
   $userEmail = $_POST['email'];
+
+  $sql = "SELECT * FROM accounts WHERE email=?";
+  $stmt = mysqli_stmt_init($conn);
+  if (!mysqli_stmt_prepare($stmt, $sql)) {
+    header("Location: ../reset-password.php?error=sqlError");
+    exit();
+  } else {
+    mysqli_stmt_bind_param($stmt, "s", $userEmail);
+    mysqli_stmt_execute($stmt);
+
+    $result = mysqli_stmt_get_result($stmt);
+    if (!$row = mysqli_fetch_assoc($result)) {
+      header("Location: ../reset-password.php?error=UserNotFound");
+      exit();
+    }
+  }
+
   $sql = "DELETE FROM password_reset WHERE email=?";
   $stmt = mysqli_stmt_init($conn);
   if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -39,20 +57,15 @@ if (isset($_POST['reset-request-submit'])) {
   $message .= "<a href='$url'>$url</a></p>";
 
   $headers = 'From: whereisinput.help@gmail.com' . " \r\n";
-  $headers.= 'MIME-Version: 1.0' . "\r\n";
-  $headers.= 'Content-type: text/html; charset=utf-8'."\r\n";
-  $headers.= 'X-Mailer: PHP/' . phpversion();
+  $headers .= 'MIME-Version: 1.0' . "\r\n";
+  $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+  $headers .= 'X-Mailer: PHP/' . phpversion();
 
   if (mail($to, $subject, $message, $headers)) {
     header("Location: ../reset-password.php?reset=success");
   } else {
     header("Location: ../reset-password.php?error=emailSendError");
   }
-
-  
-
 } else {
-  header ("Location: ../index.php");
+  header("Location: ../index.php");
 }
-
-?>

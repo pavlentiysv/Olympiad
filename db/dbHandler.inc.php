@@ -1,5 +1,6 @@
 <?php
-$databaseHost = '25.86.72.156'; // адрес сервера
+require '../php/config.inc.php';
+$databaseHost = $serverHostIP; // адрес сервера
 $databaseUser = 'root'; // имя пользователя
 $databasePassword = 'root'; // пароль
 $database = 'bsuir_olympiad'; // имя базы данных
