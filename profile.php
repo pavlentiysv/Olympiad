@@ -184,10 +184,10 @@ require 'php/printSelect.inc.php';
                                 <div class="info-title col-md-3">
                                     <p>Дата рождения</p>
                                 </div>
-                                <div class="info-value col-md-9">
+                                <div class="info-value bday col-md-9">
                                     <div class="row form-group">
                                         <label class="col-md-1 control-label" for="day">День</label>
-                                        <div class="col-md-2">
+                                        <div class="col-md-3">
                                             <select id="day" name="day" class="form-control">
                                                 <?php printDaysList($day); ?>
                                             </select>

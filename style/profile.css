@@ -42,6 +42,9 @@ div.info-value {
 .info-title p {
   font-weight: 700;
 }
+.col-md-3 {
+  padding: 2px;
+}
 @media (max-width: 767px) {
   .left-block {
     border-right: 0px;
