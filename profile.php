@@ -43,12 +43,12 @@ require 'php/printSelect.inc.php';
         <div class="row">
             <!-- Left Block -->
             <div class="col-md-3 text-center left-block">
-                <?php if ($photo != null && file_exists("uploads/users/avatars/$photo")) :?>
-                    <img class="avatar" src="uploads/users/avatars/<?php echo $photo;?>" alt="avatar">
-                <?php else :?>
+                <?php if ($photo != null && file_exists("uploads/users/avatars/$photo")) : ?>
+                    <img class="avatar" src="uploads/users/avatars/<?php echo $photo; ?>" alt="avatar">
+                <?php else : ?>
                     <img class="avatar" src="img/default_avatar.jpg" alt="avatar">
-                <?php endif;?>
-                <p class="fullname"><?php echo $surname;?><br><?php echo $name;?><br><?php echo $middlename;?></p>
+                <?php endif; ?>
+                <p class="fullname"><?php echo $surname; ?><br><?php echo $name; ?><br><?php echo $middlename; ?></p>
             </div>
             <!-- Right Block -->
             <div class="right-block col-md-9">
@@ -70,7 +70,7 @@ require 'php/printSelect.inc.php';
                                 <p>Фамилия</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p><?php echo $surname;?></p>
+                                <p><?php echo $surname; ?></p>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -78,7 +78,7 @@ require 'php/printSelect.inc.php';
                                 <p>Имя</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p><?php echo $name;?></p>
+                                <p><?php echo $name; ?></p>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -86,7 +86,7 @@ require 'php/printSelect.inc.php';
                                 <p>Отчество</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p><?php echo $middlename;?></p>
+                                <p><?php echo $middlename; ?></p>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -94,13 +94,13 @@ require 'php/printSelect.inc.php';
                                 <p>Пол</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <?php if ($gender == 'М') :?>
+                                <?php if ($gender == 'М') : ?>
                                     <p>Мужской</p>
-                                <?php elseif ($gender == 'Ж') :?>
+                                <?php elseif ($gender == 'Ж') : ?>
                                     <p>Женский</p>
-                                <?php else :?>
+                                <?php else : ?>
                                     <p>?</p>
-                                <?php endif;?>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -108,7 +108,7 @@ require 'php/printSelect.inc.php';
                                 <p>Дата рождения</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p><?php echo "$day.$month.$year";?></p>
+                                <p><?php echo "$day.$month.$year"; ?></p>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -116,7 +116,7 @@ require 'php/printSelect.inc.php';
                                 <p>Адрес</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p><?php echo $city;?></p>
+                                <p><?php echo $city; ?></p>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -124,7 +124,7 @@ require 'php/printSelect.inc.php';
                                 <p>Телефон</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p><?php echo $telephone;?></p>
+                                <p><?php echo $telephone; ?></p>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -132,7 +132,7 @@ require 'php/printSelect.inc.php';
                                 <p>Учебное заведение</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p><?php echo $institution_number;?><br><?php echo $grade;?> класс</p>
+                                <p><?php echo $institution_number; ?><br><?php echo $grade; ?> класс</p>
                             </div>
                         </div>
                     </div>
@@ -149,7 +149,7 @@ require 'php/printSelect.inc.php';
                                     <p>Фамилия</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input type="text" class="form-control" name="surname" value="<?php echo $surname;?>" required=""/>
+                                    <input type="text" class="form-control" name="surname" value="<?php echo $surname; ?>" required="" />
                                 </div>
                             </div>
                             <div class="info-row row">
@@ -157,7 +157,7 @@ require 'php/printSelect.inc.php';
                                     <p>Имя</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input type="text" class="form-control" name="name" value="<?php echo $name;?>" required=""/>
+                                    <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" required="" />
                                 </div>
                             </div>
                             <div class="info-row row">
@@ -165,7 +165,7 @@ require 'php/printSelect.inc.php';
                                     <p>Отчество</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input type="text" class="form-control" name="middlename" value="<?php echo $middlename;?>" />
+                                    <input type="text" class="form-control" name="middlename" value="<?php echo $middlename; ?>" />
                                 </div>
                             </div>
                             <div class="info-row row">
@@ -186,19 +186,22 @@ require 'php/printSelect.inc.php';
                                 </div>
                                 <div class="info-value bday col-md-9">
                                     <div class="row form-group">
-                                        <label class="col-md-1 control-label" for="day">День</label>
-                                        <div class="col-md-3">
+                                        <div class="col-md-1">
+                                            <label class="control-label" for="day">День</label></div>
+                                        <div class="col-md-2">
                                             <select id="day" name="day" class="form-control">
                                                 <?php printDaysList($day); ?>
                                             </select>
                                         </div>
-                                        <label class="col-md-1 control-label" for="month">Месяц</label>
+                                        <div class="col-md-2">
+                                            <label class="control-label" for="month">Месяц</label></div>
                                         <div class="col-md-3">
                                             <select id="month" name="month" class="form-control">
                                                 <?php printMonthsList($month); ?>
                                             </select>
                                         </div>
-                                        <label class="col-md-1 control-label" for="year">Год</label>
+                                        <div class="col-md-1">
+                                            <label class="control-label" for="year">Год</label></div>
                                         <div class="col-md-3">
                                             <select id="year" name="year" class="form-control">
                                                 <?php printYearList($year); ?>
@@ -212,7 +215,7 @@ require 'php/printSelect.inc.php';
                                     <p>Aдрес</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input type="text" class="form-control" name="city" value="<?php echo $city;?>" required=""/>
+                                    <input type="text" class="form-control" name="city" value="<?php echo $city; ?>" required="" />
                                 </div>
                             </div>
                             <div class="info-row row">
@@ -220,7 +223,7 @@ require 'php/printSelect.inc.php';
                                     <p>Телефон</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input id="telephone" name="telephone" type="tel" pattern="\+[0-9]{3}\([0-9]{2}\)[0-9]{3}-[0-9]{2}-[0-9]{2}" placeholder="+375(29)123-45-67" class="form-control" value="<?php echo $telephone;?>" required="">
+                                    <input id="telephone" name="telephone" type="tel" pattern="\+[0-9]{3}\([0-9]{2}\)[0-9]{3}-[0-9]{2}-[0-9]{2}" placeholder="+375(29)123-45-67" class="form-control" value="<?php echo $telephone; ?>" required="">
                                 </div>
                             </div>
                             <div class="info-row row">
@@ -242,7 +245,7 @@ require 'php/printSelect.inc.php';
                                     <p>Название/номер учебного заведения</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input type="text" class="form-control" name="institution_number" value="<?php echo $institution_number;?>" required=""/>
+                                    <input type="text" class="form-control" name="institution_number" value="<?php echo $institution_number; ?>" required="" />
                                 </div>
                             </div>
                             <div class="info-row row">
@@ -250,7 +253,15 @@ require 'php/printSelect.inc.php';
                                     <p>Класс/Курс</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input type="text" class="form-control" name="grade" value="<?php echo $grade;?>" required=""/>
+                                    <input type="text" class="form-control" name="grade" value="<?php echo $grade; ?>" required="" />
+                                </div>
+                            </div>
+                            <div class="info-row row">
+                                <div class="info-title col-md-3">
+                                    <p>Новый пароль</p>
+                                </div>
+                                <div class="info-value col-md-9">
+                                    <input type="password" class="form-control" name="newpassword" />
                                 </div>
                             </div>
                             <h3>Подтверждение изменений</h3>
@@ -259,7 +270,7 @@ require 'php/printSelect.inc.php';
                                     <p>Пароль</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input type="password" class="form-control" name="password" required=""/>
+                                    <input type="password" class="form-control" name="password" required="" />
                                 </div>
                             </div>
                             <input type="submit" class="btn btn-success" value="Сохранить">
