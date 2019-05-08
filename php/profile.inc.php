@@ -10,6 +10,9 @@ $institution_number = null;
 $grade = null;
 $gender = null;
 $birthDate = null;
+$year = null;
+$month = null;
+$day = null;
 $telephone = null;
 $photo = null;
 
@@ -51,5 +54,10 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
     $birthDate = $row['birthdate'];
     $telephone = $row['telephoneNumber'];
     $photo = $row['photo'];
+
+    $parts = explode("-", $birthDate);
+    $year = $parts[0];
+    $month = $parts[1];
+    $day = $parts[2];
   }
 }

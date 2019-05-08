@@ -1,6 +1,7 @@
 <?php
 require 'php/session.inc.php';
 require 'php/profile.inc.php';
+require 'php/printSelect.inc.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,7 +94,13 @@ require 'php/profile.inc.php';
                                 <p>Пол</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p><?php echo $gender;?></p>
+                                <?php if ($gender == 'М') :?>
+                                    <p>Мужской</p>
+                                <?php elseif ($gender == 'Ж') :?>
+                                    <p>Женский</p>
+                                <?php else :?>
+                                    <p>?</p>
+                                <?php endif;?>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -101,7 +108,7 @@ require 'php/profile.inc.php';
                                 <p>Дата рождения</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p><?php echo $birthDate;?></p>
+                                <p><?php echo "$day.$month.$year";?></p>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -136,13 +143,13 @@ require 'php/profile.inc.php';
                     <!-- Settings Tab Content -->
                     <div class="nav-settings tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
                         <h3>Редактирование профиля</h3>
-                        <form action="" method="">
+                        <form action="php/profile-update.inc.php" method="post">
                             <div class="info-row row">
                                 <div class="info-title col-md-3">
                                     <p>Фамилия</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input type="text" class="form-control" name="surname" value="Иванов" />
+                                    <input type="text" class="form-control" name="surname" value="<?php echo $surname;?>" required=""/>
                                 </div>
                             </div>
                             <div class="info-row row">
@@ -150,7 +157,7 @@ require 'php/profile.inc.php';
                                     <p>Имя</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input type="text" class="form-control" name="name" value="Иван" />
+                                    <input type="text" class="form-control" name="name" value="<?php echo $name;?>" required=""/>
                                 </div>
                             </div>
                             <div class="info-row row">
@@ -158,7 +165,7 @@ require 'php/profile.inc.php';
                                     <p>Отчество</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input type="text" class="form-control" name="middlename" value="Иванович" />
+                                    <input type="text" class="form-control" name="middlename" value="<?php echo $middlename;?>" />
                                 </div>
                             </div>
                             <div class="info-row row">
@@ -167,9 +174,9 @@ require 'php/profile.inc.php';
                                 </div>
                                 <div class="info-value col-md-9">
                                     <select id="gender" name="gender" class="form-control">
-                                        <option value="">- Не выбран -</option>
-                                        <option value="М">Мужской</option>
-                                        <option value="Ж">Женский</option>
+                                        <option <?php if ($gender == null) echo 'selected' ?> value="">- Не выбран -</option>
+                                        <option <?php if ($gender == 'М') echo 'selected' ?> value="М">Мужской</option>
+                                        <option <?php if ($gender == 'Ж') echo 'selected' ?>value="Ж">Женский</option>
                                     </select>
                                 </div>
                             </div>
@@ -182,19 +189,19 @@ require 'php/profile.inc.php';
                                         <label class="col-md-1 control-label" for="day">День</label>
                                         <div class="col-md-2">
                                             <select id="day" name="day" class="form-control">
-                                                
+                                                <?php printDaysList($day); ?>
                                             </select>
                                         </div>
                                         <label class="col-md-1 control-label" for="month">Месяц</label>
                                         <div class="col-md-3">
                                             <select id="month" name="month" class="form-control">
-                                                
+                                                <?php printMonthsList($month); ?>
                                             </select>
                                         </div>
                                         <label class="col-md-1 control-label" for="year">Год</label>
                                         <div class="col-md-3">
                                             <select id="year" name="year" class="form-control">
-                                                
+                                                <?php printYearList($year); ?>
                                             </select>
                                         </div>
                                     </div>
@@ -202,10 +209,10 @@ require 'php/profile.inc.php';
                             </div>
                             <div class="info-row row">
                                 <div class="info-title col-md-3">
-                                    <p>Город проживания</p>
+                                    <p>Aдрес</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input type="text" class="form-control" name="city" value="Нурсултан" />
+                                    <input type="text" class="form-control" name="city" value="<?php echo $city;?>" required=""/>
                                 </div>
                             </div>
                             <div class="info-row row">
@@ -213,7 +220,7 @@ require 'php/profile.inc.php';
                                     <p>Телефон</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input id="telephone" name="telephone" type="tel" pattern="\+[0-9]{3}\([0-9]{2}\)[0-9]{3}-[0-9]{2}-[0-9]{2}" placeholder="+375(29)123-45-67" class="form-control" value="+375(33)383-50-09">
+                                    <input id="telephone" name="telephone" type="tel" pattern="\+[0-9]{3}\([0-9]{2}\)[0-9]{3}-[0-9]{2}-[0-9]{2}" placeholder="+375(29)123-45-67" class="form-control" value="<?php echo $telephone;?>" required="">
                                 </div>
                             </div>
                             <div class="info-row row">
@@ -222,11 +229,11 @@ require 'php/profile.inc.php';
                                 </div>
                                 <div class="info-value col-md-9">
                                     <select id="institution_type" name="institution_type" class="form-control">
-                                        <option value="">- Не выбран -</option>
-                                        <option value="Средняя Школа">Средняя Школа</option>
-                                        <option value="Гимназия">Гимназия</option>
-                                        <option value="Лицей">Лицей</option>
-                                        <option value="Колледж">Колледж</option>
+                                        <option <?php if ($institution_type == null) echo 'selected' ?> value="">- Не выбран -</option>
+                                        <option <?php if ($institution_type == 'Средняя Школа') echo 'selected' ?> value="Средняя Школа">Средняя Школа</option>
+                                        <option <?php if ($institution_type == 'Гимназия') echo 'selected' ?> value="Гимназия">Гимназия</option>
+                                        <option <?php if ($institution_type == 'Лицей') echo 'selected' ?> value="Лицей">Лицей</option>
+                                        <option <?php if ($institution_type == 'Колледж') echo 'selected' ?> value="Колледж">Колледж</option>
                                     </select>
                                 </div>
                             </div>
@@ -235,7 +242,7 @@ require 'php/profile.inc.php';
                                     <p>Название/номер учебного заведения</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input type="text" class="form-control" name="institution_number" value="50" />
+                                    <input type="text" class="form-control" name="institution_number" value="<?php echo $institution_number;?>" required=""/>
                                 </div>
                             </div>
                             <div class="info-row row">
@@ -243,7 +250,7 @@ require 'php/profile.inc.php';
                                     <p>Класс/Курс</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input type="text" class="form-control" name="grade" value="3" />
+                                    <input type="text" class="form-control" name="grade" value="<?php echo $grade;?>" required=""/>
                                 </div>
                             </div>
                             <h3>Подтверждение изменений</h3>
@@ -252,7 +259,7 @@ require 'php/profile.inc.php';
                                     <p>Пароль</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input type="password" class="form-control" name="password" />
+                                    <input type="password" class="form-control" name="password" required=""/>
                                 </div>
                             </div>
                             <input type="submit" class="btn btn-success" value="Сохранить">
