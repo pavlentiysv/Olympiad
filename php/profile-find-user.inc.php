@@ -16,6 +16,7 @@ if (isset($_POST['submit-search'])) {
   $desiredUserEmail = $_POST['desired-email'];
 } else if (isset($_GET['email'])) {
   $desiredUserEmail = $_GET['email'];
+  $gettelephone = $_GET['telephone'];
 } else {
   header("Location: ../profile.php?error=noSubmit");
   exit();
@@ -66,6 +67,6 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
 
     $autoFill = "&email=${email}&usertype=$userType&surname=${surname}&name=${name}&middlename=${middlename}&city=${city}&institution_type=${institution_type}&institution_number=${institution_number}&grade=${grade}&gender=${gender}&day=${day}&month=${month}&year=${year}&birthdate=$birthDate&telephone=${telephone}&photo=$photo";
 
-    header("Location: ../profile.php?search=success$autoFill");
+    header("Location: ../profile.php?search=success$autoFill&$gettelephone");
   }
 }

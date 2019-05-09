@@ -53,7 +53,7 @@ if ($newPhoto['name'] == null) {
   $newPhoto = null;
 }
 
-if ($session_usertype != 'admin') {
+if ($session_usertype != 'admin' || $session_email != $email) {
   if (
     empty($newSurname) || empty($newName) || empty($newCity) || empty($newInstitution_type) || empty($newInstitution_number) || empty($newGrade) || empty($newGender) || empty($newDay) || empty($newMonth) || empty($newYear) || empty($newTelephone)
   ) {
@@ -226,7 +226,7 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
               $session_usertype = $newUserType;
             }
 
-            header("Location: profile-find-user.inc.php?update=success&email=$email");
+            header("Location: profile-find-user.inc.php?update=success&email=$email&telephone=$newTelephone");
             exit();
           }
         }

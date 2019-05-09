@@ -227,9 +227,9 @@ require 'php/printSelect.inc.php';
                                 </div>
                                 <div class="info-value col-md-9">
                                     <select id="gender" name="gender" class="form-control">
-                                        <option <?php if ($gender == null) echo 'selected' ?> value="">- Не выбран -</option>
-                                        <option <?php if ($gender == 'М') echo 'selected' ?> value="М">Мужской</option>
-                                        <option <?php if ($gender == 'Ж') echo 'selected' ?>value="Ж">Женский</option>
+                                        <option <?php if ($gender == null) echo 'selected'; ?> value="">- Не выбран - .<?php echo $gender?>.</option>
+                                        <option <?php if ($gender == 'М') echo 'selected'; ?> value='М'>Мужской</option>
+                                        <option <?php if ($gender == 'Ж') echo 'selected';?> value='Ж'>Женский</option>
                                     </select>
                                 </div>
                             </div>
@@ -243,21 +243,21 @@ require 'php/printSelect.inc.php';
                                             <label class="control-label" for="day">День</label></div>
                                         <div class="col-md-2">
                                             <select id="day" name="day" class="form-control">
-                                                <?php printDaysList($day); ?>
+                                                <?php printDaysList(intval($day)); ?>
                                             </select>
                                         </div>
                                         <div class="col-md-2">
                                             <label class="control-label" for="month">Месяц</label></div>
                                         <div class="col-md-3">
                                             <select id="month" name="month" class="form-control">
-                                                <?php printMonthsList($month); ?>
+                                                <?php printMonthsList(intval($month)); ?>
                                             </select>
                                         </div>
                                         <div class="col-md-1">
                                             <label class="control-label" for="year">Год</label></div>
                                         <div class="col-md-3">
                                             <select id="year" name="year" class="form-control">
-                                                <?php printYearList($year); ?>
+                                                <?php printYearList(intval($year)); ?>
                                             </select>
                                         </div>
                                     </div>
@@ -285,11 +285,11 @@ require 'php/printSelect.inc.php';
                                 </div>
                                 <div class="info-value col-md-9">
                                     <select id="institution_type" name="institution_type" class="form-control">
-                                        <option <?php if ($institution_type == null) echo 'selected' ?> value="">- Не выбран -</option>
-                                        <option <?php if ($institution_type == 'Средняя Школа') echo 'selected' ?> value="Средняя Школа">Средняя Школа</option>
-                                        <option <?php if ($institution_type == 'Гимназия') echo 'selected' ?> value="Гимназия">Гимназия</option>
-                                        <option <?php if ($institution_type == 'Лицей') echo 'selected' ?> value="Лицей">Лицей</option>
-                                        <option <?php if ($institution_type == 'Колледж') echo 'selected' ?> value="Колледж">Колледж</option>
+                                        <option <?php if ($institution_type == null) echo 'selected'; ?> value="">- Не выбран -</option>
+                                        <option <?php if (trim($institution_type)== 'Средняя Школа') echo 'selected'; ?> value="Средняя Школа">Средняя Школа</option>
+                                        <option <?php if (trim($institution_type) == 'Гимназия') echo 'selected'; ?> value="Гимназия">Гимназия</option>
+                                        <option <?php if (trim($institution_type) == 'Лицей') echo 'selected'; ?> value="Лицей">Лицей</option>
+                                        <option <?php if (trim($institution_type) == 'Колледж') echo 'selected'; ?> value="Колледж">Колледж</option>
                                     </select>
                                 </div>
                             </div>

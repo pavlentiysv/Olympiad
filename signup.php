@@ -147,19 +147,19 @@ if (isset($_GET['telephone'])) {
                             <label class="col-md-1 control-label" for="day">День</label>
                             <div class="col-md-2">
                                 <select id="day" name="day" class="form-control">
-                                    <?php printDaysList($day); ?>
+                                    <?php printDaysList(intval($day)); ?>
                                 </select>
                             </div>
                             <label class="col-md-1 control-label" for="month">Месяц</label>
                             <div class="col-md-3">
                                 <select id="month" name="month" class="form-control">
-                                    <?php printMonthsList($month); ?>
+                                    <?php printMonthsList(intval($month)); ?>
                                 </select>
                             </div>
                             <label class="col-md-1 control-label" for="year">Год</label>
                             <div class="col-md-3">
                                 <select id="year" name="year" class="form-control">
-                                    <?php printYearList($year); ?>
+                                    <?php printYearList(intval($year)); ?>
                                 </select>
                             </div>
                         </div>
