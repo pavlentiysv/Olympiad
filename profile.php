@@ -140,7 +140,7 @@ require 'php/printSelect.inc.php';
                                 <p>Электронная почта</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p><?php echo $email; ?></p>
+                                <p><?php echo $session_email; ?></p>
                             </div>
                         </div>
                     </div>
