@@ -1,5 +1,4 @@
 <?php
-$email = null;
 $userType = null;
 $surname = null;
 $name = null;
@@ -17,8 +16,12 @@ $telephone = null;
 $photo = null;
 
 if (isset($_SESSION['userEmail'])) {
-  $email = $_SESSION['userEmail'];
+  $session_email = $_SESSION['userEmail'];
 } else {
+  header("Location: ./signin.php?error=noSession");
+}
+
+if ($session_email == null) {
   header("Location: ./signin.php?error=noSession");
 }
 
@@ -36,12 +39,12 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
   header("Location: ./profile.php?error=sqlError");
   exit();
 } else {
-  mysqli_stmt_bind_param($stmt, "s", $email);
+  mysqli_stmt_bind_param($stmt, "s", $session_email);
   mysqli_stmt_execute($stmt);
 
   $result = mysqli_stmt_get_result($stmt);
   if (!$row = mysqli_fetch_assoc($result)) {
-    header("Location: ./profile.php?error=infoNotFound");
+    header("Location: ./signin.php?error=infoNotFound");
     exit();
   } else {
     $userType = $row['usertype'];
