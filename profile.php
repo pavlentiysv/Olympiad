@@ -25,6 +25,13 @@ require 'php/printSelect.inc.php';
             <a href="index.php" class="navbar-brand">
                 <img src="img/bsuirlogo.png" alt="logo" />
             </a>
+            <?php if ($session_usertype == 'admin' || $session_usertype == 'org') :?>
+                <form class="ml-auto" action="php/profile-find-user.inc.php" method="post">
+                    <input type="email" name="desired-email" id="desired-email" class="" placeholder="<?php echo $email?>">
+                    <input type="submit" name="submit-search" class="btn btn-outline-light btn-lg ml-auto" id="submit" value="Найти пользователя" /> 
+                </form>
+                <a class="btn btn-danger" href="profile.php">Х</a>
+            <?php endif;?>
             <form class="ml-auto" action="php/signout.inc.php" method="post">
                 <input type="submit" name="signout-submit" class="btn btn-outline-light btn-lg ml-auto" id="submit" value="Выйти" />
             </form>
@@ -58,7 +65,9 @@ require 'php/printSelect.inc.php';
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">Профиль</a>
                         <a class="nav-item nav-link" id="nav-tests-tab" data-toggle="tab" href="#nav-tests" role="tab" aria-controls="nav-tests" aria-selected="false">Тесты</a>
+                        <?php if ($email == $session_email || $session_usertype=='admin') :?>
                         <a class="nav-item nav-link" id="nav-settings-tab" data-toggle="tab" href="#nav-settings" role="tab" aria-controls="nav-settings" aria-selected="false">Настройки</a>
+                        <?php endif;?>
                     </div>
                 </nav>
 
@@ -71,12 +80,12 @@ require 'php/printSelect.inc.php';
                                     <p>Тип пользователя</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <?php if ($session_usertype=='admin') :?>
-                                        <p>Администратор сайта</p>
-                                    <?php elseif ($session_usertype=='org') :?>
-                                        <p>Организатор мероприятия</p>
+                                    <?php if ($userType=='admin') :?>
+                                        <p>Администратор</p>
+                                    <?php elseif ($userType=='org') :?>
+                                        <p>Организатор</p>
                                     <?php else:?>
-                                        <p>Ошибка</p>
+                                        <p>Участник</p>
                                     <?php endif;?>
                                 </div>
                             </div>
@@ -165,7 +174,9 @@ require 'php/printSelect.inc.php';
                         <p>Результаты</p>
                     </div>
                     <!-- Settings Tab Content -->
+                    <?php if ($email == $session_email || $session_usertype=='admin') :?>
                     <div class="nav-settings tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
+
                         <h3>Редактирование профиля</h3>
                         <form action="php/profile-update.inc.php" method="post" enctype="multipart/form-data">
                             <?php if ($session_usertype == 'admin') : ?>
@@ -175,21 +186,23 @@ require 'php/printSelect.inc.php';
                                     </div>
                                     <div class="info-value col-md-9">
                                         <select id="usertype" name="usertype" class="form-control">
-                                            <option <?php if ($session_usertype == null) echo 'selected' ?> value="">Обычный пользователь</option>
-                                            <option <?php if ($session_usertype == 'admin') echo 'selected' ?> value="admin">Администратор сайта</option>
-                                            <option <?php if ($session_usertype == 'org') echo 'selected' ?>value="org">Организатор мероприятия</option>
+                                            <option <?php if ($userType == null) echo 'selected' ?> value="">Участник</option>
+                                            <option <?php if ($userType == 'admin') echo 'selected' ?> value="admin">Администратор</option>
+                                            <option <?php if ($userType == 'org') echo 'selected' ?>value="org">Организатор</option>
                                         </select>
                                     </div>
                                 </div>
                             <?php else : ?>
-                                <input type="hidden" class="form-control" name="usertype" value="<?php echo $session_usertype; ?>" />
+                                <input type="hidden" class="form-control" name="usertype" value="<?php echo $userType; ?>" />
                             <?php endif; ?>
+                            <input type="hidden" class="form-control" name="email" value="<?php echo $email; ?>" />
+
                             <div class="info-row row">
                                 <div class="info-title col-md-3">
                                     <p>Фамилия</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input type="text" class="form-control" name="surname" value="<?php echo $surname; ?>" required="" />
+                                    <input type="text" class="form-control" name="surname" value="<?php echo $surname; ?>" <?php if ($session_usertype != 'admin') echo 'required=""';?> />
                                 </div>
                             </div>
                             <div class="info-row row">
@@ -197,7 +210,7 @@ require 'php/printSelect.inc.php';
                                     <p>Имя</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" required="" />
+                                    <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" <?php if ($session_usertype != 'admin') echo 'required=""';?>/>
                                 </div>
                             </div>
                             <div class="info-row row">
@@ -255,7 +268,7 @@ require 'php/printSelect.inc.php';
                                     <p>Aдрес</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input type="text" class="form-control" name="city" value="<?php echo $city; ?>" required="" />
+                                    <input type="text" class="form-control" name="city" value="<?php echo $city; ?>" <?php if ($session_usertype != 'admin') echo 'required=""';?> />
                                 </div>
                             </div>
                             <div class="info-row row">
@@ -263,7 +276,7 @@ require 'php/printSelect.inc.php';
                                     <p>Телефон</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input id="telephone" name="telephone" type="tel" pattern="\+[0-9]{3}\([0-9]{2}\)[0-9]{3}-[0-9]{2}-[0-9]{2}" placeholder="+375(29)123-45-67" class="form-control" value="<?php echo $telephone; ?>" required="">
+                                    <input id="telephone" name="telephone" type="tel" pattern="\+[0-9]{3}\([0-9]{2}\)[0-9]{3}-[0-9]{2}-[0-9]{2}" placeholder="+375(29)123-45-67" class="form-control" value="<?php echo $telephone; ?>" <?php if ($session_usertype != 'admin') echo 'required=""';?>>
                                 </div>
                             </div>
                             <div class="info-row row">
@@ -285,7 +298,7 @@ require 'php/printSelect.inc.php';
                                     <p>Название/номер учебного заведения</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input type="text" class="form-control" name="institution_number" value="<?php echo $institution_number; ?>" required="" />
+                                    <input type="text" class="form-control" name="institution_number" value="<?php echo $institution_number; ?>" <?php if ($session_usertype != 'admin') echo 'required=""';?> />
                                 </div>
                             </div>
                             <div class="info-row row">
@@ -293,7 +306,7 @@ require 'php/printSelect.inc.php';
                                     <p>Класс/Курс</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input type="text" class="form-control" name="grade" value="<?php echo $grade; ?>" required="" />
+                                    <input type="text" class="form-control" name="grade" value="<?php echo $grade; ?>" <?php if ($session_usertype != 'admin') echo 'required=""';?> />
                                 </div>
                             </div>
                             <div class="info-row row">
@@ -304,22 +317,24 @@ require 'php/printSelect.inc.php';
                                     <input id="newphoto" name="newphoto" type="file" class="input-md" />
                                 </div>
                             </div>
-                            <div class="info-row row">
-                                <div class="info-title col-md-3">
-                                    <p>Новый пароль</p>
+                            
+                                <div class="info-row row">
+                                    <div class="info-title col-md-3">
+                                        <p>Новый пароль</p>
+                                    </div>
+                                    <div class="info-value col-md-9">
+                                        <input type="password" class="form-control" name="newpassword" />
+                                    </div>
                                 </div>
-                                <div class="info-value col-md-9">
-                                    <input type="password" class="form-control" name="newpassword" />
+                                <div class="info-row row">
+                                    <div class="info-title col-md-3">
+                                        <p>Подтвердите новый пароль</p>
+                                    </div>
+                                    <div class="info-value col-md-9">
+                                        <input type="password" class="form-control" name="newrepeatpassword" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="info-row row">
-                                <div class="info-title col-md-3">
-                                    <p>Подтвердите новый пароль</p>
-                                </div>
-                                <div class="info-value col-md-9">
-                                    <input type="password" class="form-control" name="newrepeatpassword" />
-                                </div>
-                            </div>
+                            
                             <h3>Подтверждение изменений</h3>
                             <div class="info-row row">
                                 <div class="info-title col-md-3">
@@ -329,10 +344,11 @@ require 'php/printSelect.inc.php';
                                     <input type="password" class="form-control" name="password" required="" />
                                 </div>
                             </div>
-                            <input type="submit" class="btn btn-success" value="Сохранить">
+                            <input type="submit" name="update-submit" class="btn btn-success" value="Сохранить">
                             <a id="cancel" name="cancel" class="btn btn-danger" href="signin.php">Отмена</a>
                         </form>
                     </div>
+                    <?php endif;?>
                 </div>
             </div>
         </div>
