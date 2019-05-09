@@ -1,0 +1,46 @@
+section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.test {
+  background-color: #74b9ff;
+}
+.wrapper {
+  position: relative;
+  overflow-x: hidden;
+}
+.answer-bar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 20%;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-color: #6c5ce7;
+  color: white;
+  transition: 0.5s;
+  transform: translateX(-100%);
+}
+.answer-bar_active {
+  transform: translateX(0%);
+}
+.answer-bar-btn {
+  width: 70px;
+  height: 30px;
+  background-color: #fd79a8;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  right: -90px;
+  top: 20px;
+}
+.answer-bar-btn a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: white;
+}
+
