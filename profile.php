@@ -65,6 +65,22 @@ require 'php/printSelect.inc.php';
                 <div class="tab-content" id="nav-tabContent">
                     <!-- Profile Tab Content -->
                     <div class="nav-profile tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <?php if ($session_usertype == 'admin' || $session_usertype == 'org') :?>
+                            <div class="info-row row">
+                                <div class="info-title col-md-3">
+                                    <p>Тип пользователя</p>
+                                </div>
+                                <div class="info-value col-md-9">
+                                    <?php if ($session_usertype=='admin') :?>
+                                        <p>Администратор сайта</p>
+                                    <?php elseif ($session_usertype=='org') :?>
+                                        <p>Организатор мероприятия</p>
+                                    <?php else:?>
+                                        <p>Ошибка</p>
+                                    <?php endif;?>
+                                </div>
+                            </div>
+                        <?php endif;?>
                         <div class="info-row row">
                             <div class="info-title col-md-3">
                                 <p>Фамилия</p>
@@ -159,9 +175,9 @@ require 'php/printSelect.inc.php';
                                     </div>
                                     <div class="info-value col-md-9">
                                         <select id="usertype" name="usertype" class="form-control">
-                                            <option <?php if ($session_usertype == null) echo 'selected' ?> value="null">Обычный пользователь</option>
-                                            <option <?php if ($session_usertype == 'admin') echo 'selected' ?> value="М">Администратор сайта</option>
-                                            <option <?php if ($session_usertype == 'org') echo 'selected' ?>value="Ж">Организатор мероприятия</option>
+                                            <option <?php if ($session_usertype == null) echo 'selected' ?> value="">Обычный пользователь</option>
+                                            <option <?php if ($session_usertype == 'admin') echo 'selected' ?> value="admin">Администратор сайта</option>
+                                            <option <?php if ($session_usertype == 'org') echo 'selected' ?>value="org">Организатор мероприятия</option>
                                         </select>
                                     </div>
                                 </div>
