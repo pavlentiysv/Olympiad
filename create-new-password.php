@@ -22,7 +22,7 @@
       </a>
     </nav>
     <!-- End Navigation -->
-    <div class="col-md-12 control-label text-center">
+    <div class="row">
       <?php
       $selector = $_GET['selector'];
       $validator = $_GET['validator'];
@@ -32,13 +32,36 @@
       } else {
         if (ctype_xdigit($selector) && ctype_xdigit($validator)) {
           ?>
-          <form class="inline-block" action="php/reset-password.inc.php" method="post">
-            <input type="hidden" name="selector" value="<?php echo $selector; ?>">
-            <input type="hidden" name="validator" value="<?php echo $validator; ?>">
-            <input id="password" name="password" type="password" placeholder="Введите новый пароль" required="">
-            <input id="passwordRepeat" name="passwordRepeat" type="password" placeholder="Подтвердите новый пароль" required="">
-            <button type="submit" name="reset-password-submit">Сохранить</button>
-          </form>
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <form action="php/reset-password.inc.php" method="post">
+              <div class="row">
+                <div class="col-md-6 text-right">
+                  <p>Новый пароль</p>
+                </div>
+                <div class="col-md-6">
+                  <input id="password" name="password" type="password" required="" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 text-right">
+                  <p>Повторите новый пароль</p>
+                </div>
+                <div class="col-md-6">
+                  <input id="passwordRepeat" name="passwordRepeat" type="password" required="" />
+                </div>
+              </div>
+              <input type="hidden" name="selector" value="<?php echo $selector; ?>">
+              <input type="hidden" name="validator" value="<?php echo $validator; ?>">
+              <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                  <button type="submit" name="reset-password-submit">Сохранить</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-3"></div>
         <?php
       }
     }
