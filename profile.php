@@ -151,6 +151,14 @@ require 'php/printSelect.inc.php';
                                 <p><?php echo $institution_number; ?><br><?php echo $grade; ?> класс</p>
                             </div>
                         </div>
+                        <div class="info-row row">
+                            <div class="info-title col-md-3">
+                                <p>Электронная почта</p>
+                            </div>
+                            <div class="info-value col-md-9">
+                                <p><?php echo $email; ?></p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Test Tab Content -->
                     <div class="nav-tests tab-pane fade" id="nav-tests" role="tabpanel" aria-labelledby="nav-tests-tab">
@@ -160,21 +168,21 @@ require 'php/printSelect.inc.php';
                     <div class="nav-settings tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
                         <h3>Редактирование профиля</h3>
                         <form action="php/profile-update.inc.php" method="post" enctype="multipart/form-data">
-                            <?php if ($session_usertype == 'admin') :?>
+                            <?php if ($session_usertype == 'admin') : ?>
                                 <div class="info-row row">
                                     <div class="info-title col-md-3">
                                         <p>Тип пользователя</p>
                                     </div>
                                     <div class="info-value col-md-9">
-                                    <select id="usertype" name="usertype" class="form-control">
-                                        <option <?php if ($session_usertype == null) echo 'selected' ?> value="">Обычный пользователь</option>
-                                        <option <?php if ($session_usertype == 'admin') echo 'selected' ?> value="admin">Администратор сайта</option>
-                                        <option <?php if ($session_usertype == 'org') echo 'selected' ?>value="org">Организатор мероприятия</option>
-                                    </select>
+                                        <select id="usertype" name="usertype" class="form-control">
+                                            <option <?php if ($session_usertype == null) echo 'selected' ?> value="">Обычный пользователь</option>
+                                            <option <?php if ($session_usertype == 'admin') echo 'selected' ?> value="admin">Администратор сайта</option>
+                                            <option <?php if ($session_usertype == 'org') echo 'selected' ?>value="org">Организатор мероприятия</option>
+                                        </select>
                                     </div>
                                 </div>
-                            <?php else: ?>
-                                <input type="hidden" class="form-control" name="usertype" value="<?php echo $session_usertype; ?>"/>
+                            <?php else : ?>
+                                <input type="hidden" class="form-control" name="usertype" value="<?php echo $session_usertype; ?>" />
                             <?php endif; ?>
                             <div class="info-row row">
                                 <div class="info-title col-md-3">
@@ -221,7 +229,7 @@ require 'php/printSelect.inc.php';
                                         <div class="col-md-1">
                                             <label class="control-label" for="day">День</label></div>
                                         <div class="col-md-2">
-                                            <select id="day" name="day" class="form-control" size="5">
+                                            <select id="day" name="day" class="form-control">
                                                 <?php printDaysList($day); ?>
                                             </select>
                                         </div>
@@ -293,7 +301,7 @@ require 'php/printSelect.inc.php';
                                     <p>Новое фото профиля</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <input id="newphoto" name="newphoto" type="file" class="input-md"/>
+                                    <input id="newphoto" name="newphoto" type="file" class="input-md" />
                                 </div>
                             </div>
                             <div class="info-row row">
