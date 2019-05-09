@@ -30,7 +30,7 @@ if (isset($_POST['signup-submit'])) {
         $middlename=null;
     }
 
-    if (empty($photo)) {
+    if ($photo['name']==null) {
         $photo=null;
     }
 

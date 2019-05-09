@@ -143,7 +143,23 @@ require 'php/printSelect.inc.php';
                     <!-- Settings Tab Content -->
                     <div class="nav-settings tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
                         <h3>Редактирование профиля</h3>
-                        <form action="php/profile-update.inc.php" method="post">
+                        <form action="php/profile-update.inc.php" method="post" enctype="multipart/form-data">
+                            <?php if ($session_usertype == 'admin') :?>
+                                <div class="info-row row">
+                                    <div class="info-title col-md-3">
+                                        <p>Тип пользователя</p>
+                                    </div>
+                                    <div class="info-value col-md-9">
+                                    <select id="usertype" name="usertype" class="form-control">
+                                        <option <?php if ($session_usertype == null) echo 'selected' ?> value="null">Обычный пользователь</option>
+                                        <option <?php if ($session_usertype == 'admin') echo 'selected' ?> value="М">Администратор сайта</option>
+                                        <option <?php if ($session_usertype == 'org') echo 'selected' ?>value="Ж">Организатор мероприятия</option>
+                                    </select>
+                                    </div>
+                                </div>
+                            <?php else: ?>
+                                <input type="hidden" class="form-control" name="usertype" value="<?php echo $session_usertype; ?>"/>
+                            <?php endif; ?>
                             <div class="info-row row">
                                 <div class="info-title col-md-3">
                                     <p>Фамилия</p>
@@ -258,10 +274,26 @@ require 'php/printSelect.inc.php';
                             </div>
                             <div class="info-row row">
                                 <div class="info-title col-md-3">
+                                    <p>Новое фото профиля</p>
+                                </div>
+                                <div class="info-value col-md-9">
+                                    <input id="newphoto" name="newphoto" type="file" class="input-md"/>
+                                </div>
+                            </div>
+                            <div class="info-row row">
+                                <div class="info-title col-md-3">
                                     <p>Новый пароль</p>
                                 </div>
                                 <div class="info-value col-md-9">
                                     <input type="password" class="form-control" name="newpassword" />
+                                </div>
+                            </div>
+                            <div class="info-row row">
+                                <div class="info-title col-md-3">
+                                    <p>Подтвердите новый пароль</p>
+                                </div>
+                                <div class="info-value col-md-9">
+                                    <input type="password" class="form-control" name="newrepeatpassword" />
                                 </div>
                             </div>
                             <h3>Подтверждение изменений</h3>

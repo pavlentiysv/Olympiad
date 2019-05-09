@@ -22,8 +22,7 @@ if (isset($_POST['signin-submit'])) {
             $result = mysqli_stmt_get_result($stmt);
             if ($row = mysqli_fetch_assoc($result)) {
                 session_start();
-                $_SESSION['accountID'] = $row['accountID'];
-                // Заменит потом на Имя Фамилию для использования по сайту
+                $_SESSION['userType'] = $row['usertype'];
                 $_SESSION['userEmail'] = $row['email'];
                 
                 header("Location: ../signin.php?signin=success");

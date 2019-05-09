@@ -16,6 +16,8 @@ if (isset($_GET['error'])) {
     $errorMsg = 'Ошибка при обращении к базе данных';
   } else if ($_GET['error'] == 'noGmail') {
     $errorMsg = 'Неправильно введен e-mail или пароль';
+  } else if ($_GET['error'] == 'noSession') {
+    $errorMsg = 'Сессия была прервана. Войдите заново.';
   } else {
     $errorMsg = 'Возникла непредвиденная ошибка';
   }

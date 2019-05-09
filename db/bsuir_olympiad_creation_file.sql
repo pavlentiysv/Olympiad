@@ -146,7 +146,9 @@ BEFORE UPDATE
 ON accounts
 for each row
 begin
+IF new.password IS NOT NULL AND new.password!='' THEN
 	SET NEW.password = md5(NEW.password);
+END IF;
 end//
 delimiter ;
 
@@ -215,3 +217,82 @@ CREATE TABLE `bsuir_olympiad`.`password_reset` (
   `token` LONGTEXT NOT NULL,
   `expires` TEXT NOT NULL,
   PRIMARY KEY (`ID`));
+  
+USE `bsuir_olympiad`;
+DROP procedure IF EXISTS `updateUser`;
+
+DELIMITER $$
+USE `bsuir_olympiad`$$
+CREATE PROCEDURE `updateUser` (
+IN iemail VARCHAR(254), 
+    ipassword VARCHAR(254), 
+    iusertype VARCHAR(5),
+    isurname VARCHAR(64),
+	iname VARCHAR(64), 
+    imiddlename VARCHAR(64), 
+    icity VARCHAR(64), 
+    itype VARCHAR(45), 
+    inumber VARCHAR(254),
+	igrade int, 
+    igender CHAR(1), 
+    ibirthdate DATE, 
+    itelephoneNumber VARCHAR(17)
+)
+BEGIN
+	DECLARE _accountID VARCHAR(254);
+    DECLARE _password VARCHAR(32);
+    DECLARE _userType VARCHAR(5);
+    
+    DECLARE _institutionID INT;
+    DECLARE _userID INT;
+    
+    SET autocommit = 0;
+	START TRANSACTION;
+    
+    #Нахождение аккаунта пользователя
+	SELECT accountID, password, userType 
+    INTO _accountID, _password, _userType 
+    FROM accounts WHERE email = iemail;
+    
+    #проверка стоит ли меня пароль
+    IF (md5(ipassword)!=_password AND ipassword IS NOT NULL) THEN
+		UPDATE accounts SET password = ipassword, usertype = iusertype WHERE email = iemail;
+	ELSE
+		UPDATE accounts SET usertype = iusertype WHERE email = iemail;
+    END IF;
+    
+    #нахождение инфы о пользователе
+    SELECT userID INTO _userID FROM users WHERE accountID = _accountID;
+    
+    #проверка существует ли такой тип и номер ГУО
+    SELECT institutionID INTO _institutionID FROM institutions WHERE type = itype AND number = inumber;
+    #Если не существует
+    IF check_institutionID IS NULL THEN
+		INSERT INTO institutions (number, type) values (inumber, itype);
+        SELECT institutionID INTO _institutionID FROM institutions WHERE type = itype AND number = inumber;
+        UPDATE users SET institutionID = _institutionID WHERE userID=_userID;
+	 #Если существует
+	ELSE 
+		UPDATE users SET institutionID = _institutionID WHERE userID=_userID;
+    END IF;
+    
+    #Удаление, если никто не использует данное ГУО
+    SELECT institutions.institutionID 
+    FROM institutions 
+    RIGHT JOIN users 
+    ON institutions.institutionID = users.institutionID
+    WHERE users.institutionID IS null;
+    
+    #Обновление инфы о пользователе
+    UPDATE users SET surname=isurname, name=iname, middlename=imiddlename, 
+		city=icity, grade=igrade, gender=igender, birthDate=ibirthDate, telephoneNumber=itelephoneNumber
+	WHERE userID=_userID;
+	
+    COMMIT;
+	SET autocommit = 1;
+END$$
+
+DELIMITER ;
+
+use bsuir_olympiad;
+call updateUser('greerz@mail.ru', null, null,'Тест', 'Обновления', null, 'Пинск', 'Средняя Школа', 'Средняя Школа №1 г.Пинска', 10, 'М', '1999-01-01', '+375(29)291302524');
