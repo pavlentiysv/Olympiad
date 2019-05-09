@@ -31,6 +31,7 @@ $newPassword = $_POST['newpassword'];
 $newRepeatPassword = $_POST['newrepeatpassword'];
 
 $newPhoto = $_FILES['newphoto'];
+$photoNameNew = null;
 
 $newBirthDate = "$newYear-$newMonth-$newDay";
 
@@ -149,11 +150,11 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
           }
         }
 
-        if ($name == $newName && $surname == $newSurname && $middlename == $newMiddlename && $city == $newCity && $institution_type == $newInstitution_type && $institution_number == $newInstitution_number && $gender == $newGender && $day == $newDay && $month == $newMonth && $year == $newYear && $userType == $newUserType && $password == $newPassword) {
+        if ($name == $newName && $surname == $newSurname && $middlename == $newMiddlename && $city == $newCity && $institution_type == $newInstitution_type && $institution_number == $newInstitution_number && $gender == $newGender && $day == $newDay && $month == $newMonth && $year == $newYear && $userType == $newUserType && $password == $newPassword && $photo==$photoNameNew) {
           header("Location: ../profile.php?error=nothingUpdate");
           exit();
         } else {
-          $sql = "call updateUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+          $sql = "call updateUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
           $stmt = mysqli_stmt_init($conn);
           if (!mysqli_stmt_prepare($stmt, $sql)) {
             header("Location: ../profile.php?error=sqlError");
@@ -161,7 +162,7 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
           } else {
             mysqli_stmt_bind_param(
               $stmt,
-              "sssssssssisss",
+              "sssssssssissss",
               $session_email,
               $newPassword,
               $newUserType,
@@ -174,7 +175,8 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
               $newGrade,
               $newGender,
               $newBirthDate,
-              $newTelephone
+              $newTelephone,
+              $photoNameNew
             );
             mysqli_stmt_execute($stmt);
             header("Location: ../profile.php?update=success");

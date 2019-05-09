@@ -146,8 +146,13 @@ BEFORE UPDATE
 ON accounts
 for each row
 begin
-IF new.password IS NOT NULL AND new.password!='' THEN
-	SET NEW.password = md5(NEW.password);
+
+IF NEW.password IS NOT NULL THEN
+	IF NEW.password <> '' THEN
+		SET NEW.password = md5(NEW.password);
+	ELSE 
+		SET NEW.password = OLD.password;
+	END IF;
 END IF;
 end//
 delimiter ;
@@ -201,29 +206,12 @@ END$$
 
 DELIMITER ;
 
-call addUser('greerz1212@gmail.com','1212', 'Шестаков', 'Валерий', 'Валерьевич', 'Семково', 'Гимназия', 'Гимназия №50 г.Минска', 14, 'М', '1998-11-12', 291302524, null);
-
-# For select all users with full info
-SELECT accounts.email,accounts.usertype,accounts.password, surname, name, middlename, city, institutions.type, institutions.number grade, gender, birthdate, telephoneNumber, photo
-FROM users
-RIGHT JOIN accounts ON accounts.accountID = users.accountID
-LEFT JOIN institutions ON institutions.institutionID=users.institutionID;
-
-#For reseting password
-CREATE TABLE `bsuir_olympiad`.`password_reset` (
-  `ID` INT NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(254) NOT NULL,
-  `selector` TEXT NOT NULL,
-  `token` LONGTEXT NOT NULL,
-  `expires` TEXT NOT NULL,
-  PRIMARY KEY (`ID`));
-  
 USE `bsuir_olympiad`;
 DROP procedure IF EXISTS `updateUser`;
 
 DELIMITER $$
 USE `bsuir_olympiad`$$
-CREATE PROCEDURE `updateUser` (
+CREATE DEFINER=`root`@`%` PROCEDURE `updateUser`(
 IN iemail VARCHAR(254), 
     ipassword VARCHAR(254), 
     iusertype VARCHAR(5),
@@ -236,7 +224,8 @@ IN iemail VARCHAR(254),
 	igrade int, 
     igender CHAR(1), 
     ibirthdate DATE, 
-    itelephoneNumber VARCHAR(17)
+    itelephoneNumber VARCHAR(17),
+    iphoto VARCHAR(254)
 )
 BEGIN
 	DECLARE _accountID VARCHAR(254);
@@ -254,11 +243,13 @@ BEGIN
     INTO _accountID, _password, _userType 
     FROM accounts WHERE email = iemail;
     
-    #проверка стоит ли меня пароль
-    IF (md5(ipassword)!=_password AND ipassword IS NOT NULL) THEN
-		UPDATE accounts SET password = ipassword, usertype = iusertype WHERE email = iemail;
+    #проверка стоит ли менять пароль
+    IF (ipassword IS NOT NULL) THEN
+		IF (md5(ipassword)!=_password) THEN
+			UPDATE accounts SET password = ipassword, usertype = iusertype WHERE email = iemail;
+		END IF;
 	ELSE
-		UPDATE accounts SET usertype = iusertype WHERE email = iemail;
+		UPDATE accounts SET password='', usertype = iusertype WHERE email = iemail;
     END IF;
     
     #нахождение инфы о пользователе
@@ -267,7 +258,7 @@ BEGIN
     #проверка существует ли такой тип и номер ГУО
     SELECT institutionID INTO _institutionID FROM institutions WHERE type = itype AND number = inumber;
     #Если не существует
-    IF check_institutionID IS NULL THEN
+    IF _institutionID IS NULL THEN
 		INSERT INTO institutions (number, type) values (inumber, itype);
         SELECT institutionID INTO _institutionID FROM institutions WHERE type = itype AND number = inumber;
         UPDATE users SET institutionID = _institutionID WHERE userID=_userID;
@@ -284,8 +275,8 @@ BEGIN
     WHERE users.institutionID IS null;
     
     #Обновление инфы о пользователе
-    UPDATE users SET surname=isurname, name=iname, middlename=imiddlename, 
-		city=icity, grade=igrade, gender=igender, birthDate=ibirthDate, telephoneNumber=itelephoneNumber
+    UPDATE users SET surname=isurname, name=iname, middlename=imiddlename, city=icity, 
+        grade=igrade, gender=igender, birthDate=ibirthDate, telephoneNumber=itelephoneNumber, photo=iphoto
 	WHERE userID=_userID;
 	
     COMMIT;
@@ -295,4 +286,4 @@ END$$
 DELIMITER ;
 
 use bsuir_olympiad;
-call updateUser('greerz@mail.ru', null, null,'Тест', 'Обновления', null, 'Пинск', 'Средняя Школа', 'Средняя Школа №1 г.Пинска', 10, 'М', '1999-01-01', '+375(29)291302524');
+call updateUser('greerz@mail.ru', null, null,'Тест', 'Обновления', null, 'Пинск', 'Средняя Школа', 'Средняя Школа №1 г. Пинска', 10, 'М', '1999-1-1', '+375(29)130-25-24', null);
