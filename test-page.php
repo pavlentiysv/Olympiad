@@ -16,7 +16,9 @@
   <div class="wrapper">
     <!-- Sidebar -->
     <div class="answer-bar">
-      <a href="#" class="answer-bar-btn"></a>
+      <div class="answer-bar-btn">
+        <a href="#">Ответы</a>
+      </div>
       <div class="title text-center">
         <h2>Ваши ответы</h2>
       </div>
@@ -27,6 +29,9 @@
             <li><input type="text" name="answer2" placeholder="ваш ответ"></li>
             <li><input type="text" name="answer3" placeholder="ваш ответ"></li>
           </ol>
+          <div class="submit-btn text-center">
+            <input type="submit" name="submit-answers">
+          </div>
         </form>
       </div>
     </div>
@@ -41,7 +46,7 @@
   </div>
   <script src="src/jquery-3.3.1.min.js"></script>
   <script src="src/answer-bar.js"></script>
-  
+
 </body>
 
 
