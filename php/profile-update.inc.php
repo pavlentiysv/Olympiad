@@ -148,6 +148,8 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
             header("Location: ../profile.php?error=photoExt&".$photoName);
             exit();
           }
+        } else {
+          $photoNameNew = $photo;
         }
 
         if ($name == $newName && $surname == $newSurname && $middlename == $newMiddlename && $city == $newCity && $institution_type == $newInstitution_type && $institution_number == $newInstitution_number && $gender == $newGender && $day == $newDay && $month == $newMonth && $year == $newYear && $userType == $newUserType && $password == $newPassword && $photo==$photoNameNew) {
@@ -179,6 +181,11 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
               $photoNameNew
             );
             mysqli_stmt_execute($stmt);
+
+            if ($session_email = $email && $session_usertype!=$newUserType) {
+              $session_usertype = $newUserType;
+            }
+
             header("Location: ../profile.php?update=success");
             exit();
           }

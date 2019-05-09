@@ -1,4 +1,5 @@
 <?php
+$userEmail = null;
 $userType = null;
 $surname = null;
 $name = null;
@@ -15,8 +16,11 @@ $day = null;
 $telephone = null;
 $photo = null;
 
+$session_email=null;
+$session_usertype=null;
 if (isset($_SESSION['userEmail'])) {
   $session_email = $_SESSION['userEmail'];
+  $session_usertype = $_SESSION['userType'];
 } else {
   header("Location: ./signin.php?error=noSession");
 }
@@ -60,9 +64,11 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
     $telephone = $row['telephoneNumber'];
     $photo = $row['photo'];
 
+    if ($birthDate != null) {
     $parts = explode("-", $birthDate);
     $year = $parts[0];
     $month = $parts[1];
     $day = $parts[2];
+    }
   }
 }
