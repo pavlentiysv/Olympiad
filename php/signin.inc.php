@@ -21,12 +21,18 @@ if (isset($_POST['signin-submit'])) {
             mysqli_stmt_execute($stmt);
             $result = mysqli_stmt_get_result($stmt);
             if ($row = mysqli_fetch_assoc($result)) {
-                session_start();
-                $_SESSION['userType'] = $row['userType'];
-                $_SESSION['userEmail'] = $row['email'];
-                
-                header("Location: ../signin.php?signin=success");
-                exit();
+
+                if ($row['status'] == 1) {
+                    session_start();
+                    $_SESSION['userType'] = $row['userType'];
+                    $_SESSION['userEmail'] = $row['email'];
+                    
+                    header("Location: ../signin.php?signin=success");
+                    exit();
+                } else {
+                    header("Location: ../signin.php?error=noActivation&email=".$email);
+                    exit();
+                }
             } else {
                 header("Location: ../signin.php?error=noGmail&email=".$email);
                 exit();

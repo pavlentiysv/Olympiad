@@ -72,7 +72,7 @@ if (isset($_POST["reset-password-submit"])) {
                 mysqli_stmt_bind_param($stmt, "s", $tokenEmail);
                 mysqli_stmt_execute($stmt);
 
-                header("Location: ../signin.php?newpwd=success");
+                header("Location: ../signin.php?success=newpwd");
               }
             }
           }

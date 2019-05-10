@@ -3,11 +3,19 @@ require 'php/session.inc.php';
 
 $errorMsg = null;
 $email = null;
-$resetPasswordMsg = null;
+$succesMsg = null;
 
 if (isset($_GET['signin'])) {
   if ($_GET['signin'] == 'success') {
     header("Location: index.php");
+  }
+}
+
+if (isset($_GET['success'])) {
+  if ($_GET['success'] == 'signup') {
+    $succesMsg = 'Регистрация прошла успешно!</br>Осталось подтвердить ваш e-mail.';
+  } else if ($_GET["success"] == "newpwd") {
+    $succesMsg = 'Ваш пароль был успешно обновлен!';
   }
 }
 
@@ -18,6 +26,8 @@ if (isset($_GET['error'])) {
     $errorMsg = 'Неправильно введен e-mail или пароль';
   } else if ($_GET['error'] == 'noSession') {
     $errorMsg = 'Сессия была прервана. Войдите заново.';
+  } else if ($_GET['error'] == 'noActivation') {
+    $errorMsg = 'Регистрация не подтверждена. Проверьте почту.';
   } else {
     $errorMsg = 'Возникла непредвиденная ошибка';
   }
@@ -25,12 +35,6 @@ if (isset($_GET['error'])) {
 
 if (isset($_GET['email'])) {
   $email = $_GET['email'];
-}
-
-if (isset($_GET["newpwd"])) {
-  if ($_GET["newpwd"] == "success") {
-    $resetPasswordMsg = 'Ваш пароль был успешно обновлен!';
-  }
 }
 ?>
 
@@ -90,15 +94,15 @@ if (isset($_GET["newpwd"])) {
             <?php if ($errorMsg!=null) : ?>
                 <span class="error-text"><?php echo $errorMsg;?></span>
             <?php endif; ?>
+            <?php if ($succesMsg!=null) : ?>
+                <span class="success-text"><?php echo $succesMsg;?></span>
+            <?php endif; ?>
             </div>
             <div class="form-group text-center">
               <!-- <a href="#info" class="btn btn-outline-light btn-lg">Войти</a> -->
               <input type="submit" name="signin-submit" class="btn btn-outline-light btn-lg" id="submit" value="Войти" />
             </div>
             <div class="form-group">
-              <?php if ($resetPasswordMsg!=null) : ?>
-                <p class="label text-center"><?php echo $resetPasswordMsg;?></p>
-              <?php endif; ?>
               <a href="reset-password.php">
                 <p class="forgot text-center">Забыли пароль?</p>
               </a>

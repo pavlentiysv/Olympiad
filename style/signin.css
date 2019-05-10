@@ -73,6 +73,10 @@ body {
   color: #e61414;
 }
 
+.success-text {
+  color: #09cc2a;
+}
+
 
 @media (max-width: 767px) {
   .form-area {

@@ -18,12 +18,6 @@ $year = null;
 $telephone = null;
 $photo = null;
 
-if (isset($_GET['signup'])) {
-    if ($_GET['signup'] == 'success') {
-        header("Location: signin.php");
-    }
-}
-
 if (isset($_GET['error'])) {
     if ($_GET['error'] == 'emptyFields') {
         $errorMsg = 'Заполните все обязательные поля.';
@@ -173,7 +167,7 @@ if (isset($_GET['telephone'])) {
                         <select id="gender" name="gender" class="form-control">
                             <option <?php if ($gender == null) echo 'selected' ?> value="">- Не выбран -</option>
                             <option <?php if ($gender == 'М') echo 'selected' ?> value="М">Мужской</option>
-                            <option <?php if ($gender == 'Ж') echo 'selected' ?>value="Ж">Женский</option>
+                            <option <?php if ($gender == 'Ж') echo 'selected' ?> value="Ж">Женский</option>
                         </select>
                     </div>
                 </div>
@@ -191,7 +185,7 @@ if (isset($_GET['telephone'])) {
                 <div class="row form-group">
                     <label class="col-md-1 control-label" for="telephone">Телефон</label>
                     <div class="col-md-4">
-                        <input id="telephone" name="telephone" type="tel" pattern="\+[0-9]{3}\([0-9]{2}\)[0-9]{3}-[0-9]{2}-[0-9]{2}" placeholder="+375(29)123-45-67" class="form-control input-md" value='<?php echo $telephone; ?>' required="">
+                        <input id="telephone" name="telephone" type="tel" pattern="\+[0-9]{3}[0-9]{2}[0-9]{3}[0-9]{2}[0-9]{2}" placeholder="+375291234567" class="form-control input-md" value='<?php echo $telephone; ?>' required="">
                         <span class="help-block">Ваш номер телефона</span>
                     </div>
                 </div>

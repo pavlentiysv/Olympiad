@@ -68,6 +68,9 @@ require 'php/printSelect.inc.php';
                         <?php if ($email == $session_email || $session_usertype=='admin') :?>
                         <a class="nav-item nav-link" id="nav-settings-tab" data-toggle="tab" href="#nav-settings" role="tab" aria-controls="nav-settings" aria-selected="false">Настройки</a>
                         <?php endif;?>
+                        <?php if ($email == $session_email && ($session_usertype=='admin' || $session_usertype=='org')) :?>
+                        <a class="nav-item nav-link" id="nav-settings-tab" data-toggle="tab" href="#nav-event" role="tab" aria-controls="nav-event" aria-selected="false">Мероприятия</a>
+                        <?php endif;?>
                     </div>
                 </nav>
 
@@ -169,10 +172,14 @@ require 'php/printSelect.inc.php';
                             </div>
                         </div>
                     </div>
+                    
+                    
                     <!-- Test Tab Content -->
                     <div class="nav-tests tab-pane fade" id="nav-tests" role="tabpanel" aria-labelledby="nav-tests-tab">
                         <p>Результаты</p>
                     </div>
+                    
+                    
                     <!-- Settings Tab Content -->
                     <?php if ($email == $session_email || $session_usertype=='admin') :?>
                     <div class="nav-settings tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
@@ -348,6 +355,14 @@ require 'php/printSelect.inc.php';
                             <a id="cancel" name="cancel" class="btn btn-danger" href="signin.php">Отмена</a>
                         </form>
                     </div>
+                    <?php endif;?>
+
+
+                    <!-- Settings Tab Content -->
+                    <?php if ($email == $session_email && ($session_usertype=='admin' || $session_usertype=='org')) :?>
+                    <div class="nav-event tab-pane fade" id="nav-event" role="tabpanel" aria-labelledby="nav-event-tab">
+                        <h3>Мероприятия</h3>
+                            
                     <?php endif;?>
                 </div>
             </div>

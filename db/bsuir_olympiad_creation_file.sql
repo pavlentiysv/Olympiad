@@ -136,6 +136,7 @@ ON accounts
 for each row
 begin
 	SET NEW.password = md5(NEW.password);
+    SET NEW.registrationDate = NOW();
 end//
 delimiter ;
 
@@ -287,3 +288,37 @@ DELIMITER ;
 
 use bsuir_olympiad;
 call updateUser('greerz@mail.ru', null, null,'Тест', 'Обновления', null, 'Пинск', 'Средняя Школа', 'Средняя Школа №1 г. Пинска', 10, 'М', '1999-1-1', '+375(29)130-25-24', null);
+
+ALTER TABLE `bsuir_olympiad`.`accounts` 
+ADD COLUMN `registrationDate` DATE NOT NULL AFTER `userType`;
+
+ALTER TABLE `bsuir_olympiad`.`accounts` 
+ADD COLUMN `status` BOOLEAN NOT NULL DEFAULT FALSE AFTER `registrationDate`;
+
+ALTER TABLE `bsuir_olympiad`.`events_users` 
+ADD COLUMN `registrationDate` DATETIME NULL AFTER `userID`;
+
+delimiter //
+#DROP trigger IF EXISTS events_users_trigger_insert;
+CREATE TRIGGER events_users_trigger_insert
+BEFORE INSERT 
+ON events_users
+for each row
+begin
+	SET NEW.registrationDate = NOW();
+end//
+delimiter ;
+
+ALTER TABLE `bsuir_olympiad`.`events_users` 
+DROP FOREIGN KEY `events_users_users_FK`;
+ALTER TABLE `bsuir_olympiad`.`events_users` 
+CHANGE COLUMN `userID` `accountID` INT(11) NOT NULL ,
+ADD INDEX `events_users_accounts_FK_idx` (`accountID` ASC) VISIBLE,
+DROP INDEX `events_users_users_FK_idx` ;
+;
+ALTER TABLE `bsuir_olympiad`.`events_users` 
+ADD CONSTRAINT `events_users_accounts_FK`
+  FOREIGN KEY (`accountID`)
+  REFERENCES `bsuir_olympiad`.`accounts` (`accountID`);
+
+
