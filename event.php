@@ -49,8 +49,6 @@ require 'php/event.inc.php';
             <h3 class="mb-0"><?php $event->getTitle(); ?></h3>
             <div class="mb-1 text-muted"><?php $event->getStartDate(); ?></div>
             <div class="mb-1 text-muted"><?php $event->getEndDate(); ?></div>
-            <p class="card-text mb-auto"><?php $event->getShortInfo(); ?></p>
-            <a href="event.php?eventID=<?php $event->getEventID(); ?>" class="stretched-link">Продолжить чтение</a>
           </div>
         </div>
       </div>
