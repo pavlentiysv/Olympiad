@@ -1,0 +1,36 @@
+.col-md-1,
+.col-md-2 {
+  padding: 0;
+}
+.heading {
+  border-bottom: 0.2rem solid #5997d1;
+}
+.event-page-content .btn-sm {
+  margin-right: 5px;
+  margin-top: 5px;
+  color: #5997d1;
+  border-color: #5997d1;
+}
+.event-page-content .btn-sm:hover {
+  color: white;
+  background-color: #5997d1;
+}
+.full-event-info p {
+  text-align: justify;
+}
+.feedback {
+  justify-content: center;
+  align-items: center;
+}
+.feedback.jumbotron {
+  padding: 0;
+}
+.feedback-message {
+  display: none;
+}
+.feedback-message_active {
+  display: block;
+}
+.send {
+  margin-top: 10px;
+}

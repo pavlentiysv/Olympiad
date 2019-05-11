@@ -18,8 +18,7 @@ require 'php/event.inc.php';
 </head>
 
 <body data-spy="scroll" data-target="#navbarResponsive">
-  <!--- Start Home Section -->
-  <div id="home">
+  <div class="event-page-content" id="home">
     <!-- Start Navigation -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
       <a href="index.php" class="navbar-brand">
@@ -35,35 +34,65 @@ require 'php/event.inc.php';
     </nav>
     <!-- End Navigation -->
 
-    <!-- Profile Tab Content -->
+
     <div class="row main-content">
-      <div class="col-md"></div>
+      <div class="col-md-1"></div>
 
       <div class="col-md-10">
-        <div class="">
-          <div class="col">
+
+        <!-- Short Info / Heading -->
+        <div class="heading row">
+          <div class="img-container col-md-4">
             <img class="" width="200px" height="200px" src="<?php $event->getLogo(); ?>"></img>
           </div>
-          <div class="col p-4 d-flex flex-column position-static md-8">
-            <strong class="d-inline-block mb-2 text-primary"><?php $event->getCountry(); ?>, г.<?php $event->getCity(); ?>, ул.<?php $event->getStreet(); ?>, <?php $event->getHouseNumber(); ?>, к.<?php $event->getCabinet(); ?></strong>
+          <div class="short-info col-md-8">
             <h3 class="mb-0"><?php $event->getTitle(); ?></h3>
             <div class="mb-1 text-muted"><?php $event->getStartDate(); ?></div>
             <div class="mb-1 text-muted"><?php $event->getEndDate(); ?></div>
-            <p class="card-text mb-auto"><?php $event->getShortInfo(); ?></p>
-            <a href="event.php?eventID=<?php $event->getEventID(); ?>" class="stretched-link">Продолжить чтение</a>
+            <p class="mb-auto"><?php $event->getShortInfo(); ?></p>
+            <strong class="d-inline-block mb-2"><?php $event->getCountry(); ?>, г.<?php $event->getCity(); ?>, ул.<?php $event->getStreet(); ?>, <?php $event->getHouseNumber(); ?>, к.<?php $event->getCabinet(); ?></strong>
+            <form action="">
+              <input class="btn btn-outline-primary btn-sm" type="button" value="Зарегистрироваться" />
+              <input class="btn btn-outline-primary btn-sm" type="button" value="Пройти тест" />
+              <input class="btn btn-outline-primary btn-sm" type="button" value="Редактировать" />
+            </form>
           </div>
         </div>
-      </div>
 
-      <div class="col-md"></div>
+        <!-- Full Info -->
+        <div class="full-event-info col-md-12">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi vero temporibus ullam numquam labore quis, iusto laboriosam, asperiores accusantium ratione quod reiciendis quibusdam repellat nulla, corrupti et maxime eligendi cumque culpa! Minima consequatur veritatis recusandae at provident, illum ut aperiam non nisi tenetur deserunt facilis pariatur alias! Vel quibusdam culpa consequuntur, molestiae, tenetur nulla accusantium similique optio nostrum autem a, alias illum sapiente itaque cupiditate expedita labore magnam veniam nihil voluptas? Iste neque iusto voluptatum exercitationem iure vel nesciunt velit tempora necessitatibus optio debitis qui voluptates eius culpa, totam sunt, nisi sint. Fuga molestias cupiditate, deleniti dicta reprehenderit culpa itaque!</p>
+        </div>
+        <div class="col-md-1"></div>
+      </div>
     </div>
+
+    <!-- Feedback -->
+    <div class="feedback jumbotron">
+      <div class="feedback col-md-12 text-center">
+        <button class="toggle-button btn btn-secondary btn-md">Связь с организатором</button>
+      </div>
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="feedback-message form-group col-md-6">
+          <form action="">
+            <label for="message">Обращение:</label>
+            <textarea class="form-control" rows="5" id="message" name="message"></textarea>
+            <input class="send btn btn-outline-primary btn-sm" type="submit" value="Отправить">
+          </form>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+
+
   </div>
-  <!--- End Home Section -->
+
 
 
 
   <!--- Start Contact Section -->
-  <div id="contact" class="offset">
+  <div id="contact">
     <footer>
       <div class="row justify-content-center">
         <div class="col-md-12 text-center">
@@ -95,9 +124,11 @@ require 'php/event.inc.php';
   <!--- End Contact Section -->
 
   <!--- Script Source Files -->
+
   <script src="src/jquery-3.3.1.min.js"></script>
   <script src="bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
   <script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
+  <script src="src/feedback-section.js"></script>
   <!--- End of Script Source Files -->
 </body>
 
