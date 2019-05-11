@@ -1,6 +1,6 @@
 <?php
 require 'php/session.inc.php';
-require 'php/event.inc.php';
+require 'php/profile.inc.php';
 require 'php/printSelect.inc.php';
 ?>
 <!DOCTYPE html>
@@ -38,6 +38,10 @@ require 'php/printSelect.inc.php';
         </nav>
     </header>
 
+
+
+
+
     <!-- Personal Page Section -->
     <div class="profile-caption">
         <div class="col-md-12 text-center">
@@ -48,6 +52,7 @@ require 'php/printSelect.inc.php';
 
     <div class="personal-page">
         <div class="row">
+
             <!-- Left Block -->
             <div class="col-md-3 text-center left-block">
                 <?php if ($photo != null && file_exists("uploads/users/avatars/$photo")) : ?>
@@ -57,6 +62,7 @@ require 'php/printSelect.inc.php';
                 <?php endif; ?>
                 <p class="fullname"><?php echo $surname; ?><br><?php echo $name; ?><br><?php echo $middlename; ?></p>
             </div>
+
             <!-- Right Block -->
             <div class="right-block col-md-9">
                 <!-- Tabs -->
@@ -73,6 +79,10 @@ require 'php/printSelect.inc.php';
                         <?php endif; ?>
                     </div>
                 </nav>
+
+
+
+
 
                 <div class="tab-content" id="nav-tabContent">
                     <!-- Profile Tab Content -->
@@ -174,10 +184,18 @@ require 'php/printSelect.inc.php';
                     </div>
 
 
+
+
+
+
                     <!-- Test Tab Content -->
                     <div class="nav-tests tab-pane fade" id="nav-tests" role="tabpanel" aria-labelledby="nav-tests-tab">
                         <p>Результаты</p>
                     </div>
+
+
+
+
 
 
                     <!-- Settings Tab Content -->
@@ -358,27 +376,30 @@ require 'php/printSelect.inc.php';
                     <?php endif; ?>
 
 
+
+
+
                     <!-- Settings Tab Content -->
                     <?php if ($email == $session_email && ($session_usertype == 'admin' || $session_usertype == 'org')) : ?>
                         <div class="nav-event tab-pane fade" id="nav-event" role="tabpanel" aria-labelledby="nav-event-tab">
                             <h3>Мероприятия</h3>
-                            
-                            <?php for ($i=0; $i<count($event); $i++) :?>
-                            <div class="col-md-10">
-                                <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                                    <div class="col md-4">
-                                        <img class="mb-12" width="200px" height="200px" src="<?php $event[$i]->getLogo();?>"></img>
-                                    </div>
-                                    <div class="col p-4 d-flex flex-column position-static md-8">
-                                        <strong class="d-inline-block mb-2 text-primary"><?php $event[$i]->getCountry(); ?>, г.<?php $event[$i]->getCity(); ?>, ул.<?php $event[$i]->getStreet(); ?>, <?php $event[$i]->getHouseNumber(); ?>, к.<?php $event[$i]->getCabinet(); ?></strong>
-                                        <h3 class="mb-0"><?php $event[$i]->getTitle(); ?></h3>
-                                        <div class="mb-1 text-muted"><?php $event[$i]->getStartDate(); ?></div>
-                                        <div class="mb-1 text-muted"><?php $event[$i]->getEndDate(); ?></div>
-                                        <p class="card-text mb-auto"><?php $event[$i]->getShortInfo(); ?></p>
-                                        <a href="event.php?event=<?php $event[$i]->getEventID();?>" class="stretched-link">Продолжить чтение</a>
+
+                            <?php for ($i = 0; $i < count($event); $i++) : ?>
+                                <div class="col-md-10">
+                                    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                                        <div class="col md-4">
+                                            <img class="mb-12" width="200px" height="200px" src="<?php $event[$i]->getLogo(); ?>"></img>
+                                        </div>
+                                        <div class="col p-4 d-flex flex-column position-static md-8">
+                                            <strong class="d-inline-block mb-2 text-primary"><?php $event[$i]->getCountry(); ?>, г.<?php $event[$i]->getCity(); ?>, ул.<?php $event[$i]->getStreet(); ?>, <?php $event[$i]->getHouseNumber(); ?>, к.<?php $event[$i]->getCabinet(); ?></strong>
+                                            <h3 class="mb-0"><?php $event[$i]->getTitle(); ?></h3>
+                                            <div class="mb-1 text-muted"><?php $event[$i]->getStartDate(); ?></div>
+                                            <div class="mb-1 text-muted"><?php $event[$i]->getEndDate(); ?></div>
+                                            <p class="card-text mb-auto"><?php $event[$i]->getShortInfo(); ?></p>
+                                            <a href="event.php?eventID=<?php $event[$i]->getEventID(); ?>" class="stretched-link">Продолжить чтение</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             <?php endfor; ?>
                         <?php endif; ?>
                     </div>
