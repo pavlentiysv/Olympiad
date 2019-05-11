@@ -6,41 +6,52 @@ section {
   color: white;
 }
 .test {
-  background-color: #74b9ff;
+  background-color: #a4cffa;
 }
 .wrapper {
   position: relative;
   overflow-x: hidden;
 }
 .answer-bar {
+  padding-top: 20px;
   position: fixed;
-  left: 0;
+  right: 0;
   top: 0;
-  width: 20%;
+  width: 170px;
   height: 100vh;
   align-items: center;
   justify-content: center;
-  background-color: #6c5ce7;
+  background-color: #1e3357;
   color: white;
+  transform: translateX(100%);
   transition: 0.5s;
-  transform: translateX(-100%);
 }
 .answer-bar_active {
-  transform: translateX(0%);
+  transform: translateX(0);
 }
-.answer-bar-btn {
-  width: 70px;
-  height: 30px;
-  background-color: #fd79a8;
+.btn-secondary {
+  padding: 7.2px 14.4px;
+  margin: 0;
   position: absolute;
   align-items: center;
   justify-content: center;
-  right: -90px;
-  top: 20px;
+  top: 30px;
+  left: -130px;
 }
 .answer-bar-btn a {
   text-decoration: none;
+  font-weight: 700;
   text-transform: uppercase;
   color: white;
+}
+.content {
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: 0.5s;
+}
+.content_active {
+  transform: translateX(-170px);
 }
 
