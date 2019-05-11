@@ -1,26 +1,27 @@
-@import url(http://fonts.googleapis.com/css?family=lato:400,700);
-body {
-  
-    background-color: #ffffff;
-    font-family: 'Montserrat', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  color: #555;
-
-  -webkit-font-smoothing: antialiased;
-  -webkit-overflow-scrolling: touch;
+.signup .heading {
+  margin: 20px;
 }
-input[type='number'] {
-  -moz-appearance:textfield;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  display: none;
-  -webkit-appearance: none;
-  margin: 0;
-}
-
 .error-text {
   color: #e61414;
 }
+div.reg-row {
+  border-bottom: 1px solid #cccccc;
+}
+div.reg-title,
+div.reg-value {
+  padding: 5px 8px 5px;
+}
+.col-md-2 {
+  padding: 0;
+}
+div.signup {
+  padding-bottom: 40px;
+}
+div.reg-buttons {
+  border-bottom: 0px;
+  margin-top: 10px;
+}
+div.reg-buttons .reg-value {
+  text-align: right;
+}
+

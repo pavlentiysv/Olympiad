@@ -100,172 +100,213 @@ if (isset($_GET['telephone'])) {
 <body>
     <div id="home">
         <!-- Start Navigation -->
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark ">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <a href="index.php" class="navbar-brand">
                 <img src="img/bsuirlogo.png" alt="logo" />
             </a>
         </nav>
         <!-- End Navigation -->
-
-        <div class="container">
-            <div class="text-center">
-                <h1 class="nice">Регистрация</h1>
+        <div class="signup">
+            <!-- Heading -->
+            <div class="col-md-12 text-center">
+                <h3 class="heading">Регистрация</h3>
+                <div class="heading-underline"></div>
             </div>
 
-            <form action="php/signup.inc.php" method="post" enctype="multipart/form-data">
-                <!-- Text input-->
-                <div class="form-group text-center">
-                    <?php if ($errorMsg != null) : ?>
-                        <span class="error-text"><?php echo $errorMsg; ?></span>
-                    <?php endif; ?>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 control-label">
-                        <label for="surname">Фамилия</label>
-                        <input type="text" class="form-control" name="surname" placeholder="Иванов" value="<?php echo $surname; ?>" required="" autofocus="">
-                    </div>
-                    <div class="col-md-4 control-label">
-                        <label for="name">Имя</label>
-                        <input type="text" class="form-control" name="name" placeholder="Иван" value="<?php echo $name; ?>" required="">
-                    </div>
+            <div class="row">
+                <div class="col-md-2"></div>
 
-                    <div class="col-md-4 mb-4 control-label">
-                        <label for="middleName">Отчество</label>
-                        <input type="text" class="form-control" name="middlename" placeholder="Иванович" value="<?php echo $middlename; ?>">
-                    </div>
-                </div>
-                <!-- Select Date Of Birth-->
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="row form-group">
-                            <label class="col-md-1 control-label" for="day">День</label>
-                            <div class="col-md-2">
-                                <select id="day" name="day" class="form-control">
-                                    <?php printDaysList(intval($day)); ?>
-                                </select>
+                <!-- Registration Form -->
+                <div class="col-md-8">
+                    <form action="">
+                        <div class="reg-row row">
+                            <div class="reg-title col-md-3">
+                                <p>Фамилия</p>
                             </div>
-                            <label class="col-md-1 control-label" for="month">Месяц</label>
-                            <div class="col-md-3">
-                                <select id="month" name="month" class="form-control">
-                                    <?php printMonthsList(intval($month)); ?>
-                                </select>
+                            <div class="reg-value col-md-9">
+                                <input type="text" class="form-control" name="surname" value="<?php echo $surname; ?>" />
                             </div>
-                            <label class="col-md-1 control-label" for="year">Год</label>
-                            <div class="col-md-3">
-                                <select id="year" name="year" class="form-control">
-                                    <?php printYearList(intval($year)); ?>
+                        </div>
+                        <div class="reg-row row">
+                            <div class="reg-title col-md-3">
+                                <p>Имя</p>
+                            </div>
+                            <div class="reg-value col-md-9">
+                                <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" />
+                            </div>
+                        </div>
+                        <div class="reg-row row">
+                            <div class="reg-title col-md-3">
+                                <p>Отчество</p>
+                            </div>
+                            <div class="reg-value col-md-9">
+                                <input type="text" class="form-control" name="middlename" value="<?php echo $middlename; ?>" />
+                            </div>
+                        </div>
+                        <div class="reg-row row">
+                            <div class="reg-title col-md-3">
+                                <p>Пол</p>
+                            </div>
+                            <div class="reg-value col-md-9">
+                                <select id="gender" name="gender" class="form-control">
+                                    <option <?php if ($gender == null) echo 'selected'; ?> value="">- Не выбран - <?php echo $gender ?></option>
+                                    <option <?php if ($gender == 'М') echo 'selected'; ?> value='М'>Мужской</option>
+                                    <option <?php if ($gender == 'Ж') echo 'selected'; ?> value='Ж'>Женский</option>
                                 </select>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Gender Input -->
-                <div class="row form-group">
-                    <label class="col-md-1" for="gender">Пол</label>
-                    <div class="col-md-4">
-                        <select id="gender" name="gender" class="form-control">
-                            <option <?php if ($gender == null) echo 'selected' ?> value="">- Не выбран -</option>
-                            <option <?php if ($gender == 'М') echo 'selected' ?> value="М">Мужской</option>
-                            <option <?php if ($gender == 'Ж') echo 'selected' ?> value="Ж">Женский</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Address input-->
-                <div class="row form-group">
-                    <label class="col-md-1 control-label" for="city">Город</label>
-                    <div class="col-md-4">
-                        <input id="city" name="city" type="text" placeholder="а-г. Сёмково" class="form-control input-md" value="<?php echo $city; ?>" required="">
-                        <span class="help-block">Ваш город (посёлок) проживания</span>
-                    </div>
-                </div>
-
-                <!-- Phone input-->
-                <div class="row form-group">
-                    <label class="col-md-1 control-label" for="telephone">Телефон</label>
-                    <div class="col-md-4">
-                        <input id="telephone" name="telephone" type="tel" pattern="\+[0-9]{3}[0-9]{2}[0-9]{3}[0-9]{2}[0-9]{2}" placeholder="+375291234567" class="form-control input-md" value='<?php echo $telephone; ?>' required="">
-                        <span class="help-block">Ваш номер телефона</span>
-                    </div>
-                </div>
-
-                <!-- School type input-->
-                <div class="row form-group">
-                    <label class="col-md-1 control-label" for="institution_type">Тип учебного заведения</label>
-
-                    <div class="col-md-4">
-                        <select id="institution_type" name="institution_type" class="form-control">
-                            <option <?php if ($institution_type == null) echo 'selected' ?> value="">- Не выбран -</option>
-                            <option <?php if ($institution_type == 'Средняя Школа') echo 'selected' ?> value="Средняя Школа">Средняя Школа</option>
-                            <option <?php if ($institution_type == 'Гимназия') echo 'selected' ?> value="Гимназия">Гимназия</option>
-                            <option <?php if ($institution_type == 'Лицей') echo 'selected' ?> value="Лицей">Лицей</option>
-                            <option <?php if ($institution_type == 'Колледж') echo 'selected' ?> value="Колледж">Колледж</option>
-                        </select>
-                    </div>
-                </div>
-                <!-- School name input-->
-                <div class="row form-group">
-                    <label class="col-md-1 control-label" for="institution_number">Название учебного заведения</label>
-                    <div class="col-md-4">
-                        <input id="institution_number" name="institution_number" type="text" placeholder="Средняя школа №51 г. Минска" class="form-control input-md" value="<?php echo $institution_number; ?>" required="">
-                        <span class="help-block">Название вашего учебного заведения</span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 mb-2">
-                        <div class="row form-group">
-                            <label class="col-md-1 control-label" for="grade">Класс</label>
-                            <div class="col-md-3">
-                                <select id="grade" name="grade" class="form-control">
-                                    <?php printGradeList($grade); ?>
+                        <div class="reg-row row">
+                            <div class="reg-title col-md-3">
+                                <p>Дата рождения</p>
+                            </div>
+                            <div class="reg-value bday col-md-9">
+                                <div class="row form-group">
+                                    <div class="col-md-1">
+                                        <label class="control-label" for="day">День</label></div>
+                                    <div class="col-md-2">
+                                        <select id="day" name="day" class="form-control">
+                                            <?php printDaysList(intval($day)); ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="control-label" for="month">Месяц</label></div>
+                                    <div class="col-md-3">
+                                        <select id="month" name="month" class="form-control">
+                                            <?php printMonthsList(intval($month)); ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="control-label" for="year">Год</label></div>
+                                    <div class="col-md-3">
+                                        <select id="year" name="year" class="form-control">
+                                            <?php printYearList(intval($year)); ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="reg-row row">
+                            <div class="reg-title col-md-3">
+                                <p>Aдрес</p>
+                            </div>
+                            <div class="reg-value col-md-9">
+                                <input type="text" class="form-control" name="city" value="<?php echo $city; ?>" />
+                            </div>
+                        </div>
+                        <div class="reg-row row">
+                            <div class="reg-title col-md-3">
+                                <p>Телефон</p>
+                            </div>
+                            <div class="reg-value col-md-9">
+                                <input id="telephone" name="telephone" type="tel" pattern="\+[0-9]{3}[0-9]{2}[0-9]{3}[0-9]{2}[0-9]{2}" placeholder="+375291234567" class="form-control" value="<?php echo $telephone; ?>">
+                            </div>
+                        </div>
+                        <div class="reg-row row">
+                            <div class="reg-title col-md-3">
+                                <p>Тип учебного заведения</p>
+                            </div>
+                            <div class="reg-value col-md-9">
+                                <select id="institution_type" name="institution_type" class="form-control">
+                                    <option <?php if ($institution_type == null) echo 'selected'; ?> value="">- Не выбран -</option>
+                                    <option <?php if (trim($institution_type) == 'Средняя Школа') echo 'selected'; ?> value="Средняя Школа">Средняя Школа</option>
+                                    <option <?php if (trim($institution_type) == 'Гимназия') echo 'selected'; ?> value="Гимназия">Гимназия</option>
+                                    <option <?php if (trim($institution_type) == 'Лицей') echo 'selected'; ?> value="Лицей">Лицей</option>
+                                    <option <?php if (trim($institution_type) == 'Колледж') echo 'selected'; ?> value="Колледж">Колледж</option>
                                 </select>
                             </div>
                         </div>
-                    </div>
+                        <div class="reg-row row">
+                            <div class="reg-title col-md-3">
+                                <p>Название/номер учебного заведения</p>
+                            </div>
+                            <div class="reg-value col-md-9">
+                                <input type="text" class="form-control" name="institution_number" value="<?php echo $institution_number; ?>" />
+                            </div>
+                        </div>
+                        <div class="reg-row row">
+                            <div class="reg-title col-md-3">
+                                <p>Класс/Курс</p>
+                            </div>
+                            <div class="reg-value col-md-9">
+                                <input type="text" class="form-control" name="grade" value="<?php echo $grade; ?>" />
+                            </div>
+                        </div>
+                        <div class="reg-row row">
+                            <div class="reg-title col-md-3">
+                                <p>Фото профиля</p>
+                            </div>
+                            <div class="reg-value col-md-9">
+                                <input id="photo" name="photo" type="file" class="input-md" />
+                            </div>
+                        </div>
+                        <div class="reg-row row">
+                            <div class="reg-title col-md-3">
+                                <p>E-mail</p>
+                            </div>
+                            <div class="reg-value col-md-9">
+                                <input name="email" type="email" class="form-control" required="" value="<?php echo $email; ?>">
+                            </div>
+                        </div>
+                        <div class="reg-row row">
+                            <div class="reg-title col-md-3">
+                                <p>Пароль</p>
+                            </div>
+                            <div class="reg-value col-md-9">
+                                <input type="password" class="form-control" name="newpassword" />
+                            </div>
+                        </div>
+                        <div class="reg-row row">
+                            <div class="reg-title col-md-3">
+                                <p>Подтвердите пароль</p>
+                            </div>
+                            <div class="reg-value col-md-9">
+                                <input type="password" class="form-control" name="newrepeatpassword" />
+                            </div>
+                        </div>
+                        <div class="reg-buttons reg-row row">
+                            <div class="reg-title col-md-3">
+                                <input type="submit" name="update-submit" class="btn btn-success" value="Сохранить">
+                            </div>
+                            <div class="reg-value col-md-9">
+                                <a id="cancel" name="cancel" class="btn btn-danger" href="signin.php">Отмена</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
 
-                <!--Profile photo-->
-                <div class="row form-group">
-                    <label class="col-md-1 " for="photo">Фото профиля</label>
-                    <div class="col-md-4">
-                        <input id="photo" name="photo" type="file" class="input-md">
-                    </div>
-                </div>
+                <div class="col-md-2"></div>
+            </div>
 
-                <!-- Email input-->
-                <div class="row form-group">
-                    <label class="col-md-1 " for="email">Email</label>
-                    <div class="col-md-4">
-                        <input id="email" name="email" type="email" placeholder="Email" class="form-control input-md" required="" value="<?php echo $email; ?>">
+        </div>
+        <!-- Contact Section -->
+        <div id="contact" class="offset">
+            <footer>
+                <div class="row justify-content-center">
+                    <div class="col-md-12 text-center">
+                        <img src="img/bsuirlogo_mini.png" alt="" />
+                        <p>
+                            БЕЛОРУССКИЙ ГОСУДАРСТВЕННЫЙ УНИВЕРСИТЕТ ИНФОРМАТИКИ И
+                            РАДИОЭЛЕКТРОНИКИ
+                        </p>
+                        <strong>Контакты</strong>
+                        <p>9999-999-99-99<br />trofimovich_a_f@tut.by</p>
+                        <strong>Адрес</strong>
+                        <p>
+                            Республика Беларусь, Минск<br />
+                            220013, ул. П. Бровки, 6 <br />
+                            <a href="https://www.bsuir.by/ru/skhema-korpusov" target="_blank"><i class="location fas fa-map-marker-alt"></i>Схема корпусов</a>
+                        </p>
+                        <a href="https://www.instagram.com/bsuir_official/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://vk.com/bsuir_official" target="_blank"><i class="fab fa-vk"></i></a>
+                        <a href="https://www.youtube.com/user/videostudiabsuir" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.facebook.com/bsuir.by/" target="_blank"><i class="fab fa-facebook-square"></i></a>
                     </div>
-                </div>
 
-                <!--Password input-->
-                <div class="row form-group">
-                    <label class="col-md-1 " for="password">Пароль</label>
-                    <div class="col-md-4">
-                        <input id="password" name="password" type="password" placeholder="Укажите пароль" class="form-control input-md" required="">
-                    </div>
+                    <hr class="socket" />
+                    &copy;WhereIsInput
+                    <!-- <p><br>whereisinput@gmail.com</p> -->
                 </div>
-
-                <!--Password confirm-->
-                <div class="row form-group">
-                    <label class="col-md-1 " for="passwordRepeat">Подтвердите пароль</label>
-                    <div class="col-md-4">
-                        <input id="passwordRepeat" name="passwordRepeat" type="password" placeholder="Подтвердите пароль" class="form-control input-md" required="">
-                    </div>
-                </div>
-
-                <!-- Button (Double) -->
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="button1id"></label>
-                    <div class="col-md-8">
-                        <button type="submit" name="signup-submit" class="btn btn-success">Сохранить</button>
-                        <a id="cancel" name="cancel" class="btn btn-danger" href="signin.php">Отмена</a>
-                    </div>
-                </div>
-            </form>
+            </footer>
         </div>
         <!--- Script Source Files -->
         <script src="src/jquery-3.3.1.min.js"></script>
