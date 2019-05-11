@@ -17,7 +17,7 @@
 
     <!-- PDF Viewer -->
     <div class="content">
-      <embed src="uploads\Tasks\test-content.pdf#toolbar=0" type="application/pdf" height="99%" width="90%">
+      <embed src="uploads\Tasks\test-content.pdf#toolbar=0" type="application/pdf" height="100%" width="100%">
     </div>
 
     <!-- Sidebar -->

@@ -1,3 +1,6 @@
+html {
+  overflow-y: hidden;
+}
 section {
   height: 100vh;
   display: flex;
@@ -49,9 +52,8 @@ section {
   align-items: center;
   justify-content: center;
   position: relative;
-  transition: 0.5s;
+  /* transition: 0.5s; */
 }
-.content_active {
+/* .content_active {
   transform: translateX(-170px);
-}
-
+} */
