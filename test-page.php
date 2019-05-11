@@ -14,34 +14,35 @@
 
 <body>
   <div class="wrapper">
+
+    <!-- PDF Viewer -->
+    <div class="content">
+      <embed src="uploads\Tasks\test-content.pdf#toolbar=0" type="application/pdf" height="99%" width="90%">
+    </div>
+
     <!-- Sidebar -->
     <div class="answer-bar">
-      <div class="answer-bar-btn">
-        <a href="#">Ответы</a>
-      </div>
-      <div class="title text-center">
-        <h2>Ваши ответы</h2>
+      <div class="answer-bar-btn ">
+        <a class="btn btn-secondary btn-md ml-auto" href="#">Ответы</a>
       </div>
       <div class="answer-list">
         <form action="">
           <ol>
-            <li><input type="text" name="answer1" placeholder="ваш ответ"></li>
-            <li><input type="text" name="answer2" placeholder="ваш ответ"></li>
-            <li><input type="text" name="answer3" placeholder="ваш ответ"></li>
+            <li>
+              <select name="VALERALOX" class="answer-select">
+                <option value="">-</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </li>
+
           </ol>
           <div class="submit-btn text-center">
-            <input type="submit" name="submit-answers">
+            <input type="submit" name="submit-answers" class="btn btn-outline-light btn-lg ml-auto">
           </div>
         </form>
       </div>
-    </div>
-
-    <!-- Test  -->
-    <div class="content">
-      <section class="test">
-        <h2>Задание</h2>
-        <!-- <embed src="uploads/tasks/test-content.pdf#toolbar=0" type="application/pdf"> -->
-      </section>
     </div>
   </div>
   <script src="src/jquery-3.3.1.min.js"></script>
