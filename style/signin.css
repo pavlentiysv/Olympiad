@@ -69,15 +69,6 @@ body {
   color: #1e3357;
 }
 
-.error-text {
-  color: #e61414;
-}
-
-.success-text {
-  color: #09cc2a;
-}
-
-
 @media (max-width: 767px) {
   .form-area {
     margin-top: 0px;

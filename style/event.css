@@ -5,6 +5,9 @@
 .heading {
   border-bottom: 0.2rem solid #5997d1;
 }
+.img-container img {
+  max-width: 300px;
+}
 .event-page-content .btn-sm {
   margin-right: 5px;
   margin-top: 5px;

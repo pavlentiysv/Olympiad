@@ -150,6 +150,43 @@ hr {
   margin-bottom: 20px;
 }
 
+/* Popup Window */
+.main-under-error{
+  filter: blur(5px);
+}
+.cross {
+  color: white;
+}
+.cross:hover {
+  color: red;
+}
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+.popup {
+  position: absolute;
+  height: 20%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 40px;
+  box-sizing: border-box;
+  background-color: #ff7777;
+  color: #fff;
+  outline: 3px solid #b90606;
+}
+.close-popup {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+
+
 @media (max-width: 767px) {
   .caption h1 {
     font-size: 38px;

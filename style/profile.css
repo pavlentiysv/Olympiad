@@ -12,6 +12,7 @@
   margin: 1rem auto 1rem;
 }
 .avatar {
+  max-width: 250px;
   width: 100%;
   border-radius: 50%;
   padding: 15px;
@@ -51,9 +52,27 @@ div.row.form-group {
   margin: 0;
 }
 
-a.event-block {
-  text-decoration: none;
+/* Event Tab */
+.event-block {
+  padding: 16px 0px;
 }
+.event-btn {
+  text-decoration: none;
+  padding: 0;
+  border: 0;
+  background-color: #ececec; 
+}
+.event-btn:hover{
+  outline: 3px solid #5997d1;
+  background-color: #c6e2f8;
+}
+.event-logo img {
+  max-width: 175px;  
+}
+
+
+
+
 @media (max-width: 767px) {
   .left-block {
     border-right: 0px;

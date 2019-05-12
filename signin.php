@@ -54,7 +54,9 @@ if (isset($_GET['email'])) {
 </head>
 
 <body>
-  <div id="home">
+  <div class="main <?php if ($errorMsg != null) {
+                      echo "main-under-error";
+                    } ?>" id="home">
     <!-- Start Navigation -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
       <a href="index.php" class="navbar-brand">
@@ -72,18 +74,18 @@ if (isset($_GET['email'])) {
           <form action="php/signin.inc.php" method="post">
             <div class="form-group">
               <label for="email" class="label">E-mail</label>
-              <?php if ($errorMsg!=null) : ?>
-                <input type="email" name="email" class="form-error form-control" id="email" value="<?php echo $email;?>" required=""/>
-              <?php else: ?>
-                <input type="email" name="email" class="form-control" id="email" value="<?php echo $email;?>" required=""/>
+              <?php if ($errorMsg != null) : ?>
+                <input type="email" name="email" class="form-error form-control" id="email" value="<?php echo $email; ?>" required="" />
+              <?php else : ?>
+                <input type="email" name="email" class="form-control" id="email" value="<?php echo $email; ?>" required="" />
               <?php endif; ?>
             </div>
             <div class="form-group">
               <label for="password" class="label">Пароль</label>
-              <?php if ($errorMsg!=null) : ?>
-                <input type="password" name="password" class="form-error form-control" id="password" required=""/>
-              <?php else: ?>
-                <input type="password" name="password" class="form-control" id="password" required=""/>
+              <?php if ($errorMsg != null) : ?>
+                <input type="password" name="password" class="form-error form-control" id="password" required="" />
+              <?php else : ?>
+                <input type="password" name="password" class="form-control" id="password" required="" />
               <?php endif; ?>
             </div>
             <div class="form-group">
@@ -91,12 +93,12 @@ if (isset($_GET['email'])) {
               <label for="remember" class="label remember">Запомнить меня</label>
             </div>
             <div class="form-group text-center">
-            <?php if ($errorMsg!=null) : ?>
-                <span class="error-text"><?php echo $errorMsg;?></span>
-            <?php endif; ?>
-            <?php if ($succesMsg!=null) : ?>
-                <span class="success-text"><?php echo $succesMsg;?></span>
-            <?php endif; ?>
+              <?php if ($errorMsg != null) : ?>
+                <span class="error-text"><?php echo $errorMsg; ?></span>
+              <?php endif; ?>
+              <?php if ($succesMsg != null) : ?>
+                <span class="success-text"><?php echo $succesMsg; ?></span>
+              <?php endif; ?>
             </div>
             <div class="form-group text-center">
               <!-- <a href="#info" class="btn btn-outline-light btn-lg">Войти</a> -->
@@ -117,7 +119,22 @@ if (isset($_GET['email'])) {
     </div>
   </div>
 
+  <?php if ($errorMsg != null) : ?>
+    <div class="overlay js-overlay-campaign">
+      <div class="popup js-popup-campaign text-center col-md-4">
+        <h2>Произошла ошибка!</h2>
+        Ошибка
+        <a href="signin.php" class="cross">
+          <div class="close-popup js-close-campaign">
+            <i class="fas fa-times fa-2x"></i>
+          </div>
+        </a>
+      </div>
+    </div>
+  <?php endif; ?>
+
   <!--- Script Source Files -->
+  <script src="src/popup-window.js"></script>
   <script src="src/jquery-3.3.1.min.js"></script>
   <script src="bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
   <script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>

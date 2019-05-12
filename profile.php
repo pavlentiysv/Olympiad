@@ -385,26 +385,26 @@ require 'php/printSelect.inc.php';
                     <!-- Event Tab Content -->
                     <?php if ($email == $session_email && ($session_usertype == 'admin' || $session_usertype == 'org')) : ?>
                         <div class="nav-event tab-pane fade" id="nav-event" role="tabpanel" aria-labelledby="nav-event-tab">
-                            <h3>Мероприятия</h3>
+                            <h3>Список мероприятий</h3>
                             <?php for ($i = 0; $i < count($event); $i++) : ?>
                                 <form action="event.php" method="post">
                                     <input type="hidden" name="eventID" value="<?php $event[$i]->getEventID(); ?>">
-                                    <button name="event-submit" class="event-block">
-                                        <div class="col-md-10">
-                                            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                                                <div class="col md-4">
-                                                    <img class="mb-12" width="150px" height="150px" src="<?php $event[$i]->getLogo(); ?>"></img>
+                                    <div class="col-md-12 event-block">
+                                        <button name="event-submit" class="event-btn">
+                                            <div class="row">
+                                                <div class="col-md-4 text-center event-logo p-4">
+                                                    <img width="100%" src="<?php $event[$i]->getLogo(); ?>"></img>
                                                 </div>
-                                                <div class="col p-4 d-flex flex-column position-static md-8">
-                                                    <strong class="d-inline-block mb-2 text-primary"><?php $event[$i]->getCountry(); ?>, г.<?php $event[$i]->getCity(); ?>, ул.<?php $event[$i]->getStreet(); ?>, <?php $event[$i]->getHouseNumber(); ?>, к.<?php $event[$i]->getCabinet(); ?></strong>
+                                                <div class="col-md-8 p-4">
+                                                    <strong class="d-inline-block mb-2"><?php $event[$i]->getCountry(); ?>, г.<?php $event[$i]->getCity(); ?>, ул.<?php $event[$i]->getStreet(); ?>, <?php $event[$i]->getHouseNumber(); ?>, к.<?php $event[$i]->getCabinet(); ?></strong>
                                                     <h3 class="mb-0"><?php $event[$i]->getTitle(); ?></h3>
                                                     <div class="mb-1 text-muted"><?php $event[$i]->getStartDate(); ?></div>
                                                     <div class="mb-1 text-muted"><?php $event[$i]->getEndDate(); ?></div>
                                                     <p class="card-text mb-auto"><?php $event[$i]->getShortInfo(); ?></p>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </button>
+                                        </button>
+                                    </div>
                                 </form>
                             <?php endfor; ?>
                         <?php endif; ?>
