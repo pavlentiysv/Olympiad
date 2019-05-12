@@ -25,8 +25,15 @@ if (file_exists('../db/dbHandler.inc.php')) {
 $eventID = null;
 $event = null;
 
-if (isset($_GET['eventID'])) {
-  $eventID = $_GET['eventID'];
+// if (isset($_GET['eventID'])) {
+//   $eventID = $_GET['eventID'];
+// } else {
+//   header("Location: ./profile.php?error=noEvent");
+//   exit();
+// }
+
+if (isset($_POST['eventID'])) {
+  $eventID = $_POST['eventID'];
 } else {
   header("Location: ./profile.php?error=noEvent");
   exit();

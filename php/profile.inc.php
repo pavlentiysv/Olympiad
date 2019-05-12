@@ -119,3 +119,31 @@ if ($session_usertype == 'admin' || $session_usertype == 'org') {
     }
   }
 }
+
+
+// <!-- FOR UNLOADING --!>
+
+if ($session_usertype == 'admin') {
+  $table = array();
+
+  $sql = "SHOW TABLES";
+  $stmt = mysqli_stmt_init($conn);
+  if (!mysqli_stmt_prepare($stmt, $sql)) {
+    header("Location: ./profile.php?error=sqlError");
+    exit();
+  } else {
+    mysqli_stmt_execute($stmt);
+
+    $result = mysqli_stmt_get_result($stmt);
+    if ($result->num_rows < 1) {
+      header("Location: ./profile.php?error=noTables");
+      exit();
+    } else {
+      $i = 0;
+      while ($row = mysqli_fetch_assoc($result)) {
+        $table[$i] = $row['Tables_in_bsuir_olympiad'];
+        $i++;
+      }
+    }
+  }
+}

@@ -50,6 +50,10 @@ div.info-value {
 div.row.form-group {
   margin: 0;
 }
+
+a.event-block {
+  text-decoration: none;
+}
 @media (max-width: 767px) {
   .left-block {
     border-right: 0px;

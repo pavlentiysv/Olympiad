@@ -7,6 +7,7 @@ if (!isset($_POST['signup-submit'])) {
 
 require '../db/dbHandler.inc.php';
 require 'config.inc.php';
+require 'user.class.php';
 
 $email = $_POST['email'];
 $password = $_POST['password'];

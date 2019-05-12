@@ -77,6 +77,9 @@ require 'php/printSelect.inc.php';
                         <?php if ($email == $session_email && ($session_usertype == 'admin' || $session_usertype == 'org')) : ?>
                             <a class="nav-item nav-link" id="nav-settings-tab" data-toggle="tab" href="#nav-event" role="tab" aria-controls="nav-event" aria-selected="false">Мероприятия</a>
                         <?php endif; ?>
+                        <?php if ($session_usertype == 'admin') : ?>
+                            <a class="nav-item nav-link" id="nav-unloading-tab" data-toggle="tab" href="#nav-unloading" role="tab" aria-controls="nav-unloading" aria-selected="false">Выгрузка</a>
+                        <?php endif; ?>
                     </div>
                 </nav>
 
@@ -178,7 +181,7 @@ require 'php/printSelect.inc.php';
                                 <p>Электронная почта</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p><?php echo $session_email; ?></p>
+                                <p><?php echo $email; ?></p>
                             </div>
                         </div>
                     </div>
@@ -188,7 +191,7 @@ require 'php/printSelect.inc.php';
 
 
 
-                    <!-- Test Tab Content -->
+                    <!-- Tests Tab Content -->
                     <div class="nav-tests tab-pane fade" id="nav-tests" role="tabpanel" aria-labelledby="nav-tests-tab">
                         <p>Результаты</p>
                     </div>
@@ -379,30 +382,78 @@ require 'php/printSelect.inc.php';
 
 
 
-                    <!-- Settings Tab Content -->
+                    <!-- Event Tab Content -->
                     <?php if ($email == $session_email && ($session_usertype == 'admin' || $session_usertype == 'org')) : ?>
                         <div class="nav-event tab-pane fade" id="nav-event" role="tabpanel" aria-labelledby="nav-event-tab">
                             <h3>Мероприятия</h3>
-
                             <?php for ($i = 0; $i < count($event); $i++) : ?>
-                                <div class="col-md-10">
-                                    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                                        <div class="col md-4">
-                                            <img class="mb-12" width="200px" height="200px" src="<?php $event[$i]->getLogo(); ?>"></img>
+                                <form action="event.php" method="post">
+                                    <input type="hidden" name="eventID" value="<?php $event[$i]->getEventID(); ?>">
+                                    <button name="event-submit" class="event-block">
+                                        <div class="col-md-10">
+                                            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                                                <div class="col md-4">
+                                                    <img class="mb-12" width="150px" height="150px" src="<?php $event[$i]->getLogo(); ?>"></img>
+                                                </div>
+                                                <div class="col p-4 d-flex flex-column position-static md-8">
+                                                    <strong class="d-inline-block mb-2 text-primary"><?php $event[$i]->getCountry(); ?>, г.<?php $event[$i]->getCity(); ?>, ул.<?php $event[$i]->getStreet(); ?>, <?php $event[$i]->getHouseNumber(); ?>, к.<?php $event[$i]->getCabinet(); ?></strong>
+                                                    <h3 class="mb-0"><?php $event[$i]->getTitle(); ?></h3>
+                                                    <div class="mb-1 text-muted"><?php $event[$i]->getStartDate(); ?></div>
+                                                    <div class="mb-1 text-muted"><?php $event[$i]->getEndDate(); ?></div>
+                                                    <p class="card-text mb-auto"><?php $event[$i]->getShortInfo(); ?></p>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col p-4 d-flex flex-column position-static md-8">
-                                            <strong class="d-inline-block mb-2 text-primary"><?php $event[$i]->getCountry(); ?>, г.<?php $event[$i]->getCity(); ?>, ул.<?php $event[$i]->getStreet(); ?>, <?php $event[$i]->getHouseNumber(); ?>, к.<?php $event[$i]->getCabinet(); ?></strong>
-                                            <h3 class="mb-0"><?php $event[$i]->getTitle(); ?></h3>
-                                            <div class="mb-1 text-muted"><?php $event[$i]->getStartDate(); ?></div>
-                                            <div class="mb-1 text-muted"><?php $event[$i]->getEndDate(); ?></div>
-                                            <p class="card-text mb-auto"><?php $event[$i]->getShortInfo(); ?></p>
-                                            <a href="event.php?eventID=<?php $event[$i]->getEventID(); ?>" class="stretched-link">Продолжить чтение</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </button>
+                                </form>
                             <?php endfor; ?>
                         <?php endif; ?>
                     </div>
+
+
+
+
+
+                    <!-- Unload Tab Content -->
+                    <?php if ($session_usertype == 'admin') : ?>
+                        <div class="nav-unloading tab-pane fade" id="nav-unloading" role="tabpanel" aria-labelledby="nav-unloading-tab">
+                            <h3>Выгрузка данных</h3>
+                            <form action="php/unloading.inc.php" method="post">
+                                <div class="info-row row">
+                                    <div class="info-title col-md-3">
+                                        <p>Выберите тип выгрузки</p>
+                                    </div>
+                                    <div class="info-value col-md-9">
+                                        <select id="type" name="type" class="form-control">
+                                            <option selected value="">- Не выбран -</option>
+                                            <option value="Excel">Excel</option>
+                                            <option value="Xml">Xml</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="info-row row">
+                                    <div class="info-title col-md-3">
+                                        <p>Выберите таблицу</p>
+                                    </div>
+                                    <div class="info-value col-md-9">
+                                        <select id="table" name="table" class="form-control">
+                                            <option selected value="">- Не выбран -</option>
+                                            <?php for ($i = 0; $i < count($table); $i++) : ?>
+                                                <option value="<?php echo $table[$i]; ?>"><?php echo $table[$i]; ?></option>
+                                            <?php endfor; ?>
+                                            <option value="*">Все</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <input type="submit" name="unload-submit" class="btn btn-success" value="Выгрузить">
+                            </form>
+                        </div>
+                    <?php endif; ?>
+
+
+
                 </div>
             </div>
         </div>
