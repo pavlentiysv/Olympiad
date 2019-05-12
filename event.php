@@ -42,8 +42,8 @@ require 'php/event.inc.php';
 
         <!-- Short Info / Heading -->
         <div class="heading row">
-          <div class="img-container col-md-4">
-            <img class="" width="200px" height="200px" src="<?php $event->getLogo(); ?>"></img>
+          <div class="img-container col-md-4 text-center">
+            <img width="100%"  src="<?php $event->getLogo(); ?>"></img>
           </div>
           <div class="short-info col-md-8">
             <h3 class="mb-0"><?php $event->getTitle(); ?></h3>
