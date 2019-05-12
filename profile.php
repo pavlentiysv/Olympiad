@@ -428,6 +428,7 @@ require 'php/printSelect.inc.php';
                                             <option selected value="">- Не выбран -</option>
                                             <option value="Excel">Excel</option>
                                             <option value="Xml">Xml</option>
+                                            <option value="JSON">JSON</option>
                                         </select>
                                     </div>
                                 </div>
