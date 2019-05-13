@@ -1,5 +1,6 @@
 <?php
 require 'php/session.inc.php';
+require 'php/index.inc.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +11,7 @@ require 'php/session.inc.php';
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="stylesheet" href="bootstrap-4.1.3-dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="style/main.css" />
-  <link rel="stylesheet" href="style/fixed.css" />  
+  <link rel="stylesheet" href="style/fixed.css" />
   <link rel="icon" href="img/bsuirlogo_mini.png" />
   <title>Олимпиада БГУИР</title>
 </head>
@@ -109,40 +110,59 @@ require 'php/session.inc.php';
           <h3 class="heading">Ближайшие мероприятия</h3>
           <div class="heading-underline"></div>
         </div>
-        <div class="row text-center">
-          <div class="col-md-4">
-            <div class="news-item">
-              <i class="fas fa-exclamation-circle fa-3x" data-fa-transform="shrink-3 up-5"></i>
-              <h3>Заголовок мероприятия</h3>
-              <p>
-                Краткое описание события бла бла бла бла бла бла бла бла бла
-                бла
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="news-item">
-              <i class="fas fa-exclamation-circle fa-3x" data-fa-transform="shrink-3 up-5"></i>
-              <h3>Заголовок мероприятия</h3>
-              <p>
-                Краткое описание события бла бла бла бла бла бла бла бла бла
-                бла
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="news-item">
-              <i class="fas fa-exclamation-circle fa-3x" data-fa-transform="shrink-3 up-5"></i>
-              <h3>Заголовок мероприятия</h3>
-              <p>
-                Краткое описание события бла бла бла бла бла бла бла бла бла
-                бла
-              </p>
-            </div>
-          </div>
+        <div class="col-md-12 event-block">
+          <form action="event.php" method="post">
+            <input type="hidden" name="eventID" value="<?php echo $event->getEventID(); ?>">
+            <button name="event-submit" class="event-btn">
+              <div class="row">
+                <div class="col-md-4 text-center event-logo p-4">
+                  <img width="100%" src="<?php echo $event->getLogo(); ?>"></img>
+                </div>
+                <div class="col-md-8 p-4">
+                  <strong class="d-inline-block mb-2"><?php echo $event->getCountry(); ?>, г.<?php echo $event->getCity(); ?>, ул.<?php echo $event->getStreet(); ?>, <?php echo $event->getHouseNumber(); ?>, к.<?php echo $event->getCabinet(); ?></strong>
+                  <h3 class="mb-0"><?php echo $event->getTitle(); ?></h3>
+                  <div class="mb-1 text-muted"><?php echo $event->getStartDate(); ?></div>
+                  <div class="mb-1 text-muted"><?php echo $event->getEndDate(); ?></div>
+                  <p class="card-text mb-auto"><?php echo $event->getShortInfo(); ?></p>
+                </div>
+              </div>
+            </button>
+          </form>
         </div>
+        <!-- <div class="row text-center">
+          <div class="col-md-4">
+            <div class="news-item">
+              <i class="fas fa-exclamation-circle fa-3x" data-fa-transform="shrink-3 up-5"></i>
+              <h3>Заголовок мероприятия</h3>
+              <p>
+                Краткое описание события бла бла бла бла бла бла бла бла бла
+                бла
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="news-item">
+              <i class="fas fa-exclamation-circle fa-3x" data-fa-transform="shrink-3 up-5"></i>
+              <h3>Заголовок мероприятия</h3>
+              <p>
+                Краткое описание события бла бла бла бла бла бла бла бла бла
+                бла
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="news-item">
+              <i class="fas fa-exclamation-circle fa-3x" data-fa-transform="shrink-3 up-5"></i>
+              <h3>Заголовок мероприятия</h3>
+              <p>
+                Краткое описание события бла бла бла бла бла бла бла бла бла
+                бла
+              </p>
+            </div>
+          </div>
+        </div> -->
         <!-- End Row-->
       </div>
       <!-- End Narrow -->

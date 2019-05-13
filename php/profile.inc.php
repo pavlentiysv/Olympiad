@@ -112,7 +112,7 @@ if ($session_usertype == 'admin' || $session_usertype == 'org') {
     } else {
       $i = 0;
       while ($row = mysqli_fetch_assoc($result)) {
-        $event[$i] = new Event($row['eventID'], $row['title'], $row['logo'], $row['country'], $row['city'], $row['street'], $row['houseNumber'], $row['cabinet'], $row['startDate'], $row['endDate'], $row['site'], $row['shortInfo'], $row['fullInfo']);
+        $event[$i] = new Event($row['eventID'], $row['title'], $row['logo'], $row['country'], $row['city'], $row['street'], $row['houseNumber'], $row['cabinet'], $row['startDate'], $row['endDate'], $row['site'], $row['shortInfo'], $row['fullInfo'], $row['isPublished']);
 
         $i++;
       }

@@ -1,7 +1,7 @@
 <?php
 
 if (isset($_POST['signin-submit'])) {
-    
+
     require '../db/dbHandler.inc.php';
 
     $email = $_POST['email'];
@@ -14,7 +14,7 @@ if (isset($_POST['signin-submit'])) {
         $sql = "SELECT * FROM accounts WHERE email = ? AND password = md5(?)";
         $stmt = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt, $sql)) {
-            header("Location: ../signin.php?error=sqlError&email=".$email);
+            header("Location: ../signin.php?error=sqlError&email=" . $email);
             exit();
         } else {
             mysqli_stmt_bind_param($stmt, "ss", $email, $password);
@@ -26,20 +26,20 @@ if (isset($_POST['signin-submit'])) {
                     session_start();
                     $_SESSION['userType'] = $row['userType'];
                     $_SESSION['userEmail'] = $row['email'];
-                    
+                    $_SESSION['accountID'] = $row['accountID'];
+
                     header("Location: ../signin.php?signin=success");
                     exit();
                 } else {
-                    header("Location: ../signin.php?error=noActivation&email=".$email);
+                    header("Location: ../signin.php?error=noActivation&email=" . $email);
                     exit();
                 }
             } else {
-                header("Location: ../signin.php?error=noGmail&email=".$email);
+                header("Location: ../signin.php?error=noGmail&email=" . $email);
                 exit();
             }
         }
     }
-
 } else {
     header("Location: ../signin.php");
     exit();

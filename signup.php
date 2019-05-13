@@ -118,7 +118,7 @@ if (isset($_GET['telephone'])) {
 
                 <!-- Registration Form -->
                 <div class="col-md-8">
-                    <form action="">
+                    <form action="php/signup.inc.php" method="post" enctype="multipart/form-data">
                         <div class="reg-row row">
                             <div class="reg-title col-md-3">
                                 <p>Фамилия</p>
@@ -149,7 +149,7 @@ if (isset($_GET['telephone'])) {
                             </div>
                             <div class="reg-value col-md-9">
                                 <select id="gender" name="gender" class="form-control">
-                                    <option <?php if ($gender == null) echo 'selected'; ?> value="">- Не выбран - <?php echo $gender ?></option>
+                                    <option <?php if ($gender == null) echo 'selected'; ?> value="">- Не выбран -</option>
                                     <option <?php if ($gender == 'М') echo 'selected'; ?> value='М'>Мужской</option>
                                     <option <?php if ($gender == 'Ж') echo 'selected'; ?> value='Ж'>Женский</option>
                                 </select>

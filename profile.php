@@ -74,7 +74,7 @@ require 'php/printSelect.inc.php';
                         <?php if ($email == $session_email || $session_usertype == 'admin') : ?>
                             <a class="nav-item nav-link" id="nav-settings-tab" data-toggle="tab" href="#nav-settings" role="tab" aria-controls="nav-settings" aria-selected="false">Настройки</a>
                         <?php endif; ?>
-                        <?php if ($email == $session_email && ($session_usertype == 'admin' || $session_usertype == 'org')) : ?>
+                        <?php if ($session_usertype == 'admin' || $session_usertype == 'org') : ?>
                             <a class="nav-item nav-link" id="nav-settings-tab" data-toggle="tab" href="#nav-event" role="tab" aria-controls="nav-event" aria-selected="false">Мероприятия</a>
                         <?php endif; ?>
                         <?php if ($session_usertype == 'admin') : ?>
@@ -255,7 +255,7 @@ require 'php/printSelect.inc.php';
                                     </div>
                                     <div class="info-value col-md-9">
                                         <select id="gender" name="gender" class="form-control">
-                                            <option <?php if ($gender == null) echo 'selected'; ?> value="">- Не выбран - .<?php echo $gender ?>.</option>
+                                            <option <?php if ($gender == null) echo 'selected'; ?> value="">- Не выбран -</option>
                                             <option <?php if ($gender == 'М') echo 'selected'; ?> value='М'>Мужской</option>
                                             <option <?php if ($gender == 'Ж') echo 'selected'; ?> value='Ж'>Женский</option>
                                         </select>
@@ -383,24 +383,31 @@ require 'php/printSelect.inc.php';
 
 
                     <!-- Event Tab Content -->
-                    <?php if ($email == $session_email && ($session_usertype == 'admin' || $session_usertype == 'org')) : ?>
+                    <?php if ($session_usertype == 'admin' || $session_usertype == 'org') : ?>
                         <div class="nav-event tab-pane fade" id="nav-event" role="tabpanel" aria-labelledby="nav-event-tab">
-                            <h3>Список мероприятий</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3>Список мероприятий</h3>
+                                </div>
+                                <form action="event.php" method="post">
+                                <div class="col-md-6"><input type="submit" name="create-event-submit" class="btn btn-success" value="Создать новое мероприятие"></div>
+                                </form>
+                            </div>
                             <?php for ($i = 0; $i < count($event); $i++) : ?>
                                 <form action="event.php" method="post">
-                                    <input type="hidden" name="eventID" value="<?php $event[$i]->getEventID(); ?>">
+                                    <input type="hidden" name="eventID" value="<?php echo $event[$i]->getEventID(); ?>">
                                     <div class="col-md-12 event-block">
                                         <button name="event-submit" class="event-btn">
                                             <div class="row">
                                                 <div class="col-md-4 text-center event-logo p-4">
-                                                    <img width="100%" src="<?php $event[$i]->getLogo(); ?>"></img>
+                                                    <img width="100%" src="<?php echo $event[$i]->getLogo(); ?>"></img>
                                                 </div>
                                                 <div class="col-md-8 p-4">
-                                                    <strong class="d-inline-block mb-2"><?php $event[$i]->getCountry(); ?>, г.<?php $event[$i]->getCity(); ?>, ул.<?php $event[$i]->getStreet(); ?>, <?php $event[$i]->getHouseNumber(); ?>, к.<?php $event[$i]->getCabinet(); ?></strong>
-                                                    <h3 class="mb-0"><?php $event[$i]->getTitle(); ?></h3>
-                                                    <div class="mb-1 text-muted"><?php $event[$i]->getStartDate(); ?></div>
-                                                    <div class="mb-1 text-muted"><?php $event[$i]->getEndDate(); ?></div>
-                                                    <p class="card-text mb-auto"><?php $event[$i]->getShortInfo(); ?></p>
+                                                    <strong class="d-inline-block mb-2"><?php echo $event[$i]->getCountry(); ?>, г.<?php echo $event[$i]->getCity(); ?>, ул.<?php echo $event[$i]->getStreet(); ?>, <?php echo $event[$i]->getHouseNumber(); ?>, к.<?php echo $event[$i]->getCabinet(); ?></strong>
+                                                    <h3 class="mb-0"><?php echo $event[$i]->getTitle(); ?></h3>
+                                                    <div class="mb-1 text-muted"><?php echo $event[$i]->getStartDate(); ?></div>
+                                                    <div class="mb-1 text-muted"><?php echo $event[$i]->getEndDate(); ?></div>
+                                                    <p class="card-text mb-auto"><?php echo $event[$i]->getShortInfo(); ?></p>
                                                 </div>
                                             </div>
                                         </button>

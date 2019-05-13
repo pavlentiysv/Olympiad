@@ -54,9 +54,7 @@ if (isset($_GET['email'])) {
 </head>
 
 <body>
-  <div class="main <?php if ($errorMsg != null) {
-                      echo "main-under-error";
-                    } ?>" id="home">
+  <div class="main <?php if ($errorMsg != null) echo "main-under-error"; ?>" id="home">
     <!-- Start Navigation -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
       <a href="index.php" class="navbar-brand">
@@ -67,8 +65,8 @@ if (isset($_GET['email'])) {
 
     <div class="container sign-up">
       <div class="row">
-        <div class="empty-space col-md-4"></div>
-        <div class="form-area col-md-5">
+        <div class="empty-space col-md-3"></div>
+        <div class="form-area col-md-6">
           <h1 class="text-center">Вход</h1>
 
           <form action="php/signin.inc.php" method="post">
@@ -114,7 +112,7 @@ if (isset($_GET['email'])) {
             </p>
           </form>
         </div>
-        <div class="empty-space col-md-4"></div>
+        <div class="empty-space col-md-3"></div>
       </div>
     </div>
   </div>
@@ -123,7 +121,7 @@ if (isset($_GET['email'])) {
     <div class="overlay js-overlay-campaign">
       <div class="popup js-popup-campaign text-center col-md-4">
         <h2>Произошла ошибка!</h2>
-        Ошибка
+        <?php echo $errorMsg; ?>
         <a href="signin.php" class="cross">
           <div class="close-popup js-close-campaign">
             <i class="fas fa-times fa-2x"></i>
