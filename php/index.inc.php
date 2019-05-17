@@ -3,7 +3,7 @@ require 'event.class.php';
 $conn = getConnection();
 $event = null;
 
-$sql = "SELECT *, MIN(dif) FROM (SELECT *, TIMESTAMPDIFF(SECOND, NOW(),startDate) as dif FROM events) as temp WHERE dif>0";
+$sql = "SELECT * FROM (SELECT *, TIMESTAMPDIFF(SECOND, NOW(),startDate) as dif FROM events) as temp WHERE dif>0 ORDER BY dif LIMIT 1";
 $stmt = mysqli_stmt_init($conn);
 if (!mysqli_stmt_prepare($stmt, $sql)) {
   header("Location: ./index.php?error=sqlError");

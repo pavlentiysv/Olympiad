@@ -206,9 +206,9 @@ if (isset($_POST['create-event-submit'])) {
     if (file_exists('../uploads/events/logos/' . $logoFile . ".jpg")) {
       $logoFile = "logo" . $evenID . ".jpg";
     } else if (file_exists('../uploads/events/logos/' . $logoFile . ".png")) {
-      $logoFile = "logo" . $evenID . ".jpeg";
-    } else if (file_exists('../uploads/events/logos/' . $logoFile . ".jpeg")) {
       $logoFile = "logo" . $evenID . ".png";
+    } else if (file_exists('../uploads/events/logos/' . $logoFile . ".jpeg")) {
+      $logoFile = "logo" . $evenID . ".jpeg";
     } else {
       $logoFile = null;
     }

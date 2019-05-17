@@ -86,10 +86,10 @@ if (isset($_GET['email'])) {
                 <input type="password" name="password" class="form-control" id="password" required="" />
               <?php endif; ?>
             </div>
-            <div class="form-group">
-              <input type="checkbox" id="remember" />
-              <label for="remember" class="label remember">Запомнить меня</label>
-            </div>
+            <!-- <div class="form-group"> -->
+              <!-- <input type="checkbox" id="remember" /> -->
+              <!-- <label for="remember" class="label remember">Запомнить меня</label> -->
+            <!-- </div> -->
             <div class="form-group text-center">
               <?php if ($errorMsg != null) : ?>
                 <span class="error-text"><?php echo $errorMsg; ?></span>

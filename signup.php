@@ -252,7 +252,7 @@ if (isset($_GET['telephone'])) {
                                 <p>Пароль</p>
                             </div>
                             <div class="reg-value col-md-9">
-                                <input type="password" class="form-control" name="newpassword" />
+                                <input type="password" class="form-control" name="password" />
                             </div>
                         </div>
                         <div class="reg-row row">
@@ -260,12 +260,12 @@ if (isset($_GET['telephone'])) {
                                 <p>Подтвердите пароль</p>
                             </div>
                             <div class="reg-value col-md-9">
-                                <input type="password" class="form-control" name="newrepeatpassword" />
+                                <input type="password" class="form-control" name="passwordRepeat" />
                             </div>
                         </div>
                         <div class="reg-buttons reg-row row">
                             <div class="reg-title col-md-3">
-                                <input type="submit" name="update-submit" class="btn btn-success" value="Сохранить">
+                                <input type="submit" name="signup-submit" class="btn btn-success" value="Сохранить">
                             </div>
                             <div class="reg-value col-md-9">
                                 <a id="cancel" name="cancel" class="btn btn-danger" href="signin.php">Отмена</a>

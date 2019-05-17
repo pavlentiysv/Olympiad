@@ -67,7 +67,7 @@ require 'php/event.inc.php';
                 </form>
                 <form action="php/test-add-config.inc.php" method="post">
                   <input type="hidden" name="eventID" value="<?php echo $event->getEventID(); ?>" />
-                  <input class="btn btn-outline-primary btn-sm" type="submit" name="add-test-submit" value="Добавить тест" />
+                  <!-- <input class="btn btn-outline-primary btn-sm" type="submit" name="add-test-submit" value="Добавить тест" /> -->
                 </form>
               <?php endif; ?>
               <?php if ($isRegistred == 0) : ?>

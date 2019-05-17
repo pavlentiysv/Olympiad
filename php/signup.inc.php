@@ -36,7 +36,7 @@ $url = null;
 $token = bin2hex(random_bytes(8));
 $url = "${serverHostIP}/olympiad/php/activation.inc.php?activator=$token";
 
-$autoFill = "&email=${email}&surname=${surname}&name=${name}&middlename=${middlename}&city=${city}&institution_type=${institution_type}&institution_number=${institution_number}&grade=${grade}&gender=${gender}&day=${day}&month=${month}&year=${year}&telephone=${telephone}";
+$autoFill = "&email=${email}&surname=${surname}&name=${name}&middlename=${middlename}&city=${city}&institution_type=${institution_type}&institution_number=${institution_number}&grade=${grade}&gender=${gender}&day=${day}&month=${month}&year=${year}&telephone=${telephone}&$password&$passwordRepeat";
 
 if (empty($middlename)) {
     $middlename = null;

@@ -390,7 +390,7 @@ require 'php/printSelect.inc.php';
                                     <h3>Список мероприятий</h3>
                                 </div>
                                 <form action="event.php" method="post">
-                                <div class="col-md-6"><input type="submit" name="create-event-submit" class="btn btn-success" value="Создать новое мероприятие"></div>
+                                    <div class="col-md-6"><input type="submit" name="create-event-submit" class="btn btn-success" value="Создать новое мероприятие"></div>
                                 </form>
                             </div>
                             <?php for ($i = 0; $i < count($event); $i++) : ?>
@@ -403,7 +403,7 @@ require 'php/printSelect.inc.php';
                                                     <img width="100%" src="<?php echo $event[$i]->getLogo(); ?>"></img>
                                                 </div>
                                                 <div class="col-md-8 p-4">
-                                                    <strong class="d-inline-block mb-2"><?php echo $event[$i]->getCountry(); ?>, г.<?php echo $event[$i]->getCity(); ?>, ул.<?php echo $event[$i]->getStreet(); ?>, <?php echo $event[$i]->getHouseNumber(); ?>, к.<?php echo $event[$i]->getCabinet(); ?></strong>
+                                                    <strong class=" d-inline-block mb-2"><?php echo $event[$i]->getCountry(); ?>, г.<?php echo $event[$i]->getCity(); ?>, ул.<?php echo $event[$i]->getStreet(); ?>, <?php echo $event[$i]->getHouseNumber(); ?>, к.<?php echo $event[$i]->getCabinet(); ?></strong>
                                                     <h3 class="mb-0"><?php echo $event[$i]->getTitle(); ?></h3>
                                                     <div class="mb-1 text-muted"><?php echo $event[$i]->getStartDate(); ?></div>
                                                     <div class="mb-1 text-muted"><?php echo $event[$i]->getEndDate(); ?></div>
