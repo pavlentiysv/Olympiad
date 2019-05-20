@@ -1,7 +1,9 @@
 <?php
+
 require 'config.inc.php';
 
-class User { 
+class User {
+
   private $accountID;
   private $email;
   private $password;
@@ -19,6 +21,8 @@ class User {
   private $birthDate;
   private $telephoneNumber;
   private $photo;
+  public static $photoDir = 'uploads/users/avatars/';
+  public static $defaultPhoto = 'default_avatar.jpg';
 
   public function __construct($accountID, $email, $password, $userType, $registrationDate, $status, $surname, $name, $middlename, $city, $institutionType, $institutionNumber, $grade, $gender, $birthDate, $telephoneNumber, $photo) {
     $this->accountID = $accountID;
@@ -35,133 +39,159 @@ class User {
     $this->institutionNumber = $institutionNumber;
     $this->grade = $grade;
     $this->gender = $gender;
-    $this->birthDate = $birthDate;
+    $this->birthDate = date("d.m.Y", strtotime($birthDate));
     $this->telephoneNumber = $telephoneNumber;
 
     if ($photo == null) {
-      $this->photo = 'uploads/users/avatars/default_avatar.jpg'; 
+      $this->photo = self::$defaultPhoto;
     } else {
-      $this->photo = "uploads/users/avatars/$photo";
+      $this->photo = "$photo";
     }
   }
-  
-  public function getAccountID() {
-    echo $this->accountID;
+
+  public static function create() {
+    $instanse = new self(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    return $instanse;
   }
+
+  public function getAccountID() {
+    return $this->accountID;
+  }
+
   public function setAccountID($accountID) {
     $this->accountID = $accountID;
   }
-  
+
   public function getEmail() {
-    echo $this->email;
+    return $this->email;
   }
+
   public function setEmail($email) {
     $this->email = $email;
   }
-  
+
   public function getPassword() {
-    echo $this->password;
+    return $this->password;
   }
+
   public function setPassword($password) {
     $this->password = $password;
   }
-  
+
   public function getUserType() {
-    echo $this->userType;
+    return $this->userType;
   }
+
   public function setUserType($userType) {
     $this->userType = $userType;
   }
-  
+
   public function getRegistrationDate() {
-    echo $this->registrationDate;
+    return $this->registrationDate;
   }
+
   public function setRegistrationDate($registrationDate) {
     $this->registrationDate = $registrationDate;
   }
-  
+
   public function getStatus() {
-    echo $this->status;
+    return $this->status;
   }
+
   public function setStatus($status) {
     $this->status = $status;
   }
-  
+
   public function getSurname() {
-    echo $this->surname;
+    return $this->surname;
   }
+
   public function setSurname($surname) {
     $this->surname = $surname;
   }
-  
+
   public function getName() {
-    echo $this->name;
+    return $this->name;
   }
+
   public function setName($name) {
     $this->name = $name;
   }
-  
+
   public function getMiddlename() {
-    echo $this->middlename;
+    return $this->middlename;
   }
+
   public function setMiddlename($middlename) {
     $this->middlename = $middlename;
   }
-  
+
   public function getCity() {
-    echo $this->city;
+    return $this->city;
   }
+
   public function setCity($city) {
     $this->city = $city;
   }
 
   public function getInstitutionType() {
-    echo $this->institutionType;
+    return $this->institutionType;
   }
+
   public function setInstitutionType($institutionType) {
     $this->institutionType = $institutionType;
   }
-  
+
   public function getInstitutionNumber() {
-    echo $this->institutionNumber;
+    return $this->institutionNumber;
   }
+
   public function setInstitutionNumber($institutionNumber) {
     $this->institutionNumber = $institutionNumber;
   }
 
   public function getGrade() {
-    echo $this->grade;
+    return $this->grade;
   }
+
   public function setGrade($grade) {
     $this->grade = $grade;
   }
 
   public function getGender() {
-    echo $this->gender;
+    return $this->gender;
   }
+
   public function setGender($gender) {
     $this->gender = $gender;
   }
 
   public function getBirthDate() {
-    echo $this->birthDate;
+    return $this->birthDate;
   }
+
   public function setBirthDate($birthDate) {
     $this->birthDate = $birthDate;
   }
 
   public function getTelephoneNumber() {
-    echo $this->telephoneNumber;
+    return $this->telephoneNumber;
   }
+
   public function setTelephoneNumber($telephoneNumber) {
     $this->telephoneNumber = $telephoneNumber;
   }
 
   public function getPhoto() {
-    echo $this->photo;
+    return $this->photo;
   }
+
   public function setPhoto($photo) {
     $this->photo = $photo;
   }
+
+  public function getAutoFill() {
+    $autoFill = "&email=$this->email&usertype=$this->userType&surname=$this->surname&name=$this->name&middlename=$this->middlename&city=$this->city&institution_type=$this->institutionType&institution_number=$this->institutionNumber&grade=$this->grade&gender=$this->gender&birthdate=$this->birthDate&telephone=$this->telephoneNumber&photo=$this->photo";
+    return $autoFill;
+  }
 }
-?>

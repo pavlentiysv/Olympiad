@@ -1,6 +1,14 @@
 <?php
-require 'session.inc.php';
 
+require 'session.inc.php';
+require 'user.class.php';
+
+$desiredUser = null; //которого надо поменять
+$newUser = null; //новая инфа о том кого надо поменять
+$curUser = User::create(); //меняющий пользователь (мб админ)
+
+$session_email = null;
+$session_usertype = null;
 if (isset($_SESSION['userEmail'])) {
   $session_email = $_SESSION['userEmail'];
   if (!empty($_SESSION['userType'])) {
@@ -14,87 +22,35 @@ if (isset($_SESSION['userEmail'])) {
 }
 
 if (isset($_POST['update-submit'])) {
-  $email = $_POST['email'];
-  $password = $_POST['password'];
-  $newUserType = $_POST['usertype'];
-  $newSurname = $_POST['surname'];
-  $newName = $_POST['name'];
-  $newMiddlename = $_POST['middlename'];
-  $newCity = $_POST['city'];
-  $newInstitution_type = $_POST['institution_type'];
-  $newInstitution_number = $_POST['institution_number'];
-  $newGrade = $_POST['grade'];
-  $newGender = $_POST['gender'];
-  $newYear = $_POST['year'];
-  $newMonth = $_POST['month'];
-  $newDay = $_POST['day'];
-  $newTelephone = $_POST['telephone'];
-  $newPassword = $_POST['newpassword'];
+  $newUser = new User(null, $_POST['email'], null, $_POST['usertype'], null, null, $_POST['surname'], $_POST['name'], $_POST['middlename'], $_POST['city'], $_POST['institution_type'], $_POST['institution_number'], $_POST['grade'], $_POST['gender'], date("y-m-d", strtotime($_POST['year'] ."-". $_POST['month'] ."-". $_POST['day'])), $_POST['telephone'], null);
+
+  $curUser->setEmail($session_email);
+  $curUser->setPassword($_POST['password']);
   $newRepeatPassword = $_POST['newrepeatpassword'];
 
   $newPhoto = $_FILES['newphoto'];
-  $photoNameNew = null;
-
-  $newBirthDate = "$newYear-$newMonth-$newDay";
 } else {
   header("Location: ../profile.php?error=noSubmit");
   exit();
 }
 
-if (empty($newPassword)) {
-  $newPassword = null;
-}
-
-if (empty($middlename)) {
-  $middlename = null;
+if (!empty($_POST['newPassword'])) {
+  $newUser->setPassword($_POST['newPassword']);
 }
 
 if ($newPhoto['name'] == null) {
   $newPhoto = null;
 }
 
-if ($session_usertype != 'admin' || $session_email != $email) {
-  if (
-    empty($newSurname) || empty($newName) || empty($newCity) || empty($newInstitution_type) || empty($newInstitution_number) || empty($newGrade) || empty($newGender) || empty($newDay) || empty($newMonth) || empty($newYear) || empty($newTelephone)
-  ) {
-    header("Location: ../profile.php?error=emptyFields");
-    exit();
-  }
-} else {
-  if (empty($newSurname)) {
-    $newSurname = null;
-  }
-  if (empty($newName)) {
-    $newName = null;
-  }
-  if (empty($newCity)) {
-    $newCity = null;
-  }
-  if (empty($newInstitution_type)) {
-    $newInstitution_type = null;
-  }
-  if (empty($newInstitution_number)) {
-    $newInstitution_number = null;
-  }
-  if (empty($newGrade)) {
-    $newGrade = null;
-  }
-  if (empty($newDay)) {
-    $newDay = null;
-  }
-  if (empty($newMonth)) {
-    $newMonth = null;
-  }
-  if (empty($newYear)) {
-    $newYear = null;
-  }
-  if (empty($newTelephone)) {
-    $newTelephone = null;
-  }
+if (
+        empty($newUser->getSurname()) || empty($newUser->getName()) || empty($newUser->getCity()) || empty($newUser->getInstitutionType()) || empty($newUser->getInstitutionNumber()) || empty($newUser->getGrade()) || empty($newUser->getGender()) || empty($newUser->getBirthDate()) || empty($newUser->getTelephoneNumber())
+) {
+  header("Location: ../profile.php?error=emptyFields");
+  exit();
 }
 
-if ($newPassword != null) {
-  if ($newPassword != $newRepeatPassword) {
+if ($newUser->getPassword() != null) {
+  if ($newUser->getPassword() != $newRepeatPassword) {
     header("Location: ../profile.php?error=newPasswordNotMatching");
     exit();
   }
@@ -115,7 +71,8 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
   header("Location: ../profile.php?error=sqlError");
   exit();
 } else {
-  mysqli_stmt_bind_param($stmt, "ss", $session_email, $password);
+  $curPassword = $curUser->getPassword();
+  mysqli_stmt_bind_param($stmt, "ss", $session_email, $curPassword);
   mysqli_stmt_execute($stmt);
 
   $result = mysqli_stmt_get_result($stmt);
@@ -125,36 +82,21 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
   } else {
 
     // <!-- Выборка инфы о пользователе, указанного в форме редактирования --!>
-    $sql = "SELECT accounts.userType, users.surname, users.name, users.middlename, users.city, institutions.type, institutions.number, users.grade, users.gender, users.birthdate, users.telephoneNumber, users.photo FROM users RIGHT JOIN accounts ON accounts.accountID = users.accountID LEFT JOIN institutions ON institutions.institutionID=users.institutionID WHERE accounts.email = ?";
+    $sql = "SELECT * FROM users RIGHT JOIN accounts ON accounts.accountID = users.accountID LEFT JOIN institutions ON institutions.institutionID=users.institutionID WHERE accounts.email = ?";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
       header("Location: ../profile.php?error=sqlError");
       exit();
     } else {
-      mysqli_stmt_bind_param($stmt, "s", $email);
+      $desiredEmail = $newUser->getEmail();
+      mysqli_stmt_bind_param($stmt, "s", $desiredEmail);
       mysqli_stmt_execute($stmt);
       $result = mysqli_stmt_get_result($stmt);
       if (!$row = mysqli_fetch_assoc($result)) {
         header("Location: ../profile.php?error=infoNotFound");
         exit();
       } else {
-        $userType = $row['userType'];
-        $surname = $row['surname'];
-        $name = $row['name'];
-        $middlename = $row['middlename'];
-        $city = $row['city'];
-        $institution_type = $row['type'];
-        $institution_number = $row['number'];
-        $grade = $row['grade'];
-        $gender = $row['gender'];
-        $birthDate = $row['birthdate'];
-        $telephone = $row['telephoneNumber'];
-        $photo = $row['photo'];
-
-        $parts = explode("-", $birthDate);
-        $year = $parts[0];
-        $month = $parts[1];
-        $day = $parts[2];
+        $desiredUser = new User($row['accountID'], $row['email'], null, $row['userType'], $row['registrationDate'], 1, $row['surname'], $row['name'], $row['middlename'], $row['city'], $row['type'], $row['number'], $row['grade'], $row['gender'], $row['birthDate'], $row['telephoneNumber'], $row['photo']);
 
         $photoName = null;
         if ($newPhoto != null) {
@@ -170,7 +112,7 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
             if ($photoError === 0) {
               if ($photoSize <= 5242880) {
                 //5242880 Kb = 5 Mb
-                $photoNameNew = $email . "." . $photoActualExt;
+                $photoNameNew = $newUser->getEmail(). "." . $photoActualExt;
                 $photoDestination = '../uploads/users/avatars/' . $photoNameNew;
                 if (file_exists("../uploads/users/avatars/$photoName")) {
                   unlink("../uploads/users/avatars/$photoName");
@@ -189,10 +131,22 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
             exit();
           }
         } else {
-          $photoNameNew = $photo;
+          $photoNameNew = $desiredUser->getPhoto();
         }
+        $newUser->setPhoto($photoNameNew);
 
-        if ($name == $newName && $surname == $newSurname && $middlename == $newMiddlename && $city == $newCity && $institution_type == $newInstitution_type && $institution_number == $newInstitution_number && $gender == $newGender && $day == $newDay && $month == $newMonth && $year == $newYear && $userType == $newUserType && $password == $newPassword && $photo == $photoNameNew) {
+        if ($desiredUser->getName() == $newUser->getName() &&
+                $desiredUser->getSurname() == $newUser->getSurname() &&
+                $desiredUser->getMiddlename() == $newUser->getMiddlename() &&
+                $desiredUser->getCity() == $newUser->getCity() &&
+                $desiredUser->getInstitutionType() == $newUser->getInstitutionType() &&
+                $desiredUser->getInstitutionNumber() == $newUser->getInstitutionNumber() &&
+                $desiredUser->getGrade() == $newUser->getGrade() &&
+                $desiredUser->getGender() == $newUser->getGender() &&
+                $desiredUser->getBirthDate() == $newUser->getBirthDate() &&
+                $desiredUser->getUserType() == $newUser->getUserType() &&
+                $desiredUser->getPassword() == $newUser->getPassword() &&
+                $desiredUser->getPhoto() == $newUser->getPhoto()) {
           header("Location: ../profile.php?error=nothingUpdate");
           exit();
         } else {
@@ -202,31 +156,31 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
             header("Location: ../profile.php?error=sqlError");
             exit();
           } else {
+            $email = $newUser->getEmail();
+            $newPassword = $newUser->getPassword();
+            $newUserType = $newUser->getUserType();
+            $newSurname = $newUser->getSurname();
+            $newName = $newUser->getName();
+            $newMiddlename = $newUser->getMiddlename();
+            $newCity = $newUser->getCity();
+            $newInstitution_type = $newUser->getInstitutionType();
+            $newInstitution_number = $newUser->getInstitutionNumber();
+            $newGrade = $newUser->getGrade();
+            $newGender = $newUser->getGender();
+            $newBirthDate = date("y", strtotime($newUser->getBirthDate()))."-".date("m", strtotime($newUser->getBirthDate()))."-".date("d", strtotime($newUser->getBirthDate()));
+            $newTelephone = $newUser->getTelephoneNumber();
+            $photoNameNew = $newUser->getPhoto();
+
             mysqli_stmt_bind_param(
-              $stmt,
-              "sssssssssissss",
-              $email,
-              $newPassword,
-              $newUserType,
-              $newSurname,
-              $newName,
-              $newMiddlename,
-              $newCity,
-              $newInstitution_type,
-              $newInstitution_number,
-              $newGrade,
-              $newGender,
-              $newBirthDate,
-              $newTelephone,
-              $photoNameNew
+                    $stmt, "sssssssssissss", $email, $newPassword, $newUserType, $newSurname, $newName, $newMiddlename, $newCity, $newInstitution_type, $newInstitution_number, $newGrade, $newGender, $newBirthDate, $newTelephone, $photoNameNew
             );
             mysqli_stmt_execute($stmt);
 
-            if ($session_email = $email && $session_usertype != $newUserType) {
-              $session_usertype = $newUserType;
+            if ($session_email == $newUser->getEmail() && $session_usertype != $newUser->getUserType()) {
+              $session_usertype = $newUser->getUserType();
             }
 
-            header("Location: profile-find-user.inc.php?update=success&email=$email&telephone=$newTelephone");
+            header("Location: profile-find-user.inc.php?update=success&email=$email");
             exit();
           }
         }

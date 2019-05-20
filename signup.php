@@ -1,22 +1,10 @@
 <?php
 require 'php/session.inc.php';
 require 'php/printSelect.inc.php';
+require 'php/user.class.php';
 
 $errorMsg = null;
-$email = null;
-$surname = null;
-$name = null;
-$middlename = null;
-$city = null;
-$institution_type = null;
-$institution_number = null;
-$grade = null;
-$gender = null;
-$day = null;
-$month = null;
-$year = null;
-$telephone = null;
-$photo = null;
+$user = null;
 
 if (isset($_GET['error'])) {
     if ($_GET['error'] == 'emptyFields') {
@@ -42,45 +30,7 @@ if (isset($_GET['error'])) {
     }
 }
 
-if (isset($_GET['email'])) {
-    $email = $_GET['email'];
-}
-if (isset($_GET['surname'])) {
-    $surname = $_GET['surname'];
-}
-if (isset($_GET['name'])) {
-    $name = $_GET['name'];
-}
-if (isset($_GET['middlename'])) {
-    $middlename = $_GET['middlename'];
-}
-if (isset($_GET['city'])) {
-    $city = $_GET['city'];
-}
-if (isset($_GET['institution_type'])) {
-    $institution_type = $_GET['institution_type'];
-}
-if (isset($_GET['institution_number'])) {
-    $institution_number = $_GET['institution_number'];
-}
-if (isset($_GET['grade'])) {
-    $grade = $_GET['grade'];
-}
-if (isset($_GET['gender'])) {
-    $gender = $_GET['gender'];
-}
-if (isset($_GET['day'])) {
-    $day = $_GET['day'];
-}
-if (isset($_GET['month'])) {
-    $month = $_GET['month'];
-}
-if (isset($_GET['year'])) {
-    $year = $_GET['year'];
-}
-if (isset($_GET['telephone'])) {
-    $telephone = '+' . trim($_GET['telephone']);
-}
+$user = new User(null, $_GET['email'], null, $_GET['usertype'], null, null, $_GET['surname'], $_GET['name'], $_GET['middlename'], $_GET['city'], $_GET['institution_type'], $_GET['institution_number'], $_GET['grade'], $_GET['gender'], $_GET['birthdate'], "+".trim($_GET['telephone']), $_GET['photo']);
 ?>
 
 <!DOCTYPE html>
@@ -124,7 +74,7 @@ if (isset($_GET['telephone'])) {
                                 <p>Фамилия</p>
                             </div>
                             <div class="reg-value col-md-9">
-                                <input type="text" class="form-control" name="surname" value="<?php echo $surname; ?>" />
+                              <input type="text" class="form-control" name="surname" value="<?php echo $user->getSurname(); ?>" />
                             </div>
                         </div>
                         <div class="reg-row row">
@@ -132,7 +82,7 @@ if (isset($_GET['telephone'])) {
                                 <p>Имя</p>
                             </div>
                             <div class="reg-value col-md-9">
-                                <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" />
+                              <input type="text" class="form-control" name="name" value="<?php echo $user->getName(); ?>" />
                             </div>
                         </div>
                         <div class="reg-row row">
@@ -140,7 +90,7 @@ if (isset($_GET['telephone'])) {
                                 <p>Отчество</p>
                             </div>
                             <div class="reg-value col-md-9">
-                                <input type="text" class="form-control" name="middlename" value="<?php echo $middlename; ?>" />
+                              <input type="text" class="form-control" name="middlename" value="<?php echo $user->getMiddlename(); ?>" />
                             </div>
                         </div>
                         <div class="reg-row row">
@@ -149,9 +99,9 @@ if (isset($_GET['telephone'])) {
                             </div>
                             <div class="reg-value col-md-9">
                                 <select id="gender" name="gender" class="form-control">
-                                    <option <?php if ($gender == null) echo 'selected'; ?> value="">- Не выбран -</option>
-                                    <option <?php if ($gender == 'М') echo 'selected'; ?> value='М'>Мужской</option>
-                                    <option <?php if ($gender == 'Ж') echo 'selected'; ?> value='Ж'>Женский</option>
+                                  <option <?php if ($user->getGender() == null) {echo 'selected';} ?> value="">- Не выбран -</option>
+                                  <option <?php if ($user->getGender() == 'М') {echo 'selected';} ?> value='М'>Мужской</option>
+                                  <option <?php if ($user->getGender() == 'Ж') {echo 'selected';} ?> value='Ж'>Женский</option>
                                 </select>
                             </div>
                         </div>
@@ -165,21 +115,21 @@ if (isset($_GET['telephone'])) {
                                         <label class="control-label" for="day">День</label></div>
                                     <div class="col-md-2">
                                         <select id="day" name="day" class="form-control">
-                                            <?php printDaysList(intval($day)); ?>
+                                            <?php printDaysList(intval(date("d", strtotime($user->getBirthDate())))); ?>
                                         </select>
                                     </div>
                                     <div class="col-md-2">
                                         <label class="control-label" for="month">Месяц</label></div>
                                     <div class="col-md-3">
                                         <select id="month" name="month" class="form-control">
-                                            <?php printMonthsList(intval($month)); ?>
+                                            <?php printMonthsList(intval(date("m", strtotime($user->getBirthDate())))); ?>
                                         </select>
                                     </div>
                                     <div class="col-md-1">
                                         <label class="control-label" for="year">Год</label></div>
                                     <div class="col-md-3">
                                         <select id="year" name="year" class="form-control">
-                                            <?php printYearList(intval($year)); ?>
+                                            <?php printYearList(intval(date("Y", strtotime($user->getBirthDate())))); ?>
                                         </select>
                                     </div>
                                 </div>
@@ -190,7 +140,7 @@ if (isset($_GET['telephone'])) {
                                 <p>Aдрес</p>
                             </div>
                             <div class="reg-value col-md-9">
-                                <input type="text" class="form-control" name="city" value="<?php echo $city; ?>" />
+                              <input type="text" class="form-control" name="city" value="<?php echo $user->getCity(); ?>" />
                             </div>
                         </div>
                         <div class="reg-row row">
@@ -198,7 +148,7 @@ if (isset($_GET['telephone'])) {
                                 <p>Телефон</p>
                             </div>
                             <div class="reg-value col-md-9">
-                                <input id="telephone" name="telephone" type="tel" pattern="\+[0-9]{3}[0-9]{2}[0-9]{3}[0-9]{2}[0-9]{2}" placeholder="+375291234567" class="form-control" value="<?php echo $telephone; ?>">
+                              <input id="telephone" name="telephone" type="tel" pattern="\+[0-9]{3}[0-9]{2}[0-9]{3}[0-9]{2}[0-9]{2}" placeholder="+375291234567" class="form-control" value="<?php echo $user->getTelephoneNumber(); ?>">
                             </div>
                         </div>
                         <div class="reg-row row">
@@ -207,11 +157,11 @@ if (isset($_GET['telephone'])) {
                             </div>
                             <div class="reg-value col-md-9">
                                 <select id="institution_type" name="institution_type" class="form-control">
-                                    <option <?php if ($institution_type == null) echo 'selected'; ?> value="">- Не выбран -</option>
-                                    <option <?php if (trim($institution_type) == 'Средняя Школа') echo 'selected'; ?> value="Средняя Школа">Средняя Школа</option>
-                                    <option <?php if (trim($institution_type) == 'Гимназия') echo 'selected'; ?> value="Гимназия">Гимназия</option>
-                                    <option <?php if (trim($institution_type) == 'Лицей') echo 'selected'; ?> value="Лицей">Лицей</option>
-                                    <option <?php if (trim($institution_type) == 'Колледж') echo 'selected'; ?> value="Колледж">Колледж</option>
+                                  <option <?php if ($user->getInstitutionType() == null) {echo 'selected';} ?> value="">- Не выбран -</option>
+                                    <option <?php if (trim($user->getInstitutionType()) == 'Средняя Школа') {echo 'selected';} ?> value="Средняя Школа">Средняя Школа</option>
+                                    <option <?php if (trim($user->getInstitutionType()) == 'Гимназия') {echo 'selected';} ?> value="Гимназия">Гимназия</option>
+                                    <option <?php if (trim($user->getInstitutionType()) == 'Лицей') {echo 'selected';} ?> value="Лицей">Лицей</option>
+                                    <option <?php if (trim($user->getInstitutionType()) == 'Колледж') {echo 'selected';} ?> value="Колледж">Колледж</option>
                                 </select>
                             </div>
                         </div>
@@ -220,7 +170,7 @@ if (isset($_GET['telephone'])) {
                                 <p>Название/номер учебного заведения</p>
                             </div>
                             <div class="reg-value col-md-9">
-                                <input type="text" class="form-control" name="institution_number" value="<?php echo $institution_number; ?>" />
+                              <input type="text" class="form-control" name="institution_number" value="<?php echo $user->getInstitutionNumber(); ?>" />
                             </div>
                         </div>
                         <div class="reg-row row">
@@ -228,7 +178,7 @@ if (isset($_GET['telephone'])) {
                                 <p>Класс/Курс</p>
                             </div>
                             <div class="reg-value col-md-9">
-                                <input type="text" class="form-control" name="grade" value="<?php echo $grade; ?>" />
+                              <input type="text" class="form-control" name="grade" value="<?php echo $user->getGrade(); ?>" />
                             </div>
                         </div>
                         <div class="reg-row row">
@@ -244,7 +194,7 @@ if (isset($_GET['telephone'])) {
                                 <p>E-mail</p>
                             </div>
                             <div class="reg-value col-md-9">
-                                <input name="email" type="email" class="form-control" required="" value="<?php echo $email; ?>">
+                              <input name="email" type="email" class="form-control" required="" value="<?php echo $user->getEmail(); ?>">
                             </div>
                         </div>
                         <div class="reg-row row">

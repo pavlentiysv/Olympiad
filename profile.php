@@ -1,7 +1,5 @@
 <?php
-require 'php/session.inc.php';
 require 'php/profile.inc.php';
-require 'php/printSelect.inc.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +25,7 @@ require 'php/printSelect.inc.php';
             </a>
             <?php if ($session_usertype == 'admin' || $session_usertype == 'org') : ?>
                 <form class="ml-auto" action="php/profile-find-user.inc.php" method="post">
-                    <input type="email" name="desired-email" id="desired-email" class="" placeholder="<?php echo $email ?>">
+                    <input type="email" name="desired-email" id="desired-email" class="" placeholder="<?php echo $user->getEmail(); ?>">
                     <input type="submit" name="submit-search" class="btn btn-outline-light btn-lg ml-auto" id="submit" value="Найти пользователя" />
                 </form>
                 <a class="btn btn-danger" href="profile.php">Х</a>
@@ -55,12 +53,12 @@ require 'php/printSelect.inc.php';
 
             <!-- Left Block -->
             <div class="col-md-3 text-center left-block">
-                <?php if ($photo != null && file_exists("uploads/users/avatars/$photo")) : ?>
-                    <img class="avatar" src="uploads/users/avatars/<?php echo $photo; ?>" alt="avatar">
+                <?php if ($user->getPhoto() != null && file_exists(User::$photoDir.$user->getPhoto())) : ?>
+                    <img class="avatar" src="<?php echo User::$photoDir.$user->getPhoto(); ?>" alt="avatar">
                 <?php else : ?>
-                    <img class="avatar" src="img/default_avatar.jpg" alt="avatar">
+                    <img class="avatar" src="<?php echo User::$photoDir.User::$defaultPhoto; ?>" alt="avatar">
                 <?php endif; ?>
-                <p class="fullname"><?php echo $surname; ?><br><?php echo $name; ?><br><?php echo $middlename; ?></p>
+                <p class="fullname"><?php echo $user->getSurname(); ?><br><?php echo $user->getName(); ?><br><?php echo $user->getMiddlename(); ?></p>
             </div>
 
             <!-- Right Block -->
@@ -71,7 +69,7 @@ require 'php/printSelect.inc.php';
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">Профиль</a>
                         <a class="nav-item nav-link" id="nav-tests-tab" data-toggle="tab" href="#nav-tests" role="tab" aria-controls="nav-tests" aria-selected="false">Тесты</a>
-                        <?php if ($email == $session_email || $session_usertype == 'admin') : ?>
+                        <?php if ($user->getEmail() == $session_email || $session_usertype == 'admin') : ?>
                             <a class="nav-item nav-link" id="nav-settings-tab" data-toggle="tab" href="#nav-settings" role="tab" aria-controls="nav-settings" aria-selected="false">Настройки</a>
                         <?php endif; ?>
                         <?php if ($session_usertype == 'admin' || $session_usertype == 'org') : ?>
@@ -96,9 +94,9 @@ require 'php/printSelect.inc.php';
                                     <p>Тип пользователя</p>
                                 </div>
                                 <div class="info-value col-md-9">
-                                    <?php if ($userType == 'admin') : ?>
+                                    <?php if ($user->getUserType() == 'admin') : ?>
                                         <p>Администратор</p>
-                                    <?php elseif ($userType == 'org') : ?>
+                                    <?php elseif ($user->getUserType() == 'org') : ?>
                                         <p>Организатор</p>
                                     <?php else : ?>
                                         <p>Участник</p>
@@ -111,7 +109,7 @@ require 'php/printSelect.inc.php';
                                 <p>Фамилия</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p><?php echo $surname; ?></p>
+                                <p><?php echo $user->getSurname(); ?></p>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -119,7 +117,7 @@ require 'php/printSelect.inc.php';
                                 <p>Имя</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p><?php echo $name; ?></p>
+                                <p><?php echo $user->getName(); ?></p>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -127,7 +125,7 @@ require 'php/printSelect.inc.php';
                                 <p>Отчество</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p><?php echo $middlename; ?></p>
+                                <p><?php echo $user->getMiddleName(); ?></p>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -135,9 +133,9 @@ require 'php/printSelect.inc.php';
                                 <p>Пол</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <?php if ($gender == 'М') : ?>
+                                <?php if ($user->getGender() == 'М') : ?>
                                     <p>Мужской</p>
-                                <?php elseif ($gender == 'Ж') : ?>
+                                <?php elseif ($user->getGender() == 'Ж') : ?>
                                     <p>Женский</p>
                                 <?php else : ?>
                                     <p>?</p>
@@ -149,7 +147,7 @@ require 'php/printSelect.inc.php';
                                 <p>Дата рождения</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p><?php echo "$day.$month.$year"; ?></p>
+                                <p><?php echo $user->getBirthDate(); ?></p>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -157,7 +155,7 @@ require 'php/printSelect.inc.php';
                                 <p>Адрес</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p><?php echo $city; ?></p>
+                                <p><?php echo $user->getCity(); ?></p>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -165,7 +163,7 @@ require 'php/printSelect.inc.php';
                                 <p>Телефон</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p><?php echo $telephone; ?></p>
+                                <p><?php echo $user->getTelephoneNumber(); ?></p>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -173,7 +171,7 @@ require 'php/printSelect.inc.php';
                                 <p>Учебное заведение</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p><?php echo $institution_number; ?><br><?php echo $grade; ?> класс</p>
+                                <p><?php echo $user->getInstitutionNumber(); ?><br><?php echo $user->getGrade(); ?> класс</p>
                             </div>
                         </div>
                         <div class="info-row row">
@@ -181,7 +179,7 @@ require 'php/printSelect.inc.php';
                                 <p>Электронная почта</p>
                             </div>
                             <div class="info-value col-md-9">
-                                <p><?php echo $email; ?></p>
+                                <p><?php echo $user->getEmail(); ?></p>
                             </div>
                         </div>
                     </div>
@@ -202,7 +200,7 @@ require 'php/printSelect.inc.php';
 
 
                     <!-- Settings Tab Content -->
-                    <?php if ($email == $session_email || $session_usertype == 'admin') : ?>
+                    <?php if ($user->getEmail() == $session_email || $session_usertype == 'admin') : ?>
                         <div class="nav-settings tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
 
                             <h3>Редактирование профиля</h3>
@@ -214,23 +212,23 @@ require 'php/printSelect.inc.php';
                                         </div>
                                         <div class="info-value col-md-9">
                                             <select id="usertype" name="usertype" class="form-control">
-                                                <option <?php if ($userType == null) echo 'selected' ?> value="">Участник</option>
-                                                <option <?php if ($userType == 'admin') echo 'selected' ?> value="admin">Администратор</option>
-                                                <option <?php if ($userType == 'org') echo 'selected' ?>value="org">Организатор</option>
+                                                <option <?php if ($user->getUserType() == null) {echo 'selected';} ?> value="">Участник</option>
+                                                <option <?php if ($user->getUserType() == 'admin') {echo 'selected';}  ?> value="admin">Администратор</option>
+                                                <option <?php if ($user->getUserType() == 'org') {echo 'selected';} ?>value="org">Организатор</option>
                                             </select>
                                         </div>
                                     </div>
                                 <?php else : ?>
-                                    <input type="hidden" class="form-control" name="usertype" value="<?php echo $userType; ?>" />
+                                    <input type="hidden" class="form-control" name="usertype" value="<?php echo $user->getUserType(); ?>" />
                                 <?php endif; ?>
-                                <input type="hidden" class="form-control" name="email" value="<?php echo $email; ?>" />
+                                <input type="hidden" class="form-control" name="email" value="<?php echo $user->getEmail(); ?>" />
 
                                 <div class="info-row row">
                                     <div class="info-title col-md-3">
                                         <p>Фамилия</p>
                                     </div>
                                     <div class="info-value col-md-9">
-                                        <input type="text" class="form-control" name="surname" value="<?php echo $surname; ?>" <?php if ($session_usertype != 'admin') echo 'required=""'; ?> />
+                                        <input type="text" class="form-control" name="surname" value="<?php echo $user->getSurname(); ?>" <?php if ($session_usertype != 'admin') echo 'required=""'; ?> />
                                     </div>
                                 </div>
                                 <div class="info-row row">
@@ -238,7 +236,7 @@ require 'php/printSelect.inc.php';
                                         <p>Имя</p>
                                     </div>
                                     <div class="info-value col-md-9">
-                                        <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" <?php if ($session_usertype != 'admin') echo 'required=""'; ?> />
+                                        <input type="text" class="form-control" name="name" value="<?php echo $user->getName(); ?>" <?php if ($session_usertype != 'admin') echo 'required=""'; ?> />
                                     </div>
                                 </div>
                                 <div class="info-row row">
@@ -246,7 +244,7 @@ require 'php/printSelect.inc.php';
                                         <p>Отчество</p>
                                     </div>
                                     <div class="info-value col-md-9">
-                                        <input type="text" class="form-control" name="middlename" value="<?php echo $middlename; ?>" />
+                                        <input type="text" class="form-control" name="middlename" value="<?php echo $user->getMiddlename(); ?>" />
                                     </div>
                                 </div>
                                 <div class="info-row row">
@@ -255,9 +253,9 @@ require 'php/printSelect.inc.php';
                                     </div>
                                     <div class="info-value col-md-9">
                                         <select id="gender" name="gender" class="form-control">
-                                            <option <?php if ($gender == null) echo 'selected'; ?> value="">- Не выбран -</option>
-                                            <option <?php if ($gender == 'М') echo 'selected'; ?> value='М'>Мужской</option>
-                                            <option <?php if ($gender == 'Ж') echo 'selected'; ?> value='Ж'>Женский</option>
+                                            <option <?php if ($user->getGender() == null) {echo 'selected';} ?> value="">- Не выбран -</option>
+                                            <option <?php if ($user->getGender() == 'М') {echo 'selected';} ?> value='М'>Мужской</option>
+                                            <option <?php if ($user->getGender() == 'Ж') {echo 'selected';} ?> value='Ж'>Женский</option>
                                         </select>
                                     </div>
                                 </div>
@@ -271,21 +269,21 @@ require 'php/printSelect.inc.php';
                                                 <label class="control-label" for="day">День</label></div>
                                             <div class="col-md-2">
                                                 <select id="day" name="day" class="form-control">
-                                                    <?php printDaysList(intval($day)); ?>
+                                                    <?php printDaysList(intval(date("d", strtotime($user->getBirthDate())))); ?>
                                                 </select>
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="control-label" for="month">Месяц</label></div>
                                             <div class="col-md-3">
                                                 <select id="month" name="month" class="form-control">
-                                                    <?php printMonthsList(intval($month)); ?>
+                                                    <?php printMonthsList(intval(date("m", strtotime($user->getBirthDate())))); ?>
                                                 </select>
                                             </div>
                                             <div class="col-md-1">
                                                 <label class="control-label" for="year">Год</label></div>
                                             <div class="col-md-3">
                                                 <select id="year" name="year" class="form-control">
-                                                    <?php printYearList(intval($year)); ?>
+                                                    <?php printYearList(intval(date("Y", strtotime($user->getBirthDate())))); ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -296,7 +294,7 @@ require 'php/printSelect.inc.php';
                                         <p>Aдрес</p>
                                     </div>
                                     <div class="info-value col-md-9">
-                                        <input type="text" class="form-control" name="city" value="<?php echo $city; ?>" <?php if ($session_usertype != 'admin') echo 'required=""'; ?> />
+                                        <input type="text" class="form-control" name="city" value="<?php echo $user->getCity(); ?>" <?php if ($session_usertype != 'admin') echo 'required=""'; ?> />
                                     </div>
                                 </div>
                                 <div class="info-row row">
@@ -304,7 +302,7 @@ require 'php/printSelect.inc.php';
                                         <p>Телефон</p>
                                     </div>
                                     <div class="info-value col-md-9">
-                                        <input id="telephone" name="telephone" type="tel" pattern="\+[0-9]{3}[0-9]{2}[0-9]{3}[0-9]{2}[0-9]{2}" placeholder="+375(29)123-45-67" class="form-control" value="<?php echo $telephone; ?>" <?php if ($session_usertype != 'admin') echo 'required=""'; ?>>
+                                        <input id="telephone" name="telephone" type="tel" pattern="\+[0-9]{3}[0-9]{2}[0-9]{3}[0-9]{2}[0-9]{2}" placeholder="+375(29)123-45-67" class="form-control" value="<?php echo $user->getTelephoneNumber(); ?>" <?php if ($session_usertype != 'admin') echo 'required=""'; ?>>
                                     </div>
                                 </div>
                                 <div class="info-row row">
@@ -313,11 +311,11 @@ require 'php/printSelect.inc.php';
                                     </div>
                                     <div class="info-value col-md-9">
                                         <select id="institution_type" name="institution_type" class="form-control">
-                                            <option <?php if ($institution_type == null) echo 'selected'; ?> value="">- Не выбран -</option>
-                                            <option <?php if (trim($institution_type) == 'Средняя Школа') echo 'selected'; ?> value="Средняя Школа">Средняя Школа</option>
-                                            <option <?php if (trim($institution_type) == 'Гимназия') echo 'selected'; ?> value="Гимназия">Гимназия</option>
-                                            <option <?php if (trim($institution_type) == 'Лицей') echo 'selected'; ?> value="Лицей">Лицей</option>
-                                            <option <?php if (trim($institution_type) == 'Колледж') echo 'selected'; ?> value="Колледж">Колледж</option>
+                                            <option <?php if ($user->getInstitutionType() == null) {echo 'selected';} ?> value="">- Не выбран -</option>
+                                            <option <?php if (trim($user->getInstitutionType()) == 'Средняя Школа') {echo 'selected';} ?> value="Средняя Школа">Средняя Школа</option>
+                                            <option <?php if (trim($user->getInstitutionType()) == 'Гимназия') {echo 'selected';} ?> value="Гимназия">Гимназия</option>
+                                            <option <?php if (trim($user->getInstitutionType()) == 'Лицей') {echo 'selected';} ?> value="Лицей">Лицей</option>
+                                            <option <?php if (trim($user->getInstitutionType()) == 'Колледж') {echo 'selected';} ?> value="Колледж">Колледж</option>
                                         </select>
                                     </div>
                                 </div>
@@ -326,7 +324,7 @@ require 'php/printSelect.inc.php';
                                         <p>Название/номер учебного заведения</p>
                                     </div>
                                     <div class="info-value col-md-9">
-                                        <input type="text" class="form-control" name="institution_number" value="<?php echo $institution_number; ?>" <?php if ($session_usertype != 'admin') echo 'required=""'; ?> />
+                                        <input type="text" class="form-control" name="institution_number" value="<?php echo $user->getInstitutionNumber(); ?>" <?php if ($session_usertype != 'admin') echo 'required=""'; ?> />
                                     </div>
                                 </div>
                                 <div class="info-row row">
@@ -334,7 +332,7 @@ require 'php/printSelect.inc.php';
                                         <p>Класс/Курс</p>
                                     </div>
                                     <div class="info-value col-md-9">
-                                        <input type="text" class="form-control" name="grade" value="<?php echo $grade; ?>" <?php if ($session_usertype != 'admin') echo 'required=""'; ?> />
+                                        <input type="text" class="form-control" name="grade" value="<?php echo $user->getGrade(); ?>" <?php if ($session_usertype != 'admin') echo 'required=""'; ?> />
                                     </div>
                                 </div>
                                 <div class="info-row row">

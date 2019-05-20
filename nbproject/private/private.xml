@@ -5,6 +5,12 @@
         <group>
             <file>file:/E:/wamp/wamp64/www/Olympiad/php/index.inc.php</file>
             <file>file:/E:/wamp/wamp64/www/Olympiad/index.php</file>
+            <file>file:/E:/wamp/wamp64/www/Olympiad/php/user.class.php</file>
+            <file>file:/E:/wamp/wamp64/www/Olympiad/php/unloading.inc.php</file>
+            <file>file:/E:/wamp/wamp64/www/Olympiad/event.php</file>
+            <file>file:/E:/wamp/wamp64/www/Olympiad/php/event.class.php</file>
+            <file>file:/E:/wamp/wamp64/www/Olympiad/profile.php</file>
+            <file>file:/E:/wamp/wamp64/www/Olympiad/php/profile.inc.php</file>
         </group>
     </open-files>
 </project-private>

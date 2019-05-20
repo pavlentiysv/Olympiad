@@ -1,26 +1,18 @@
 <?php
-$email = null;
-$userType = null;
-$surname = null;
-$name = null;
-$middlename = null;
-$city = null;
-$institution_type = null;
-$institution_number = null;
-$grade = null;
-$gender = null;
-$birthDate = null;
-$year = null;
-$month = null;
-$day = null;
-$telephone = null;
-$photo = null;
+
+require 'php/session.inc.php';
+require 'php/printSelect.inc.php';
+require 'user.class.php';
+
+$user = null;
 
 $session_email = null;
 $session_usertype = null;
+$session_accountID = null;
 if (isset($_SESSION['userEmail'])) {
   $session_email = $_SESSION['userEmail'];
   $session_usertype = $_SESSION['userType'];
+  $session_accountID = $_SESSION['accountID'];
 } else {
   header("Location: ./signin.php?error=noSession");
 }
@@ -37,7 +29,7 @@ if (file_exists('../db/dbHandler.inc.php')) {
   header("Location: ./profile.php?error=pageNotFound");
 }
 
-$sql = "SELECT accounts.usertype, users.surname, users.name, users.middlename, users.city, institutions.type, institutions.number, users.grade, users.gender, users.birthdate, users.telephoneNumber, users.photo FROM users RIGHT JOIN accounts ON accounts.accountID = users.accountID LEFT JOIN institutions ON institutions.institutionID=users.institutionID WHERE accounts.email = ?";
+$sql = "SELECT accounts.usertype, accounts.registrationDate, accounts.status, users.surname, users.name, users.middlename, users.city, institutions.type, institutions.number, users.grade, users.gender, users.birthdate, users.telephoneNumber, users.photo FROM users RIGHT JOIN accounts ON accounts.accountID = users.accountID LEFT JOIN institutions ON institutions.institutionID=users.institutionID WHERE accounts.email = ?";
 $stmt = mysqli_stmt_init($conn);
 if (!mysqli_stmt_prepare($stmt, $sql)) {
   header("Location: ./profile.php?error=sqlError");
@@ -52,40 +44,9 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
     exit();
   } else {
     if (isset($_GET['email'])) {
-      $email = $_GET['email'];
-      $userType = $_GET['usertype'];
-      $surname = $_GET['surname'];
-      $name = $_GET['name'];
-      $middlename = $_GET['middlename'];
-      $city = $_GET['city'];
-      $institution_type = $_GET['institution_type'];
-      $institution_number = $_GET['institution_number'];
-      $grade = $_GET['grade'];
-      $gender = $_GET['gender'];
-      $birthDate = $_GET['birthdate'];
-      $telephone = '+' . trim($_GET['telephone']);
-      $photo = $_GET['photo'];
+      $user = new User(null, $_GET['email'], null, $_GET['usertype'], null, null, $_GET['surname'], $_GET['name'], $_GET['middlename'], $_GET['city'], $_GET['institution_type'], $_GET['institution_number'], $_GET['grade'], $_GET['gender'], $_GET['birthdate'], "+".trim($_GET['telephone']), $_GET['photo']);
     } else {
-      $email = $session_email;
-      $userType = $session_usertype;
-      $surname = $row['surname'];
-      $name = $row['name'];
-      $middlename = $row['middlename'];
-      $city = $row['city'];
-      $institution_type = $row['type'];
-      $institution_number = $row['number'];
-      $grade = $row['grade'];
-      $gender = $row['gender'];
-      $birthDate = $row['birthdate'];
-      $telephone = $row['telephoneNumber'];
-      $photo = $row['photo'];
-    }
-
-    if ($birthDate != null) {
-      $parts = explode("-", $birthDate);
-      $year = $parts[0];
-      $month = $parts[1];
-      $day = $parts[2];
+      $user = new User($session_accountID, $session_email, null, $session_usertype, $row['registrationDate'], 1, $row['surname'], $row['name'], $row['middlename'], $row['city'], $row['type'], $row['number'], $row['grade'], $row['gender'], $row['birthdate'], $row['telephoneNumber'], $row['photo']);
     }
   }
 }
